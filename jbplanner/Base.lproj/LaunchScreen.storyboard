@@ -18,19 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Planner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpO-L9-PB8">
-                                <rect key="frame" x="109" y="65" width="156" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Planner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpO-L9-PB8">
+                                <rect key="frame" x="130.5" y="120" width="114" height="38.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="check_icon" translatesAutoresizingMaskIntoConstraints="NO" id="3ao-vP-F9b">
-                                <rect key="frame" x="155" y="107" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_icon" translatesAutoresizingMaskIntoConstraints="NO" id="3ao-vP-F9b">
+                                <rect key="frame" x="155.5" y="301.5" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="8Hp-2h-W3u"/>
+                                    <constraint firstAttribute="height" constant="64" id="kKt-gW-xmD"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.32156862745098036" green="0.3411764705882353" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xpO-L9-PB8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="BXn-cf-7K8"/>
+                            <constraint firstItem="3ao-vP-F9b" firstAttribute="top" relation="lessThanOrEqual" secondItem="xpO-L9-PB8" secondAttribute="bottom" constant="200" id="Gu5-eI-jf5"/>
+                            <constraint firstItem="3ao-vP-F9b" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="IXT-vr-5v0"/>
+                            <constraint firstItem="3ao-vP-F9b" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZX1-oW-I1C"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
