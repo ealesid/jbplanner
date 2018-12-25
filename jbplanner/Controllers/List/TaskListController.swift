@@ -10,11 +10,20 @@ import UIKit
 
 class TaskListController: UITableViewController {
     
+    let dateFormatter = DateFormatter()
+    
     // временный массив данных
-    private var tempData = ["firstString", "secondString", "thirdString", ]
+    private var taskList:[Task] = [
+        Task(name: "1st Task", category: "1st Category"),
+        Task(name: "2nd Task", category: "2nd Category", priority: "High"),
+        Task(name: "3rd Task", category: "3rd Category", deadLine: Date())
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,32 +38,39 @@ class TaskListController: UITableViewController {
     
     // количество секций в таблице
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
 
     // количество записей в каждой секции
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section + 1
+        return taskList.count
     }
 
     // отображение данных в строке
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
 
-        cell.textLabel?.text = tempData[indexPath.row]  // получить значение из массива по индексу
 
+        let task = taskList[indexPath.row]
+        cell.textLabel?.text = task.name + " " + (task.priority ?? "")
+        if let deadLine = task.deadLine {
+            cell.detailTextLabel?.text = (task.category ?? "") + " " + dateFormatter.string(from: deadLine)
+        } else {
+            cell.detailTextLabel?.text = task.category
+        }
+        
         return cell
     }
     
     //название для каждой секции
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section " + String(section + 1)
-    }
-    
-    // высота каждой секции
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Section " + String(section + 1)
+//    }
+//
+//    // высота каждой секции
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 50
+//    }
 
     /*
     // Override to support conditional editing of the table view.

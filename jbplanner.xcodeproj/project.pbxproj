@@ -14,6 +14,7 @@
 		DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB9A83521CC110E00129C92 /* jbplanner.xcdatamodeld */; };
 		DBB9A83921CC111400129C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBB9A83821CC111400129C92 /* Assets.xcassets */; };
 		DBB9A83C21CC111400129C92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB9A83A21CC111400129C92 /* LaunchScreen.storyboard */; };
+		DBE783A121D2640C00512370 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A021D2640C00512370 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		DBB9A83821CC111400129C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBB9A83B21CC111400129C92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBB9A83D21CC111400129C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBE783A021D2640C00512370 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		DBB9A82D21CC110E00129C92 /* jbplanner */ = {
 			isa = PBXGroup;
 			children = (
+				DBE7839F21D263EC00512370 /* Objects */,
 				DB116BD421D11B4B0070F13D /* Storyboards */,
 				DB116BD221D11AF00070F13D /* Controllers */,
 				DBB9A82E21CC110E00129C92 /* AppDelegate.swift */,
@@ -92,6 +95,14 @@
 				DBB9A83521CC110E00129C92 /* jbplanner.xcdatamodeld */,
 			);
 			path = jbplanner;
+			sourceTree = "<group>";
+		};
+		DBE7839F21D263EC00512370 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				DBE783A021D2640C00512370 /* Task.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			files = (
 				DBB9A83121CC110E00129C92 /* ViewController.swift in Sources */,
 				DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */,
+				DBE783A121D2640C00512370 /* Task.swift in Sources */,
 				DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */,
 				DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */,
 			);
