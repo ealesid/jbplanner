@@ -13,11 +13,11 @@ class TaskListController: UITableViewController {
     let dateFormatter = DateFormatter()
     
     // временный массив данных
-    private var taskList:[Task] = [
-        Task(name: "1st Task", category: "1st Category"),
-        Task(name: "2nd Task", category: "2nd Category", priority: "High"),
-        Task(name: "3rd Task", category: "3rd Category", deadLine: Date())
-    ]
+//    private var taskList:[Task] = [
+//        Task(name: "1st Task", category: "1st Category"),
+//        Task(name: "2nd Task", category: "2nd Category", priority: "High"),
+//        Task(name: "3rd Task", category: "3rd Category", deadLine: Date())
+//    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class TaskListController: UITableViewController {
 
     // количество записей в каждой секции
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskList.count
+        return 1
     }
 
     // отображение данных в строке
@@ -52,14 +52,14 @@ class TaskListController: UITableViewController {
             fatalError("Cell Type Error")
         }
 
-        let task = taskList[indexPath.row]
-        cell.labelTaskName.text = task.name
-        cell.labelTaskCategory.text = (task.category ?? "")
-        if let deadLine = task.deadLine {
-            cell.labelDeadLine.text = dateFormatter.string(from: deadLine)
-        } else {
-            cell.labelDeadLine.text = ""
-        }
+//        let task = taskList[indexPath.row]
+//        cell.labelTaskName.text = task.name
+//        cell.labelTaskCategory.text = (task.category ?? "")
+//        if let deadLine = task.deadLine {
+//            cell.labelDeadLine.text = dateFormatter.string(from: deadLine)
+//        } else {
+//            cell.labelDeadLine.text = ""
+//        }
         
         return cell
     }
