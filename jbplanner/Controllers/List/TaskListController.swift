@@ -6,11 +6,14 @@
 //  Copyright © 2018 Aleksey Sidorov. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class TaskListController: UITableViewController {
     
     let dateFormatter = DateFormatter()
+    
+    var context: NSManagedObjectContext! // контекст для связи объектов с БД
     
     // временный массив данных
 //    private var taskList:[Task] = [
@@ -24,6 +27,14 @@ class TaskListController: UITableViewController {
         
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
+        
+        // используем AppDelegate для получения доступа к контексту
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("appDelegate error")
+        }
+        
+        // получаем контекст из persistentContainer
+        context = appDelegate.persistentContainer.viewContext
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,16 +63,61 @@ class TaskListController: UITableViewController {
             fatalError("Cell Type Error")
         }
 
-//        let task = taskList[indexPath.row]
-//        cell.labelTaskName.text = task.name
-//        cell.labelTaskCategory.text = (task.category ?? "")
-//        if let deadLine = task.deadLine {
-//            cell.labelDeadLine.text = dateFormatter.string(from: deadLine)
-//        } else {
-//            cell.labelDeadLine.text = ""
-//        }
+        let cat1 = addCategory(name: "Sport")
+        let cat2 = addCategory(name: "Family")
+        let cat3 = addCategory(name: "Vacation")
+
+        let priority1 = addPriority(name: "Low", index: 1)
+        let priority2 = addPriority(name: "Meduim", index: 2)
+        let priority3 = addPriority(name: "High", index: 3)
         
+        let task1 = addTask(name: "Visit swimpool", completed: false, deadline: Date(), info: "additional info", category: cat1, priority: priority2)
+        let task2 = addTask(name: "Weekend with family", completed: false, deadline: Date(), info: "additional info", category: cat2, priority: priority1)
+
         return cell
+    }
+    
+    func addCategory(name: String) -> Category {
+        let category = Category(context: context)
+        category.name = name
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Category could not save : \(error)")
+        }
+        
+        return category
+    }
+    
+    func addPriority(name: String, index: Int32) -> Priority {
+        let priority = Priority(context: context)
+        priority.name = name
+        priority.index = index
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Priority could not save : \(error)")
+        }
+        
+        return priority
+    }
+    
+    func addTask(name: String, completed: Bool, deadline: Date?, info: String?, category: Category?, priority: Priority?) -> Task {
+        let task = Task(context: context)
+        task.name = name
+        task.completed = completed
+        task.deadline = deadline
+        task.info = info
+        task.category = category
+        task.priority = priority
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Task could not save: \(error)")
+        }
+        
+        return task
     }
     
     //название для каждой секции
