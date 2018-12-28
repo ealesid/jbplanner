@@ -15,6 +15,8 @@ class TaskListController: UITableViewController {
     
     var context: NSManagedObjectContext! // контекст для связи объектов с БД
     
+    var taskList:[Task]!
+    
     // временный массив данных
 //    private var taskList:[Task] = [
 //        Task(name: "1st Task", category: "1st Category"),
@@ -35,6 +37,10 @@ class TaskListController: UITableViewController {
         
         // получаем контекст из persistentContainer
         context = appDelegate.persistentContainer.viewContext
+        
+//        initData()
+        
+        taskList = getAllTasks()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -54,7 +60,7 @@ class TaskListController: UITableViewController {
 
     // количество записей в каждой секции
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return taskList.count
     }
 
     // отображение данных в строке
@@ -62,17 +68,18 @@ class TaskListController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as? TaskListCell else {
             fatalError("Cell Type Error")
         }
-
-        let cat1 = addCategory(name: "Sport")
-        let cat2 = addCategory(name: "Family")
-        let cat3 = addCategory(name: "Vacation")
-
-        let priority1 = addPriority(name: "Low", index: 1)
-        let priority2 = addPriority(name: "Meduim", index: 2)
-        let priority3 = addPriority(name: "High", index: 3)
         
-        let task1 = addTask(name: "Visit swimpool", completed: false, deadline: Date(), info: "additional info", category: cat1, priority: priority2)
-        let task2 = addTask(name: "Weekend with family", completed: false, deadline: Date(), info: "additional info", category: cat2, priority: priority1)
+        let task = taskList[indexPath.row]
+        
+        cell.labelTaskName.text = task.name
+        cell.labelTaskCategory.text = (task.category?.name ?? "")
+        cell.labelPriority.text = (task.priority?.name ?? "")
+        
+        if let deadline = task.deadline {
+            cell.labelDeadLine?.text = dateFormatter.string(from: deadline)
+        } else {
+            cell.labelDeadLine?.text = ""
+        }
 
         return cell
     }
@@ -118,6 +125,32 @@ class TaskListController: UITableViewController {
         }
         
         return task
+    }
+    
+    func initData() {
+        let cat1 = addCategory(name: "Sport")
+        let cat2 = addCategory(name: "Family")
+        let cat3 = addCategory(name: "Vacation")
+        
+        let priority1 = addPriority(name: "Low", index: 1)
+        let priority2 = addPriority(name: "Meduim", index: 2)
+        let priority3 = addPriority(name: "High", index: 3)
+        
+        let task1 = addTask(name: "Visit swimpool", completed: false, deadline: Date(), info: "additional info", category: cat1, priority: priority2)
+        let task2 = addTask(name: "Weekend with family", completed: false, deadline: Date(), info: "additional info", category: cat2, priority: priority1)
+    }
+    
+    func getAllTasks() -> [Task] {
+        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+        let list:[Task]
+        
+        do {
+            list = try context.fetch(fetchRequest)
+        } catch {
+            fatalError("Task fetch failed!")
+        }
+        
+        return list
     }
     
     //название для каждой секции

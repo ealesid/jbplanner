@@ -26,15 +26,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="labelDeadLine" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQn-3n-XcD">
-                                            <rect key="frame" x="270" y="19.5" width="100" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="Mo5-0g-i5h"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="labelName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hu-VB-Sg3">
                                             <rect key="frame" x="5" y="3" width="260" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -47,20 +38,38 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="labelPriority" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejy-E2-vJs">
+                                            <rect key="frame" x="265" y="32" width="91" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="labelDeadLine" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQn-3n-XcD">
+                                            <rect key="frame" x="265" y="3" width="100" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="Mo5-0g-i5h"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="9hu-VB-Sg3" firstAttribute="trailing" secondItem="BQn-3n-XcD" secondAttribute="leading" constant="-5" id="0xt-Ik-Emg"/>
+                                        <constraint firstItem="BQn-3n-XcD" firstAttribute="firstBaseline" secondItem="9hu-VB-Sg3" secondAttribute="firstBaseline" id="1Gl-mf-oYB"/>
                                         <constraint firstItem="9hu-VB-Sg3" firstAttribute="leading" secondItem="Fv7-6L-e1k" secondAttribute="leading" constant="5" id="5X8-7Q-0HF"/>
                                         <constraint firstItem="Q3L-A0-EeH" firstAttribute="trailing" secondItem="9hu-VB-Sg3" secondAttribute="trailing" id="6GE-Oi-ZNt"/>
                                         <constraint firstAttribute="trailing" secondItem="BQn-3n-XcD" secondAttribute="trailing" constant="5" id="7dM-vh-nJS"/>
                                         <constraint firstItem="9hu-VB-Sg3" firstAttribute="top" relation="lessThanOrEqual" secondItem="Fv7-6L-e1k" secondAttribute="top" constant="2" id="HvM-dE-jWh"/>
+                                        <constraint firstItem="ejy-E2-vJs" firstAttribute="trailing" secondItem="BQn-3n-XcD" secondAttribute="trailing" id="Ooi-pd-YZR"/>
                                         <constraint firstItem="Q3L-A0-EeH" firstAttribute="top" secondItem="9hu-VB-Sg3" secondAttribute="bottom" constant="3" id="Qgs-72-TKG"/>
-                                        <constraint firstItem="BQn-3n-XcD" firstAttribute="centerY" secondItem="Fv7-6L-e1k" secondAttribute="centerY" id="V2b-1r-kcF"/>
+                                        <constraint firstItem="ejy-E2-vJs" firstAttribute="firstBaseline" secondItem="Q3L-A0-EeH" secondAttribute="firstBaseline" id="X6B-xx-2cJ"/>
                                         <constraint firstItem="Q3L-A0-EeH" firstAttribute="leading" secondItem="9hu-VB-Sg3" secondAttribute="leading" id="kmV-Br-cd2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="labelDeadLine" destination="BQn-3n-XcD" id="jgz-CB-ZJF"/>
+                                    <outlet property="labelPriority" destination="ejy-E2-vJs" id="1ex-wd-52b"/>
                                     <outlet property="labelTaskCategory" destination="Q3L-A0-EeH" id="uhR-HL-LYx"/>
                                     <outlet property="labelTaskName" destination="9hu-VB-Sg3" id="SlF-8n-P9v"/>
                                 </connections>
