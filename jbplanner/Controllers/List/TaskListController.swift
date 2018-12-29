@@ -73,15 +73,46 @@ class TaskListController: UITableViewController {
         
         cell.labelTaskName.text = task.name
         cell.labelTaskCategory.text = (task.category?.name ?? "")
-        cell.labelPriority.text = (task.priority?.name ?? "")
         
-        if let deadline = task.deadline {
-            cell.labelDeadLine?.text = dateFormatter.string(from: deadline)
+        if let priority = task.priority {
+            switch priority.index {
+            case 1:
+                cell.labelPriority.backgroundColor = UIColor(named: "low")
+            case 2:
+                cell.labelPriority.backgroundColor = UIColor(named: "medium")
+            case 3:
+                cell.labelPriority.backgroundColor = UIColor(named: "high")
+            default:
+                cell.labelPriority.backgroundColor = UIColor.white
+            }
         } else {
-            cell.labelDeadLine?.text = ""
+            cell.labelPriority.backgroundColor = UIColor.white
+        }
+        
+        cell.labelDeadLine.textColor = .lightGray
+        
+        if let diff = task.daysLeft() {
+            switch diff {
+            case 0:
+                cell.labelDeadLine.text = "Today" // TODO: localization
+            case 1:
+                cell.labelDeadLine.text = "Tomorrow"
+            case 0...:
+                cell.labelDeadLine.text = "\(diff) day(s)"
+            case ..<0:
+                cell.labelDeadLine.textColor = .red
+                cell.labelDeadLine.text = "\(diff) day(s)"
+            default:
+                cell.labelDeadLine.text = ""
+            }
         }
 
         return cell
+    }
+    
+    // установка высоты строки
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     func addCategory(name: String) -> Category {
@@ -137,7 +168,7 @@ class TaskListController: UITableViewController {
         let priority3 = addPriority(name: "High", index: 3)
         
         let task1 = addTask(name: "Visit swimpool", completed: false, deadline: Date(), info: "additional info", category: cat1, priority: priority2)
-        let task2 = addTask(name: "Weekend with family", completed: false, deadline: Date(), info: "additional info", category: cat2, priority: priority1)
+        let task2 = addTask(name: "Weekend with family", completed: false, deadline: Date().rewindDays(2), info: "additional info", category: cat2, priority: priority1)
     }
     
     func getAllTasks() -> [Task] {
