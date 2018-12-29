@@ -58,7 +58,7 @@ class TaskListController: UITableViewController {
 
     // отображение данных в строке
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as? TaskListCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTask", for: indexPath) as? TaskListCell else {
             fatalError("Cell Type Error")
         }
         
@@ -83,6 +83,13 @@ class TaskListController: UITableViewController {
         }
         
         cell.labelDeadLine.textColor = .lightGray
+        
+        // отображать или нет иконку блокнота
+        if task.info == nil || (task.info?.isEmpty)! {
+            cell.buttonTaskInfo.isHidden = true
+        } else {
+            cell.buttonTaskInfo.isHidden = false
+        }
         
         if let diff = task.daysLeft() {
             switch diff {
