@@ -14,16 +14,13 @@ class TaskListController: UITableViewController {
     let db = Db()
     
     let dateFormatter = DateFormatter()
+    
+    let taskDao = TaskDaoDbImpl.current
+    let categoryDao = CategoryDaoDbImpl.current
+    let priorityDao = PriorityDaoDbImpl.current
         
     var taskList:[Task]!
     
-    // временный массив данных
-//    private var taskList:[Task] = [
-//        Task(name: "1st Task", category: "1st Category"),
-//        Task(name: "2nd Task", category: "2nd Category", priority: "High"),
-//        Task(name: "3rd Task", category: "3rd Category", deadLine: Date())
-//    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +30,7 @@ class TaskListController: UITableViewController {
        
 //        db.initData()
         
-        taskList = db.getAllTasks()
+        taskList = taskDao.getAll()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -119,7 +116,7 @@ class TaskListController: UITableViewController {
         
         if editingStyle == .delete {
             
-            db.deleteTask(task: taskList[indexPath.row]) //удалить задачу из БД
+            taskDao.delete(taskList[indexPath.row]) //удалить задачу из БД
             
             // удалить саму строку и объект из коллекции
             taskList.remove(at: indexPath.row)

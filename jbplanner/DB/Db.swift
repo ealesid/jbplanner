@@ -34,7 +34,7 @@ class Db {
         let priority2 = addPriority(name: "Meduim", index: 2)
         let priority3 = addPriority(name: "High", index: 3)
         
-        let task1 = addTask(name: "Visit swimpool", completed: false, deadline: Date(), info: "additional info", category: cat1, priority: priority2)
+        let task1 = addTask(name: "Visit swimpool", completed: false, deadline: Date(), info: "additional info", category: cat1, priority: priority3)
         let task2 = addTask(name: "Weekend with family", completed: false, deadline: Date().rewindDays(2), info: "additional info", category: cat2, priority: priority1)
     }
     

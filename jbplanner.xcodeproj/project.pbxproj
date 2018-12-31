@@ -17,6 +17,11 @@
 		DBCCEAF521D77B3C00ABFCF3 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */; };
 		DBCCEAF721D77D6400ABFCF3 /* TaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */; };
 		DBCCEAFA21D783D800ABFCF3 /* Db.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEAF921D783D800ABFCF3 /* Db.swift */; };
+		DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0421DA145C00ABFCF3 /* CategoryDaoDbImpl.swift */; };
+		DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0621DA16BA00ABFCF3 /* TaskDaoDbImpl.swift */; };
+		DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0821DA175900ABFCF3 /* PriorityDaoDbImpl.swift */; };
+		DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0A21DA208800ABFCF3 /* Crud.swift */; };
+		DBCCEB0D21DA23CA00ABFCF3 /* CrudExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +38,11 @@
 		DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtension.swift; sourceTree = "<group>"; };
 		DBCCEAF921D783D800ABFCF3 /* Db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Db.swift; sourceTree = "<group>"; };
+		DBCCEB0421DA145C00ABFCF3 /* CategoryDaoDbImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDaoDbImpl.swift; sourceTree = "<group>"; };
+		DBCCEB0621DA16BA00ABFCF3 /* TaskDaoDbImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDaoDbImpl.swift; sourceTree = "<group>"; };
+		DBCCEB0821DA175900ABFCF3 /* PriorityDaoDbImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityDaoDbImpl.swift; sourceTree = "<group>"; };
+		DBCCEB0A21DA208800ABFCF3 /* Crud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crud.swift; sourceTree = "<group>"; };
+		DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudExtension.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +102,8 @@
 		DBB9A82D21CC110E00129C92 /* jbplanner */ = {
 			isa = PBXGroup;
 			children = (
+				DBCCEAFD21DA10DF00ABFCF3 /* DaoImplementation */,
+				DBCCEAFC21DA10D300ABFCF3 /* DAO */,
 				DBCCEAF821D783C700ABFCF3 /* DB */,
 				DBCCEAF321D77B2400ABFCF3 /* Extensions */,
 				DBE783A521D26FAC00512370 /* Cells */,
@@ -110,6 +122,7 @@
 			children = (
 				DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */,
 				DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */,
+				DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -120,6 +133,24 @@
 				DBCCEAF921D783D800ABFCF3 /* Db.swift */,
 			);
 			path = DB;
+			sourceTree = "<group>";
+		};
+		DBCCEAFC21DA10D300ABFCF3 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				DBCCEB0A21DA208800ABFCF3 /* Crud.swift */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		DBCCEAFD21DA10DF00ABFCF3 /* DaoImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				DBCCEB0421DA145C00ABFCF3 /* CategoryDaoDbImpl.swift */,
+				DBCCEB0621DA16BA00ABFCF3 /* TaskDaoDbImpl.swift */,
+				DBCCEB0821DA175900ABFCF3 /* PriorityDaoDbImpl.swift */,
+			);
+			path = DaoImplementation;
 			sourceTree = "<group>";
 		};
 		DBE783A521D26FAC00512370 /* Cells */ = {
@@ -204,11 +235,16 @@
 				DBCCEAF721D77D6400ABFCF3 /* TaskExtension.swift in Sources */,
 				DBCCEAFA21D783D800ABFCF3 /* Db.swift in Sources */,
 				DBB9A83121CC110E00129C92 /* ViewController.swift in Sources */,
+				DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */,
 				DBCCEAF521D77B3C00ABFCF3 /* DateExtension.swift in Sources */,
 				DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */,
+				DBCCEB0D21DA23CA00ABFCF3 /* CrudExtension.swift in Sources */,
 				DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */,
+				DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */,
 				DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */,
 				DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */,
+				DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */,
+				DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
