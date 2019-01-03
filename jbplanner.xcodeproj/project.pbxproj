@@ -22,6 +22,11 @@
 		DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0821DA175900ABFCF3 /* PriorityDaoDbImpl.swift */; };
 		DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0A21DA208800ABFCF3 /* Crud.swift */; };
 		DBCCEB0D21DA23CA00ABFCF3 /* CrudExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */; };
+		DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0E21DE24F600ABFCF3 /* TaskNameCell.swift */; };
+		DBCCEB1121DE25CD00ABFCF3 /* TaskCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1021DE25CD00ABFCF3 /* TaskCategoryCell.swift */; };
+		DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */; };
+		DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1421DE2CD600ABFCF3 /* TaskDeadlineCell.swift */; };
+		DBCCEB1721DE2CE800ABFCF3 /* TaskInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1621DE2CE800ABFCF3 /* TaskInfoCell.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +48,11 @@
 		DBCCEB0821DA175900ABFCF3 /* PriorityDaoDbImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityDaoDbImpl.swift; sourceTree = "<group>"; };
 		DBCCEB0A21DA208800ABFCF3 /* Crud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crud.swift; sourceTree = "<group>"; };
 		DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudExtension.swift; sourceTree = "<group>"; };
+		DBCCEB0E21DE24F600ABFCF3 /* TaskNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNameCell.swift; sourceTree = "<group>"; };
+		DBCCEB1021DE25CD00ABFCF3 /* TaskCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategoryCell.swift; sourceTree = "<group>"; };
+		DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPriorityCell.swift; sourceTree = "<group>"; };
+		DBCCEB1421DE2CD600ABFCF3 /* TaskDeadlineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDeadlineCell.swift; sourceTree = "<group>"; };
+		DBCCEB1621DE2CE800ABFCF3 /* TaskInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoCell.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +167,11 @@
 			isa = PBXGroup;
 			children = (
 				DBE783A621D26FE800512370 /* TaskListCell.swift */,
+				DBCCEB0E21DE24F600ABFCF3 /* TaskNameCell.swift */,
+				DBCCEB1021DE25CD00ABFCF3 /* TaskCategoryCell.swift */,
+				DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */,
+				DBCCEB1421DE2CD600ABFCF3 /* TaskDeadlineCell.swift */,
+				DBCCEB1621DE2CE800ABFCF3 /* TaskInfoCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -232,16 +247,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBCCEB1721DE2CE800ABFCF3 /* TaskInfoCell.swift in Sources */,
 				DBCCEAF721D77D6400ABFCF3 /* TaskExtension.swift in Sources */,
 				DBCCEAFA21D783D800ABFCF3 /* Db.swift in Sources */,
 				DBB9A83121CC110E00129C92 /* TaskDetailsController.swift in Sources */,
 				DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */,
+				DBCCEB1121DE25CD00ABFCF3 /* TaskCategoryCell.swift in Sources */,
 				DBCCEAF521D77B3C00ABFCF3 /* DateExtension.swift in Sources */,
+				DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */,
 				DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */,
 				DBCCEB0D21DA23CA00ABFCF3 /* CrudExtension.swift in Sources */,
 				DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */,
 				DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */,
+				DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */,
 				DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */,
+				DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */,
 				DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */,
 				DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */,
 				DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */,
