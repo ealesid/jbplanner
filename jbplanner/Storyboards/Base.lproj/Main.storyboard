@@ -101,7 +101,7 @@
                                     <outlet property="labelPriority" destination="ejy-E2-vJs" id="1ex-wd-52b"/>
                                     <outlet property="labelTaskCategory" destination="Q3L-A0-EeH" id="uhR-HL-LYx"/>
                                     <outlet property="labelTaskName" destination="9hu-VB-Sg3" id="SlF-8n-P9v"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="ioV-5T-yOC"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="updateTask" id="ioV-5T-yOC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

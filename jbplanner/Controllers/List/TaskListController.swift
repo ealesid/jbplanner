@@ -174,14 +174,33 @@ class TaskListController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        switch segue.identifier! {
+        case "updateTask":
+            
+            // приведение sender к типу ячейки (получаем доступ к нажатой ячейке)
+            let selectedCell = sender as! TaskListCell
+            
+            let selectedIndex = (tableView.indexPath(for: selectedCell)?.row)!
+            let selectedTask = taskDao.items[selectedIndex]
+            
+            // получаем доступ к целевому контроллеру
+            guard let controller = segue.destination as? TaskDetailsController else {
+                fatalError("Destination Controller select error")
+            }
+            
+            controller.title = "Editing"
+            controller.task = selectedTask // передаем задачу в целевой контроллер
+            
+        default:
+            return
+        }
     }
-    */
 
 }

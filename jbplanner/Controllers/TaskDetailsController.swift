@@ -10,6 +10,9 @@ import UIKit
 
 class TaskDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // текущая задача для редактирования
+    var task: Task!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -17,7 +20,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellTaskDetail", for: indexPath)
-        cell.textLabel?.text = "Test Cell"
+        cell.textLabel?.text = task.name
         
         return cell
     }
