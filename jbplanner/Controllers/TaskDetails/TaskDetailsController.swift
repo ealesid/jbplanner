@@ -184,5 +184,28 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         
         navigationController?.popViewController(animated: true)
     }
+    
+    
+    // MARK: prepare
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == nil { return }
+        
+        switch segue.identifier {
+        case "selectCategory":
+            if let controller = segue.destination as? CategoryListController {
+                controller.selectedCategory = taskCategory     // передаем текущее значение категории
+            }
+            
+        case "selectPriority":
+            if let controller = segue.destination as? PriorityListController {
+                controller.selectedPriority = taskPriority     // передаем текущее значение категории
+            }
+            
+        default:
+            return
+        }
+    }
 }
 

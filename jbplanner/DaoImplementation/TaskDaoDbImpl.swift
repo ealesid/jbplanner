@@ -14,8 +14,8 @@ class TaskDaoDbImpl: Crud {
     static let current = TaskDaoDbImpl()
     private init() {}
     
-    let categoryDao = CategoryDaoDbImpl.current
-    let priorityDao = PriorityDaoDbImpl.current
+    let categoryDAO = CategoryDaoDbImpl.current
+    let priorityDAO = PriorityDaoDbImpl.current
     
     var items:[Task]!
     

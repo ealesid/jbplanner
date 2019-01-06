@@ -12,7 +12,9 @@ import CoreData
 class PriorityDaoDbImpl: Crud {
     
     static let current = PriorityDaoDbImpl()
-    private init() {}
+    private init() {
+        items = getAll()
+    }
     
     var items: [Priority]!
     

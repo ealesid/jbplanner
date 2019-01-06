@@ -13,7 +13,9 @@ class CategoryDaoDbImpl: Crud {
     var items: [Category]!
     
     static let current = CategoryDaoDbImpl()
-    private init() {}
+    private init() {
+        items = getAll()
+    }
     
     func addOrUpdate(_ category: Category) {
         if !items.contains(category) {
