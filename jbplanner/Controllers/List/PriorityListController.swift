@@ -9,10 +9,17 @@
 import UIKit
 
 class PriorityListController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+        
+    @IBOutlet weak var tableView: UITableView!
     
     let priorityDAO = PriorityDaoDbImpl.current
     
     var selectedPriority: Priority!
+    
+    var delegate: ActionResultDelegate!            // нужен для возврата выбранной атегории в предыдущий контроллер
+    
+    var currentCheckedIndexPath: IndexPath!     // последний/текущий выбранный элемент
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +44,7 @@ class PriorityListController: UIViewController, UITableViewDataSource, UITableVi
         
         if selectedPriority != nil && selectedPriority == priority {
             cell.buttonCheckPriority.setImage(UIImage(named: "check_green"), for: .normal)
+            currentCheckedIndexPath = indexPath         // сохраняем выбранный индекс
         } else {
             cell.buttonCheckPriority.setImage(UIImage(named: "check_gray"), for: .normal)
         }
@@ -47,15 +55,39 @@ class PriorityListController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
+    // MARK: IBActions
+    
+    @IBAction func tapCheckPriority(_ sender: UIButton) {
 
-    /*
-    // MARK: - Navigation
+        // определение строки по координатам нажатия
+        let viewPosition = sender.convert(CGPoint.zero, to: tableView)
+        let indexPath = tableView.indexPathForRow(at: viewPosition)!
+        
+        let priority = priorityDAO.items[indexPath.row]
+        
+        if indexPath != currentCheckedIndexPath {       // если текущая строка не была выбрана
+            selectedPriority = priority
+            
+            if let currentCheckedIndexPath = currentCheckedIndexPath {      // снимаем выделение для прошлой выбранной строки
+                tableView.reloadRows(at: [currentCheckedIndexPath], with: .none)    // обновляем ранее выбранную строку
+            }
+            
+            currentCheckedIndexPath = indexPath         // запоминаем новый выбранный индекс
+        } else {        // если строка уже была выделена - снимаем выделение
+            selectedPriority = nil
+            currentCheckedIndexPath = nil
+        }
+        
+        // обновляем вид нажатой строки
+        tableView.reloadRows(at: [indexPath], with: .none)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
-
+    @IBAction func tapCancel(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func tapSave(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+        delegate?.done(source: self, data: selectedPriority)
+    }
 }

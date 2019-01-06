@@ -306,12 +306,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="s9P-WX-jTo" id="xKB-if-9pG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1000.8" y="47.226386806596707"/>
         </scene>
-        <!--Category List Controller-->
+        <!--Title-->
         <scene sceneID="51Z-8p-Lbk">
             <objects>
                 <viewController id="X4b-HR-yxD" customClass="CategoryListController" customModule="jbplanner" customModuleProvider="target" sceneMemberID="viewController">
@@ -343,6 +346,9 @@
                                                         <constraint firstAttribute="height" constant="25" id="9On-Og-l8s"/>
                                                     </constraints>
                                                     <state key="normal" image="check_gray"/>
+                                                    <connections>
+                                                        <action selector="tapCheckCategory:" destination="X4b-HR-yxD" eventType="touchUpInside" id="MdV-1f-8yB"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -374,12 +380,27 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cg8-dr-F4V"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="CnJ-Oo-fqr">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ne3-3r-qOT">
+                            <connections>
+                                <action selector="tapCancel:" destination="X4b-HR-yxD" id="GGH-3Z-NQr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="fgJ-Nq-eG8">
+                            <connections>
+                                <action selector="tapSave:" destination="X4b-HR-yxD" id="QmB-Rk-bZl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="fsz-xb-ciM" id="uSF-Cs-qZy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIv-9D-as9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1785" y="-275"/>
         </scene>
-        <!--Priority List Controller-->
+        <!--Title-->
         <scene sceneID="euc-3f-Tjd">
             <objects>
                 <viewController id="Clz-wg-AlU" customClass="PriorityListController" customModule="jbplanner" customModuleProvider="target" sceneMemberID="viewController">
@@ -411,6 +432,9 @@
                                                         <constraint firstAttribute="width" constant="25" id="YRl-R7-ODa"/>
                                                     </constraints>
                                                     <state key="normal" image="check_gray"/>
+                                                    <connections>
+                                                        <action selector="tapCheckPriority:" destination="Clz-wg-AlU" eventType="touchUpInside" id="pDI-AZ-aBg"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -442,6 +466,21 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Get-dR-JSR"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="RSv-hg-nyv">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="BX6-JJ-nre">
+                            <connections>
+                                <action selector="tapCancel:" destination="Clz-wg-AlU" id="mdb-CE-YZp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ZEF-bN-nKv">
+                            <connections>
+                                <action selector="tapSave:" destination="Clz-wg-AlU" id="ms1-wY-nxl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="L8U-Od-lcg" id="J1a-Ju-1cS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0S0-uf-r16" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
