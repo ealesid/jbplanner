@@ -13,7 +13,20 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     // текущая задача для редактирования
     var task: Task!
     
+    // поля задачи (в них будут хранится последние изменные значения, в случае сохранения - эти данные запишутся в task)
+    var taskName: String?
+    var taskInfo: String?
+    var taskPriority: Priority?
+    var taskCategory: Category?
+    var taskDeadline: Date?
+    
     let dateFormatter = DateFormatter()
+    
+    var delegate: ActionResultDelegate! // нужен для уведомления и вызова функции из контроллера списка задач
+    
+    // сохраняем ссылки на компоненты
+    var textTaskName: UITextField!
+    var textViewTaskInfo: UITextView!
     
 
     override func viewDidLoad() {
@@ -22,6 +35,15 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
+        
+        // сохраняем в соответствующие переменные все данные задачи
+        if let task = task {    // если объект не пустой (значит, режим редактирования, а не создания новой задачи)
+            taskName = task.name
+            taskInfo = task.info
+            taskPriority = task.priority
+            taskCategory = task.category
+            taskDeadline = task.deadline
+        }
         
     }
     
@@ -52,7 +74,10 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellTaskName", for: indexPath) as? TaskNameCell else {
                 fatalError("Cell Type Error")
             }
-            cell.textTaskName.text = task.name
+            cell.textTaskName.text = taskName
+            
+            textTaskName = cell.textTaskName // для использования компонента вне метода tableView
+            
             return cell
             
         case 1: // category
@@ -62,7 +87,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             var value: String
             
-            if let name = task.category?.name {
+            if let name = taskCategory?.name {
                 value = name
             } else {
                 value = "Not slelected"
@@ -78,7 +103,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             var value: String
             
-            if let name = task.priority?.name {
+            if let name = taskPriority?.name {
                 value = name
             } else {
                 value = "Not slelected"
@@ -94,7 +119,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             var value: String
             
-            if let deadline = task.deadline {
+            if let deadline = taskDeadline {
                 value = dateFormatter.string(from: deadline)
             } else {
                 value = "No deadline."
@@ -108,7 +133,10 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 fatalError("Cell Type Error")
             }
             
-            cell.textviewTaskInfo.text = task.info
+            cell.textviewTaskInfo.text = taskInfo
+            
+            textViewTaskInfo = cell.textviewTaskInfo // для использования компонента вне метода tableView
+            
             return cell
 
         default:
@@ -138,6 +166,23 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             return ""
             
         }
+    }
+    
+    // MARK: IBActions
+    
+    // закрытие контроллера без сохранения
+    @IBAction func tapCancel(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true) // контроллер удаляется из стека контроллеров
+    }
+    
+    @IBAction func tapSave(_ sender: UIBarButtonItem) {
+        
+        task.name = textTaskName.text
+        task.info = textViewTaskInfo.text
+        
+        delegate.done(source: self, data: nil)      // можно не передавать обратно task, т.к. reference type
+        
+        navigationController?.popViewController(animated: true)
     }
 }
 

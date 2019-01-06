@@ -9,15 +9,15 @@
 import CoreData
 import UIKit
 
-class TaskListController: UITableViewController {
+class TaskListController: UITableViewController, ActionResultDelegate {
     
     let db = Db()
     
     let dateFormatter = DateFormatter()
     
-    let taskDao = TaskDaoDbImpl.current
-    let categoryDao = CategoryDaoDbImpl.current
-    let priorityDao = PriorityDaoDbImpl.current
+    let taskDAO = TaskDaoDbImpl.current
+    let categoryDAO = CategoryDaoDbImpl.current
+    let priorityDAO = PriorityDaoDbImpl.current
         
     var taskList:[Task]!
     
@@ -30,7 +30,7 @@ class TaskListController: UITableViewController {
        
 //        db.initData()
         
-        taskList = taskDao.getAll()
+        taskList = taskDAO.getAll()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -116,7 +116,7 @@ class TaskListController: UITableViewController {
         
         if editingStyle == .delete {
             
-            taskDao.delete(taskList[indexPath.row]) //удалить задачу из БД
+            taskDAO.delete(taskList[indexPath.row]) //удалить задачу из БД
             
             // удалить саму строку и объект из коллекции
             taskList.remove(at: indexPath.row)
@@ -188,7 +188,7 @@ class TaskListController: UITableViewController {
             let selectedCell = sender as! TaskListCell
             
             let selectedIndex = (tableView.indexPath(for: selectedCell)?.row)!
-            let selectedTask = taskDao.items[selectedIndex]
+            let selectedTask = taskDAO.items[selectedIndex]
             
             // получаем доступ к целевому контроллеру
             guard let controller = segue.destination as? TaskDetailsController else {
@@ -197,9 +197,24 @@ class TaskListController: UITableViewController {
             
             controller.title = "Editing"
             controller.task = selectedTask // передаем задачу в целевой контроллер
+            controller.delegate = self
             
         default:
             return
+        }
+    }
+    
+    // MARK: ActionResultDelegate
+    
+    // может обрабатывать ответы (слушать действия) от любых контроллеров
+    func done(source: UIViewController, data: Any?) {
+        
+        // если пришел ответт от TaskDetailsController
+        if source is TaskDetailsController {
+            if let selectedIndexPaht = tableView.indexPathForSelectedRow { // определяем выбранную строку
+                taskDAO.save() // сохраняем измененную задачу (сохраняет все изменения)
+                tableView.reloadRows(at: [selectedIndexPaht], with: .fade) // обновляем только нужную строку
+            }
         }
     }
 

@@ -27,6 +27,7 @@
 		DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */; };
 		DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1421DE2CD600ABFCF3 /* TaskDeadlineCell.swift */; };
 		DBCCEB1721DE2CE800ABFCF3 /* TaskInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1621DE2CE800ABFCF3 /* TaskInfoCell.swift */; };
+		DBCCEB1C21E20C0200ABFCF3 /* ActionResultDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1B21E20C0200ABFCF3 /* ActionResultDelegate.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPriorityCell.swift; sourceTree = "<group>"; };
 		DBCCEB1421DE2CD600ABFCF3 /* TaskDeadlineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDeadlineCell.swift; sourceTree = "<group>"; };
 		DBCCEB1621DE2CE800ABFCF3 /* TaskInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoCell.swift; sourceTree = "<group>"; };
+		DBCCEB1B21E20C0200ABFCF3 /* ActionResultDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionResultDelegate.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 		DBB9A82D21CC110E00129C92 /* jbplanner */ = {
 			isa = PBXGroup;
 			children = (
+				DBCCEB1A21E20BDE00ABFCF3 /* Delegates */,
 				DBCCEAFD21DA10DF00ABFCF3 /* DaoImplementation */,
 				DBCCEAFC21DA10D300ABFCF3 /* DAO */,
 				DBCCEAF821D783C700ABFCF3 /* DB */,
@@ -163,15 +166,39 @@
 			path = DaoImplementation;
 			sourceTree = "<group>";
 		};
-		DBE783A521D26FAC00512370 /* Cells */ = {
+		DBCCEB1821E205AA00ABFCF3 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
 				DBE783A621D26FE800512370 /* TaskListCell.swift */,
+			);
+			path = TaskList;
+			sourceTree = "<group>";
+		};
+		DBCCEB1921E205BC00ABFCF3 /* TaskDetails */ = {
+			isa = PBXGroup;
+			children = (
 				DBCCEB0E21DE24F600ABFCF3 /* TaskNameCell.swift */,
 				DBCCEB1021DE25CD00ABFCF3 /* TaskCategoryCell.swift */,
 				DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */,
 				DBCCEB1421DE2CD600ABFCF3 /* TaskDeadlineCell.swift */,
 				DBCCEB1621DE2CE800ABFCF3 /* TaskInfoCell.swift */,
+			);
+			path = TaskDetails;
+			sourceTree = "<group>";
+		};
+		DBCCEB1A21E20BDE00ABFCF3 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				DBCCEB1B21E20C0200ABFCF3 /* ActionResultDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		DBE783A521D26FAC00512370 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DBCCEB1921E205BC00ABFCF3 /* TaskDetails */,
+				DBCCEB1821E205AA00ABFCF3 /* TaskList */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -262,6 +289,7 @@
 				DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */,
 				DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */,
 				DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */,
+				DBCCEB1C21E20C0200ABFCF3 /* ActionResultDelegate.swift in Sources */,
 				DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */,
 				DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */,
 				DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */,
