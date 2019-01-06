@@ -185,8 +185,10 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
         
-        task.name = textTaskName.text
-        task.info = textViewTaskInfo.text
+        task.name = taskName
+        task.info = taskInfo
+        task.category = taskCategory
+        task.priority = taskPriority
         
         delegate.done(source: self, data: nil)      // можно не передавать обратно task, т.к. reference type
         
