@@ -18,8 +18,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     let taskDAO = TaskDaoDbImpl.current
     let categoryDAO = CategoryDaoDbImpl.current
     let priorityDAO = PriorityDaoDbImpl.current
-        
-    var taskList:[Task]!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +27,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         dateFormatter.timeStyle = .none
         
        
-//        db.initData()
-        
-        taskList = taskDAO.getAll()
+        // db.initData()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -50,7 +47,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
 
     // количество записей в каждой секции
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskList.count
+        return taskDAO.items.count
     }
 
     // отображение данных в строке
@@ -59,7 +56,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             fatalError("Cell Type Error")
         }
         
-        let task = taskList[indexPath.row]
+        let task = taskDAO.items[indexPath.row]
         
         cell.labelTaskName.text = task.name
         cell.labelTaskCategory.text = (task.category?.name ?? "")
@@ -115,12 +112,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
-            taskDAO.delete(taskList[indexPath.row]) //удалить задачу из БД
-            
-            // удалить саму строку и объект из коллекции
-            taskList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .top)
+            deleteTask(indexPath)
         } else if editingStyle == .insert {
             // Create a new instance of the appripriate class, insert it into the array, and add a new row to the tableView
             
@@ -216,6 +208,28 @@ class TaskListController: UITableViewController, ActionResultDelegate {
                 tableView.reloadRows(at: [selectedIndexPaht], with: .fade) // обновляем только нужную строку
             }
         }
+    }
+    
+    
+    // MARK: actions
+    
+    @IBAction func deleteFromTaskDetails(segue: UIStoryboardSegue) {
+        guard segue.source is TaskDetailsController else {      // принимаем выховы только от TaskDetailsController - для более строго кода
+            fatalError("Return from unknown source.")
+        }
+        
+        if segue.identifier == "DeleteTaskFromDetails", let selectedIndexPath = tableView.indexPathForSelectedRow{
+            deleteTask(selectedIndexPath)
+        }
+    }
+    
+    
+    // MARK: DAO
+    
+    func deleteTask(_ indexPath: IndexPath) {
+        taskDAO.delete(taskDAO.items[indexPath.row])
+        taskDAO.items.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .top)
     }
 
 }

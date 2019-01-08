@@ -12,7 +12,9 @@ import CoreData
 class TaskDaoDbImpl: Crud {
    
     static let current = TaskDaoDbImpl()
-    private init() {}
+    private init() {
+        getAll()
+    }
     
     let categoryDAO = CategoryDaoDbImpl.current
     let priorityDAO = PriorityDaoDbImpl.current

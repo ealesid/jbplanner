@@ -125,12 +125,18 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 fatalError("Cell Type Error")
             }
             
+            cell.selectionStyle = .none
+            
             var value: String
             
             if let deadline = taskDeadline {
                 value = dateFormatter.string(from: deadline)
+                cell.labelTaskDeadline.textColor = UIColor.gray
+                cell.buttonClearDeadline.isHidden = false
             } else {
                 value = "No deadline."
+                cell.labelTaskDeadline.textColor = UIColor.lightGray
+                cell.buttonClearDeadline.isHidden = true
             }
             
             cell.labelTaskDeadline.text = value
@@ -189,6 +195,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         task.info = taskInfo
         task.category = taskCategory
         task.priority = taskPriority
+        task.deadline = taskDeadline
         
         delegate.done(source: self, data: nil)      // можно не передавать обратно task, т.к. reference type
         
@@ -198,6 +205,12 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction func taskNameChanged(_ sender: UITextField) {
         taskName = sender.text
     }
+    
+    @IBAction func tapClearDeadline(_ sender: UIButton) {
+        taskDeadline = nil
+        tableView.reloadRows(at: [IndexPath(row: 0, section: taskDeadlineSection)], with: .fade)
+    }
+    
     
     // MARK: prepare
     

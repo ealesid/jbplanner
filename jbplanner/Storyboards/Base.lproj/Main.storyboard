@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -59,7 +60,7 @@
                                             </constraints>
                                             <state key="normal" title="buttonInfo" image="note"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmY-gh-keJ">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmY-gh-keJ" customClass="AreaTapButton" customModule="jbplanner" customModuleProvider="target">
                                             <rect key="frame" x="345" y="17.5" width="25" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="IvE-4u-SaE"/>
@@ -67,8 +68,8 @@
                                             </constraints>
                                             <state key="normal" title="buttonComplete" image="check_gray"/>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="labelDeadLine" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQn-3n-XcD">
-                                            <rect key="frame" x="257" y="19.5" width="80" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQn-3n-XcD">
+                                            <rect key="frame" x="257" y="30" width="80" height="0.0"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="Mo5-0g-i5h"/>
                                             </constraints>
@@ -218,21 +219,35 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYC-j6-bia">
-                                                    <rect key="frame" x="10" y="5" width="355" height="33.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYC-j6-bia">
+                                                    <rect key="frame" x="10" y="5" width="325" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twq-RL-eVB" customClass="AreaTapButton" customModule="jbplanner" customModuleProvider="target">
+                                                    <rect key="frame" x="345" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="UIE-2e-t31"/>
+                                                        <constraint firstAttribute="width" constant="20" id="bWY-KS-aXB"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="clear"/>
+                                                    <connections>
+                                                        <action selector="tapClearDeadline:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2LY-0O-gi6"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="VYC-j6-bia" secondAttribute="bottom" constant="5" id="C6J-kd-Iqi"/>
                                                 <constraint firstItem="VYC-j6-bia" firstAttribute="top" secondItem="sL5-wm-5aw" secondAttribute="top" constant="5" id="P1U-Xd-xYN"/>
                                                 <constraint firstItem="VYC-j6-bia" firstAttribute="leading" secondItem="sL5-wm-5aw" secondAttribute="leading" constant="10" id="Xxm-CL-aHM"/>
-                                                <constraint firstAttribute="trailing" secondItem="VYC-j6-bia" secondAttribute="trailing" constant="10" id="mJ6-Hk-3yf"/>
+                                                <constraint firstItem="Twq-RL-eVB" firstAttribute="leading" secondItem="VYC-j6-bia" secondAttribute="trailing" constant="10" id="mJ6-Hk-3yf"/>
+                                                <constraint firstAttribute="trailing" secondItem="Twq-RL-eVB" secondAttribute="trailing" constant="10" id="odK-i7-LiP"/>
+                                                <constraint firstItem="Twq-RL-eVB" firstAttribute="centerY" secondItem="sL5-wm-5aw" secondAttribute="centerY" id="w19-Z0-sSA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="buttonClearDeadline" destination="Twq-RL-eVB" id="yBe-Cg-aR2"/>
                                             <outlet property="labelTaskDeadline" destination="VYC-j6-bia" id="eg1-ny-OK5"/>
                                         </connections>
                                     </tableViewCell>
@@ -273,11 +288,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73k-XB-Qeb">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
-                                        <state key="normal" title="Button"/>
+                                        <color key="backgroundColor" name="button_delete"/>
+                                        <connections>
+                                            <segue destination="vxO-dR-ivB" kind="unwind" identifier="DeleteTaskFromDetails" unwindAction="deleteFromTaskDetailsWithSegue:" id="RyD-4N-iBn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnI-zM-A7M">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
-                                        <state key="normal" title="Button"/>
+                                        <color key="backgroundColor" name="button_complete"/>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -314,6 +332,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="vxO-dR-ivB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1000.8" y="47.226386806596707"/>
         </scene>
@@ -342,7 +361,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oh-uj-ok1">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Oh-uj-ok1" customClass="AreaTapButton" customModule="jbplanner" customModuleProvider="target">
                                                     <rect key="frame" x="340" y="9.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="0NN-0q-cdI"/>
@@ -428,7 +447,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGt-Rd-hGn">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGt-Rd-hGn" customClass="AreaTapButton" customModule="jbplanner" customModuleProvider="target">
                                                     <rect key="frame" x="340" y="9.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="EnA-vK-vYf"/>
@@ -510,6 +529,13 @@
     </scenes>
     <resources>
         <image name="check_gray" width="30" height="30"/>
+        <image name="clear" width="15" height="15"/>
         <image name="note" width="25" height="29"/>
+        <namedColor name="button_complete">
+            <color red="0.29019607843137257" green="0.83529411764705885" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="button_delete">
+            <color red="1" green="0.37647058823529411" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
