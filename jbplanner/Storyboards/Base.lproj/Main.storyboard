@@ -143,6 +143,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="taskNameChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="i8g-nr-bQI"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -347,7 +350,7 @@
                                                     </constraints>
                                                     <state key="normal" image="check_gray"/>
                                                     <connections>
-                                                        <action selector="tapCheckCategory:" destination="X4b-HR-yxD" eventType="touchUpInside" id="MdV-1f-8yB"/>
+                                                        <action selector="tapCheckCategory:" destination="X4b-HR-yxD" eventType="touchUpInside" id="AK8-YX-AdO"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -383,12 +386,12 @@
                     <navigationItem key="navigationItem" title="Title" id="CnJ-Oo-fqr">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ne3-3r-qOT">
                             <connections>
-                                <action selector="tapCancel:" destination="X4b-HR-yxD" id="GGH-3Z-NQr"/>
+                                <action selector="tapCancel:" destination="X4b-HR-yxD" id="vxh-sp-8Om"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="fgJ-Nq-eG8">
                             <connections>
-                                <action selector="tapSave:" destination="X4b-HR-yxD" id="QmB-Rk-bZl"/>
+                                <action selector="tapSave:" destination="X4b-HR-yxD" id="60A-lm-dNH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -433,7 +436,7 @@
                                                     </constraints>
                                                     <state key="normal" image="check_gray"/>
                                                     <connections>
-                                                        <action selector="tapCheckPriority:" destination="Clz-wg-AlU" eventType="touchUpInside" id="pDI-AZ-aBg"/>
+                                                        <action selector="tapCheckPriority:" destination="Clz-wg-AlU" eventType="touchUpInside" id="gLN-0y-fqs"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -469,12 +472,12 @@
                     <navigationItem key="navigationItem" title="Title" id="RSv-hg-nyv">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="BX6-JJ-nre">
                             <connections>
-                                <action selector="tapCancel:" destination="Clz-wg-AlU" id="mdb-CE-YZp"/>
+                                <action selector="tapCancel:" destination="Clz-wg-AlU" id="3Sv-il-wxV"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ZEF-bN-nKv">
                             <connections>
-                                <action selector="tapSave:" destination="Clz-wg-AlU" id="ms1-wY-nxl"/>
+                                <action selector="tapSave:" destination="Clz-wg-AlU" id="7PN-5m-yEO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

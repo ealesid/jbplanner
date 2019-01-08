@@ -32,6 +32,7 @@
 		DBCCEB2121E22C4C00ABFCF3 /* CategoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2021E22C4C00ABFCF3 /* CategoryListCell.swift */; };
 		DBCCEB2321E2358500ABFCF3 /* PriorityListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2221E2358500ABFCF3 /* PriorityListController.swift */; };
 		DBCCEB2521E2364500ABFCF3 /* PriorityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */; };
+		DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF95E021E2720600655512 /* DictionaryController.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		DBCCEB2021E22C4C00ABFCF3 /* CategoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCell.swift; sourceTree = "<group>"; };
 		DBCCEB2221E2358500ABFCF3 /* PriorityListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListController.swift; sourceTree = "<group>"; };
 		DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListCell.swift; sourceTree = "<group>"; };
+		DBDF95E021E2720600655512 /* DictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryController.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 				DB116BD521D11BCB0070F13D /* TaskListController.swift */,
 				DBCCEB1E21E22BEB00ABFCF3 /* CategoryListController.swift */,
 				DBCCEB2221E2358500ABFCF3 /* PriorityListController.swift */,
+				DBDF95E021E2720600655512 /* DictionaryController.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */,
 				DBCCEB1121DE25CD00ABFCF3 /* TaskCategoryCell.swift in Sources */,
 				DBCCEAF521D77B3C00ABFCF3 /* DateExtension.swift in Sources */,
+				DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */,
 				DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */,
 				DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */,
 				DBCCEB1F21E22BEB00ABFCF3 /* CategoryListController.swift in Sources */,

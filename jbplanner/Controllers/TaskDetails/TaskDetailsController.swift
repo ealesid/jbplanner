@@ -195,6 +195,9 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func taskNameChanged(_ sender: UITextField) {
+        taskName = sender.text
+    }
     
     // MARK: prepare
     
@@ -205,13 +208,13 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         switch segue.identifier {
         case "selectCategory":
             if let controller = segue.destination as? CategoryListController {
-                controller.selectedCategory = taskCategory     // передаем текущее значение категории
+                controller.selectedItem = taskCategory     // передаем текущее значение категории
                 controller.delegate = self
             }
             
         case "selectPriority":
             if let controller = segue.destination as? PriorityListController {
-                controller.selectedPriority = taskPriority     // передаем текущее значение категории
+                controller.selectedItem = taskPriority     // передаем текущее значение категории
                 controller.delegate = self
             }
             
