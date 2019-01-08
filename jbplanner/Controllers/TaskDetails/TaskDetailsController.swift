@@ -211,6 +211,22 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         tableView.reloadRows(at: [IndexPath(row: 0, section: taskDeadlineSection)], with: .fade)
     }
     
+    @IBAction func tapDeleteTask(_ sender: UIButton) {
+        
+        let dialogMessage = UIAlertController(title: "Delete confirmation", message: "Delete selected task?", preferredStyle: .actionSheet)
+        
+        let delete = UIAlertAction(title: "Delete", style: .default, handler: { (action) -> Void in
+            self.performSegue(withIdentifier: "DeleteTaskFromDetails", sender: self)
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in }
+        
+        dialogMessage.addAction(delete)
+        dialogMessage.addAction(cancel)
+        
+        self.present(dialogMessage, animated: true, completion: nil)
+        
+    }
     
     // MARK: prepare
     

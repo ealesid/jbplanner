@@ -294,7 +294,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
                                         <color key="backgroundColor" name="button_delete"/>
                                         <connections>
-                                            <segue destination="vxO-dR-ivB" kind="unwind" identifier="DeleteTaskFromDetails" unwindAction="deleteFromTaskDetailsWithSegue:" id="RyD-4N-iBn"/>
+                                            <action selector="tapDeleteTask:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rta-6x-YJJ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnI-zM-A7M">
@@ -333,6 +333,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="s9P-WX-jTo" id="xKB-if-9pG"/>
+                        <segue destination="vxO-dR-ivB" kind="unwind" identifier="DeleteTaskFromDetails" unwindAction="deleteFromTaskDetailsWithSegue:" id="tNX-GE-5rZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -429,7 +430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIv-9D-as9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1785" y="-275"/>
+            <point key="canvasLocation" x="1785" y="-249"/>
         </scene>
         <!--EditTaskInfo-->
         <scene sceneID="OWk-oa-NcR">
@@ -474,7 +475,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kit-Ka-JhX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1001" y="791"/>
+            <point key="canvasLocation" x="1785" y="427"/>
         </scene>
         <!--Title-->
         <scene sceneID="euc-3f-Tjd">
@@ -560,7 +561,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0S0-uf-r16" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1785" y="405"/>
+            <point key="canvasLocation" x="2519" y="-250"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VmQ-nV-dVB">
