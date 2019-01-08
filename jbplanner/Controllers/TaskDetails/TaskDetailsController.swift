@@ -231,6 +231,12 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 controller.delegate = self
             }
             
+        case "editTaskInfo":
+            if let controller = segue.destination as? TaskInfoController {
+                controller.taskInfo = taskInfo
+                controller.delegate = self
+            }
+            
         default:
             return
         }
@@ -249,7 +255,11 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         case is PriorityListController:
             taskPriority = data as? Priority
             tableView.reloadRows(at: [IndexPath(row: 0, section: taskPrioritySection)], with: .fade)
-
+            
+        case is TaskInfoController:
+            taskInfo = data as? String
+            tableView.reloadRows(at: [IndexPath(row: 0, section: taskInfoSection)], with: .fade)
+            
         default:
             print()
         }

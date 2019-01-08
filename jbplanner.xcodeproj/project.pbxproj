@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB116BD521D11BCB0070F13D /* TaskListController.swift */; };
 		DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */; };
+		DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2521E51F50002FA52C /* TaskInfoController.swift */; };
 		DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB9A82E21CC110E00129C92 /* AppDelegate.swift */; };
 		DBB9A83121CC110E00129C92 /* TaskDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB9A83021CC110E00129C92 /* TaskDetailsController.swift */; };
 		DBB9A83421CC110E00129C92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB9A83221CC110E00129C92 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		DB116BD521D11BCB0070F13D /* TaskListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskListController.swift; path = jbplanner/Controllers/List/TaskListController.swift; sourceTree = SOURCE_ROOT; };
 		DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTapButton.swift; sourceTree = "<group>"; };
+		DBB79E2521E51F50002FA52C /* TaskInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoController.swift; sourceTree = "<group>"; };
 		DBB9A82B21CC110E00129C92 /* jbplanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jbplanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB9A82E21CC110E00129C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBB9A83021CC110E00129C92 /* TaskDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsController.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB9A83021CC110E00129C92 /* TaskDetailsController.swift */,
+				DBB79E2521E51F50002FA52C /* TaskInfoController.swift */,
 			);
 			path = TaskDetails;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				DBB9A83121CC110E00129C92 /* TaskDetailsController.swift in Sources */,
 				DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */,
 				DBCCEB1121DE25CD00ABFCF3 /* TaskCategoryCell.swift in Sources */,
+				DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */,
 				DBCCEAF521D77B3C00ABFCF3 /* DateExtension.swift in Sources */,
 				DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */,
 				DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */,

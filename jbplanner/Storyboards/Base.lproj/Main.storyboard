@@ -258,12 +258,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GGl-OZ-NGV">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GGl-OZ-NGV">
                                                     <rect key="frame" x="10" y="5" width="360" height="124.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <gestureRecognizers/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="fvj-ix-DOr" appends="YES" id="tdv-nl-Gih"/>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                             <constraints>
@@ -333,6 +337,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="vxO-dR-ivB" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="fvj-ix-DOr">
+                    <connections>
+                        <segue destination="Uly-2T-KxG" kind="show" identifier="editTaskInfo" id="Zfx-aq-RcY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1000.8" y="47.226386806596707"/>
         </scene>
@@ -421,6 +430,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIv-9D-as9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1785" y="-275"/>
+        </scene>
+        <!--EditTaskInfo-->
+        <scene sceneID="OWk-oa-NcR">
+            <objects>
+                <viewController id="Uly-2T-KxG" customClass="TaskInfoController" customModule="jbplanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m37-3Q-NY5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="isb-NA-pOq">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="isb-NA-pOq" firstAttribute="leading" secondItem="aS2-8C-lpR" secondAttribute="leading" id="ERj-wd-2fb"/>
+                            <constraint firstItem="isb-NA-pOq" firstAttribute="top" secondItem="aS2-8C-lpR" secondAttribute="top" id="HrA-vX-2QJ"/>
+                            <constraint firstItem="aS2-8C-lpR" firstAttribute="bottom" secondItem="isb-NA-pOq" secondAttribute="bottom" id="TtX-nJ-FCH"/>
+                            <constraint firstItem="aS2-8C-lpR" firstAttribute="trailing" secondItem="isb-NA-pOq" secondAttribute="trailing" id="pkd-AF-kIR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aS2-8C-lpR"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="EditTaskInfo" id="FJb-La-xhg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="evr-Qd-LQy">
+                            <connections>
+                                <action selector="tapCancel:" destination="Uly-2T-KxG" id="vFB-07-eVi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="7NN-0P-lfG">
+                            <connections>
+                                <action selector="tapSave:" destination="Uly-2T-KxG" id="bYs-6v-dOW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textviewTaskInfo" destination="isb-NA-pOq" id="HFS-Ib-EbH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kit-Ka-JhX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1001" y="791"/>
         </scene>
         <!--Title-->
         <scene sceneID="euc-3f-Tjd">
