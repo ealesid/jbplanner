@@ -84,6 +84,8 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             }
             cell.textTaskName.text = taskName
             
+            if (cell.textTaskName.text?.isEmpty)! { cell.textTaskName.becomeFirstResponder() }
+            
             textTaskName = cell.textTaskName // для использования компонента вне метода tableView
             
             return cell
@@ -97,8 +99,10 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
             if let name = taskCategory?.name {
                 value = name
+                cell.labelTaskCategory.textColor = UIColor.darkText
             } else {
                 value = "Not slelected"
+                cell.labelTaskCategory.textColor = UIColor.lightGray
             }
             
             cell.labelTaskCategory.text = value
@@ -191,13 +195,16 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
         
-        task.name = taskName
+        if let taskName = taskName, !taskName.isEmpty {
+            task.name = taskName
+        } else { task.name = "New Task" }
+            
         task.info = taskInfo
         task.category = taskCategory
         task.priority = taskPriority
         task.deadline = taskDeadline
         
-        delegate.done(source: self, data: nil)      // можно не передавать обратно task, т.к. reference type
+        delegate.done(source: self, data: task)      // можно не передавать обратно task, т.к. reference type
         
         navigationController?.popViewController(animated: true)
     }
@@ -282,7 +289,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             
         case is TaskInfoController:
             taskInfo = data as? String
-            tableView.reloadRows(at: [IndexPath(row: 0, section: taskInfoSection)], with: .fade)
+            textViewTaskInfo.text = taskInfo
             
         default:
             print()

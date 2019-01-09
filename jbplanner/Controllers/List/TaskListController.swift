@@ -19,6 +19,10 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     let categoryDAO = CategoryDaoDbImpl.current
     let priorityDAO = PriorityDaoDbImpl.current
     
+    let taskListSection = 0
+    
+    var taskCount: Int { return taskDAO.items.count }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -218,6 +222,13 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             controller.task = selectedTask // передаем задачу в целевой контроллер
             controller.delegate = self
             
+        case "CreateTask":
+            // получаем доступ к целевому контроллеру
+            guard let controller = segue.destination as? TaskDetailsController else { fatalError("Wrong controller") }
+            controller.title = "New Task"
+            controller.task = Task(context: taskDAO.context)
+            controller.delegate = self
+            
         default:
             return
         }
@@ -233,6 +244,13 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             if let selectedIndexPaht = tableView.indexPathForSelectedRow { // определяем выбранную строку
                 taskDAO.save() // сохраняем измененную задачу (сохраняет все изменения)
                 tableView.reloadRows(at: [selectedIndexPaht], with: .fade) // обновляем только нужную строку
+            } else {    // создаем новую задачу
+                let task = data as! Task
+                taskDAO.addOrUpdate(task)
+                
+                // индекс чтобы задача добавилась в конец списка
+                let indexPath = IndexPath(row: taskCount-1, section: taskListSection)
+                tableView.insertRows(at: [indexPath], with: .top)
             }
         }
     }

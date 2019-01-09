@@ -19,6 +19,11 @@ class TaskInfoController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Additional Info"
+        
+        //фокусируем на компоненте для открытия клавиатуры
+        textviewTaskInfo.becomeFirstResponder()
+        
         textviewTaskInfo.text = taskInfo
     }
     
