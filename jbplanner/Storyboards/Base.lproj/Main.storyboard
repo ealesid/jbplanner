@@ -67,6 +67,9 @@
                                                 <constraint firstAttribute="width" constant="25" id="hzr-a1-9Ii"/>
                                             </constraints>
                                             <state key="normal" title="buttonComplete" image="check_gray"/>
+                                            <connections>
+                                                <action selector="tapCompleteTask:" destination="g2S-BU-mts" eventType="touchUpInside" id="zdY-FG-vAi"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQn-3n-XcD">
                                             <rect key="frame" x="257" y="30" width="80" height="0.0"/>
@@ -97,12 +100,12 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="buttonCompleteTask" destination="zmY-gh-keJ" id="TDV-Rd-CLm"/>
                                     <outlet property="buttonTaskInfo" destination="pHa-eP-bgg" id="bLm-nk-ged"/>
                                     <outlet property="labelDeadLine" destination="BQn-3n-XcD" id="jgz-CB-ZJF"/>
                                     <outlet property="labelPriority" destination="ejy-E2-vJs" id="1ex-wd-52b"/>
                                     <outlet property="labelTaskCategory" destination="Q3L-A0-EeH" id="uhR-HL-LYx"/>
                                     <outlet property="labelTaskName" destination="9hu-VB-Sg3" id="SlF-8n-P9v"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="updateTask" id="ioV-5T-yOC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -115,6 +118,9 @@
                         <barButtonItem key="leftBarButtonItem" title="Item" id="rsK-nQ-gD4"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CKv-ay-ciN"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="updateTask" id="MTH-zM-zxL"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17F-xI-f8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -300,6 +306,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnI-zM-A7M">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
                                         <color key="backgroundColor" name="button_complete"/>
+                                        <connections>
+                                            <action selector="tapCompleteTask:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z3K-Ny-Iz7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -334,6 +343,7 @@
                     <connections>
                         <outlet property="tableView" destination="s9P-WX-jTo" id="xKB-if-9pG"/>
                         <segue destination="vxO-dR-ivB" kind="unwind" identifier="DeleteTaskFromDetails" unwindAction="deleteFromTaskDetailsWithSegue:" id="tNX-GE-5rZ"/>
+                        <segue destination="vxO-dR-ivB" kind="unwind" identifier="CompleteTaskFromDetails" unwindAction="completeFromTaskDetailsWithSegue:" id="Pda-ZI-8Pl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

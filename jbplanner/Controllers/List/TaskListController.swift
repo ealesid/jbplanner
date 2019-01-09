@@ -100,6 +100,25 @@ class TaskListController: UITableViewController, ActionResultDelegate {
                 cell.labelDeadLine.text = ""
             }
         }
+        
+        // стиль для завершенных задач
+        if task.completed {
+            cell.labelDeadLine.textColor = .lightGray
+            cell.labelTaskName.textColor = .lightGray
+            cell.labelTaskCategory.textColor = .lightGray
+            cell.labelPriority.backgroundColor = .lightGray
+            cell.buttonCompleteTask.setImage(UIImage(named: "check_green"), for: .normal)
+            cell.selectionStyle = .none
+            cell.buttonTaskInfo.isEnabled = false
+            cell.buttonTaskInfo.imageView?.image = UIImage(named: "note_gray")
+        } else {        // стиль для незавершенных задач
+            cell.selectionStyle = .default
+            cell.buttonTaskInfo.isEnabled = true
+            cell.buttonTaskInfo.imageView?.image = UIImage(named: "note")
+            cell.labelTaskName.textColor = .darkGray
+            cell.buttonCompleteTask.setImage(UIImage(named: "check_gray"), for: .normal)
+            cell.buttonTaskInfo.isEnabled = true
+        }
 
         return cell
     }
@@ -117,6 +136,14 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             // Create a new instance of the appripriate class, insert it into the array, and add a new row to the tableView
             
         }
+    }
+    
+    // переход к редактированию, если задача не завершена
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if taskDAO.items[indexPath.row].completed == true { return }        // если задача не завершена - выходим из метода
+        
+        // переход в контроллер для редактирования задачи
+        performSegue(withIdentifier: "updateTask", sender: tableView.cellForRow(at: indexPath))
     }
     
     
@@ -212,16 +239,44 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     
     // MARK: actions
-    
+
     @IBAction func deleteFromTaskDetails(segue: UIStoryboardSegue) {
         guard segue.source is TaskDetailsController else {      // принимаем выховы только от TaskDetailsController - для более строго кода
             fatalError("Return from unknown source.")
         }
         
-        if segue.identifier == "DeleteTaskFromDetails", let selectedIndexPath = tableView.indexPathForSelectedRow{
+        if segue.identifier == "DeleteTaskFromDetails", let selectedIndexPath = tableView.indexPathForSelectedRow {
             deleteTask(selectedIndexPath)
         }
     }
+    
+    @IBAction func completeFromTaskDetails(segue: UIStoryboardSegue) {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow { completeTask(selectedIndexPath) }
+    }
+
+    @IBAction func tapCompleteTask(_ sender: UIButton) {
+        // определяем индекс строки по нажатому компоненту
+        let viewPosition = sender.convert(CGPoint.zero, to: tableView)
+        let indexPath = self.tableView.indexPathForRow(at: viewPosition)!
+        completeTask(indexPath)
+    }
+    
+    func completeTask(_ indexPath: IndexPath) {
+        
+        // принимаем вызовы только от TaskLIstCell
+        guard (tableView.cellForRow(at: indexPath) as? TaskListCell) != nil else {
+            fatalError("Cell Type Error")
+        }
+        
+        //обновляем вид строки
+        let task = taskDAO.items[indexPath.row]
+        task.completed = !task.completed
+        taskDAO.addOrUpdate(task)
+        
+        tableView.reloadRows(at: [indexPath], with: .fade)
+
+    }
+    
     
     
     // MARK: DAO

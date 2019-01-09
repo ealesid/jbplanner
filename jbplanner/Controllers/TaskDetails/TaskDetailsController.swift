@@ -212,21 +212,29 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func tapDeleteTask(_ sender: UIButton) {
+        confirmAction(title: "Delete confirmation", text: "Delete selected task?", segue: "DeleteTaskFromDetails")
+    }
+    
+    @IBAction func tapCompleteTask(_ sender: UIButton) {
+        confirmAction(title: "Complete confirmation", text: "Complete selected task?", segue: "CompleteTaskFromDetails")
+    }
+    
+    func confirmAction(title: String, text: String, segue: String) {
+        let dialogMessage = UIAlertController(title: title, message: text, preferredStyle: .actionSheet)
         
-        let dialogMessage = UIAlertController(title: "Delete confirmation", message: "Delete selected task?", preferredStyle: .actionSheet)
-        
-        let delete = UIAlertAction(title: "Delete", style: .default, handler: { (action) -> Void in
-            self.performSegue(withIdentifier: "DeleteTaskFromDetails", sender: self)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            self.performSegue(withIdentifier: segue, sender: self)
         })
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in }
         
-        dialogMessage.addAction(delete)
+        dialogMessage.addAction(ok)
         dialogMessage.addAction(cancel)
         
         self.present(dialogMessage, animated: true, completion: nil)
-        
+
     }
+    
     
     // MARK: prepare
     
