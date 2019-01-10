@@ -20,8 +20,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellQuickTask" id="P7L-eI-Inj" customClass="QuickTaskCell" customModule="jbplanner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P7L-eI-Inj" id="99I-aU-8uJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="M59-cp-XjZ">
+                                            <rect key="frame" x="20" y="5" width="345" height="33.5"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                            <connections>
+                                                <action selector="quickTaskAdd:" destination="g2S-BU-mts" eventType="editingDidEnd" id="bWC-oM-fBT"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="M59-cp-XjZ" firstAttribute="top" secondItem="99I-aU-8uJ" secondAttribute="top" constant="5" id="4fT-fK-jQP"/>
+                                        <constraint firstAttribute="trailing" secondItem="M59-cp-XjZ" secondAttribute="trailing" constant="10" id="MPt-qY-6n4"/>
+                                        <constraint firstAttribute="bottom" secondItem="M59-cp-XjZ" secondAttribute="bottom" constant="5" id="hZw-yL-3WO"/>
+                                        <constraint firstItem="M59-cp-XjZ" firstAttribute="leading" secondItem="99I-aU-8uJ" secondAttribute="leading" constant="20" id="vnd-fh-zfj"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textQuickTask" destination="M59-cp-XjZ" id="SA4-eX-aAC"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellTask" rowHeight="60" id="cef-4R-rur" customClass="TaskListCell" customModule="jbplanner" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cef-4R-rur" id="Fv7-6L-e1k">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
@@ -153,7 +181,7 @@
                                                     <rect key="frame" x="10" y="5" width="355" height="33.5"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="taskNameChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="i8g-nr-bQI"/>
                                                     </connections>

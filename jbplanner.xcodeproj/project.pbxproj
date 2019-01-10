@@ -36,6 +36,7 @@
 		DBCCEB2521E2364500ABFCF3 /* PriorityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */; };
 		DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF95E021E2720600655512 /* DictionaryController.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
+		DBE94DF221E7B7D900748641 /* QuickTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListCell.swift; sourceTree = "<group>"; };
 		DBDF95E021E2720600655512 /* DictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryController.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
+		DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTaskCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				DBE783A621D26FE800512370 /* TaskListCell.swift */,
 				DBCCEB2021E22C4C00ABFCF3 /* CategoryListCell.swift */,
 				DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */,
+				DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */,
 				DBCCEB1121DE25CD00ABFCF3 /* TaskCategoryCell.swift in Sources */,
 				DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */,
+				DBE94DF221E7B7D900748641 /* QuickTaskCell.swift in Sources */,
 				DBCCEAF521D77B3C00ABFCF3 /* DateExtension.swift in Sources */,
 				DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */,
 				DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */,

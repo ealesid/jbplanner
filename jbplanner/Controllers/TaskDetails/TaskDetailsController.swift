@@ -195,7 +195,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
         
-        if let taskName = taskName, !taskName.isEmpty {
+        if let taskName = taskName?.trimmingCharacters(in: .whitespacesAndNewlines), !taskName.isEmpty {
             task.name = taskName
         } else { task.name = "New Task" }
             
