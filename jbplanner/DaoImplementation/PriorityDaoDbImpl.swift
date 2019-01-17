@@ -9,11 +9,11 @@
 import Foundation
 import CoreData
 
-class PriorityDaoDbImpl: Crud {
+class PriorityDaoDbImpl: CommonSearchDAO {
     
     static let current = PriorityDaoDbImpl()
     private init() {
-        items = getAll()
+//        items = getAll()
     }
     
     var items: [Priority]!
@@ -42,4 +42,22 @@ class PriorityDaoDbImpl: Crud {
         context.delete(priority)
         save()
     }
+    
+    func search(text: String) -> [Item] {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        var params = [Any]()
+        var sql = "name CONTAINS[c] %@"
+        params.append(text)
+        var predicate = NSPredicate(format: sql, argumentArray: params)
+        fetchRequest.predicate = predicate
+        
+        do {
+            items = try context.fetch(fetchRequest)
+        } catch {
+            fatalError("Priorities fetching failed")
+        }
+        
+        return items
+    }
+
 }

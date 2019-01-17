@@ -18,6 +18,7 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
         super.viewDidLoad()
         dictTableView = tableView
         dao = CategoryDaoDbImpl.current
+        dao.getAll()
     }
     
     

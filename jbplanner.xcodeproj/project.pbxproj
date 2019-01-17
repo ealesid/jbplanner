@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0F7B9321EA2B7200DA398B /* TaskDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0F7B9221EA2B7200DA398B /* TaskDao.swift */; };
 		DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB116BD521D11BCB0070F13D /* TaskListController.swift */; };
 		DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */; };
 		DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2521E51F50002FA52C /* TaskInfoController.swift */; };
@@ -35,11 +36,13 @@
 		DBCCEB2321E2358500ABFCF3 /* PriorityListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2221E2358500ABFCF3 /* PriorityListController.swift */; };
 		DBCCEB2521E2364500ABFCF3 /* PriorityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */; };
 		DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF95E021E2720600655512 /* DictionaryController.swift */; };
+		DBE406AE21F0A83300779C8D /* CommonSearchDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
 		DBE94DF221E7B7D900748641 /* QuickTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB0F7B9221EA2B7200DA398B /* TaskDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDao.swift; sourceTree = "<group>"; };
 		DB116BD521D11BCB0070F13D /* TaskListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskListController.swift; path = jbplanner/Controllers/List/TaskListController.swift; sourceTree = SOURCE_ROOT; };
 		DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTapButton.swift; sourceTree = "<group>"; };
 		DBB79E2521E51F50002FA52C /* TaskInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoController.swift; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 		DBCCEB2221E2358500ABFCF3 /* PriorityListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListController.swift; sourceTree = "<group>"; };
 		DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListCell.swift; sourceTree = "<group>"; };
 		DBDF95E021E2720600655512 /* DictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryController.swift; sourceTree = "<group>"; };
+		DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchDAO.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
 		DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTaskCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				DBCCEB0A21DA208800ABFCF3 /* Crud.swift */,
+				DB0F7B9221EA2B7200DA398B /* TaskDao.swift */,
+				DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -336,7 +342,9 @@
 				DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */,
 				DBCCEB1C21E20C0200ABFCF3 /* ActionResultDelegate.swift in Sources */,
 				DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */,
+				DBE406AE21F0A83300779C8D /* CommonSearchDAO.swift in Sources */,
 				DBCCEB2121E22C4C00ABFCF3 /* CategoryListCell.swift in Sources */,
+				DB0F7B9321EA2B7200DA398B /* TaskDao.swift in Sources */,
 				DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */,
 				DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */,
 				DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */,

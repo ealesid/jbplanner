@@ -19,6 +19,8 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     let categoryDAO = CategoryDaoDbImpl.current
     let priorityDAO = PriorityDaoDbImpl.current
     
+    var searchController: UISearchController!       // область поиска, которая будет добавляться поверх таблицы списка задач
+    
     let quickTaskSection = 0
     let taskListSection = 1
     
@@ -34,6 +36,8 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
+        
+        setupSearchController()
         
        
         // db.initData()
@@ -371,4 +375,69 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         tableView.deleteRows(at: [indexPath], with: .top)
     }
 
+}
+
+
+// настройка searchController и обработка действий при поиске
+extension TaskListController: UISearchResultsUpdating {
+    
+    // метод делегата вызывается автоматически для каждой буквы поиска
+    // или когда пользователь просто активирует поиск
+    func updateSearchResults(for searchController: UISearchController) {
+        // не будем использовать этот метод поиска
+        // будем искать только после нажатия Enter
+    }
+    
+}
+
+extension TaskListController: UISearchBarDelegate {
+    
+    // добавление search bar к таблице
+    func setupSearchController() {
+        
+        searchController = UISearchController(searchResultsController: nil)     // searchResultsController: nil - т.к. результаты будут сразу отображаться в этом же view
+        
+        searchController.dimsBackgroundDuringPresentation = false       // затемнять фон или нет при поиске, при затемнении не доступен выбор найденной записи
+        
+        // для правильного отображения внутри таблицы
+        // подробнее: http://www.thomasdenney.co.uk/blog/2014/10/5/uisearchcontroller-and-definepresentationcontext/
+        definesPresentationContext = true
+        
+        searchController.searchBar.placeholder = "Search by name"
+        searchController.searchBar.backgroundColor = .white
+        
+        // обработка действий поиска и работа с search bar в этом же классе
+        // searchController.searchResultsUpdater = self     // так как не используем
+        searchController.searchBar.delegate = self
+        
+        // сразу не показывать segmented controls для сортировки результата
+        // такой подход связан с багом, когда компоненты налезают друг на друга
+        searchController.searchBar.showsScopeBar = false
+        
+        // из-за бага в работе searchController применяем разные способы добавления searchBar в зависимости от версии iOS
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
+        }
+    }
+    
+    // обязываем пользователя нажимать Enter для поиска
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        return true
+    }
+    
+    // поиск после окончания ввода данных (нажатия на Enter/Search)
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        taskDAO.search(text: searchController.searchBar.text!)
+        tableView.reloadData()
+    }
+    
+    // нажимаем Cancel - возвращаем все данные
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchController.searchBar.text = ""
+        taskDAO.getAll()
+        tableView.reloadData()
+    }
 }

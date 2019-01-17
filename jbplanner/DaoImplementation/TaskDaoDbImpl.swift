@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class TaskDaoDbImpl: Crud {
+class TaskDaoDbImpl: TaskDao {
    
     static let current = TaskDaoDbImpl()
     private init() {
@@ -43,5 +43,31 @@ class TaskDaoDbImpl: Crud {
     func delete(_ task: Task) {
         context.delete(task)
         save()
+    }
+    
+    func search(text: String) -> [Task] {
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()       // объект-контейнер для выборки данных
+        
+        var params = [Any]()    // массив параметров лююого типа
+        
+        // прописываем само условие (без where)
+        var sql = "name CONTAINS[c] %@"     // начало запроса, [c] - case insensitive
+        
+        params.append(text)
+        
+        // объект контейнер для добавления условий
+        var predicate = NSPredicate(format: sql, argumentArray: params)
+        
+        fetchRequest.predicate = predicate      //добавляем предикат в контейнер запроса
+        
+        // можно создавать предикаты динамически и использовать нужный
+        
+        do {
+            items = try context.fetch(fetchRequest)
+        } catch {
+            fatalError("Fetching failed!")
+        }
+        
+        return items
     }
 }
