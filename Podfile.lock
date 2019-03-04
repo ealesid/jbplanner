@@ -1,0 +1,16 @@
+PODS:
+  - GCCalendar (2.4.1)
+
+DEPENDENCIES:
+  - GCCalendar
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GCCalendar
+
+SPEC CHECKSUMS:
+  GCCalendar: b9d584a3e437f9af5b0ab23030e7ed46affc3b23
+
+PODFILE CHECKSUM: 06bedab4f201d6e9e53812efa3a33c0d7c10533b
+
+COCOAPODS: 1.6.1

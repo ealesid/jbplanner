@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4F6E767B609279ECF4941EA /* Pods_jbplanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED3F1B07A05739FED1E861C /* Pods_jbplanner.framework */; };
 		DB0F7B9321EA2B7200DA398B /* TaskDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0F7B9221EA2B7200DA398B /* TaskDao.swift */; };
 		DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB116BD521D11BCB0070F13D /* TaskListController.swift */; };
+		DB21D913222D970B00C5958D /* GCCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB21D912222D970B00C5958D /* GCCalendar.framework */; };
 		DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */; };
 		DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2521E51F50002FA52C /* TaskInfoController.swift */; };
 		DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB9A82E21CC110E00129C92 /* AppDelegate.swift */; };
@@ -42,8 +44,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		104E9003A198CB1B3E61937F /* Pods-jbplanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jbplanner.release.xcconfig"; path = "Target Support Files/Pods-jbplanner/Pods-jbplanner.release.xcconfig"; sourceTree = "<group>"; };
+		555C9A537EDC0BC861E9FB67 /* Pods-jbplanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jbplanner.debug.xcconfig"; path = "Target Support Files/Pods-jbplanner/Pods-jbplanner.debug.xcconfig"; sourceTree = "<group>"; };
+		9ED3F1B07A05739FED1E861C /* Pods_jbplanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_jbplanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB0F7B9221EA2B7200DA398B /* TaskDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDao.swift; sourceTree = "<group>"; };
 		DB116BD521D11BCB0070F13D /* TaskListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskListController.swift; path = jbplanner/Controllers/List/TaskListController.swift; sourceTree = SOURCE_ROOT; };
+		DB21D912222D970B00C5958D /* GCCalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GCCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTapButton.swift; sourceTree = "<group>"; };
 		DBB79E2521E51F50002FA52C /* TaskInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoController.swift; sourceTree = "<group>"; };
 		DBB9A82B21CC110E00129C92 /* jbplanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jbplanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,12 +89,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB21D913222D970B00C5958D /* GCCalendar.framework in Frameworks */,
+				B4F6E767B609279ECF4941EA /* Pods_jbplanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B0E583433025231B3B2331D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB21D912222D970B00C5958D /* GCCalendar.framework */,
+				9ED3F1B07A05739FED1E861C /* Pods_jbplanner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77F3A3B9B8A09A2D4246E966 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				555C9A537EDC0BC861E9FB67 /* Pods-jbplanner.debug.xcconfig */,
+				104E9003A198CB1B3E61937F /* Pods-jbplanner.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DB116BD221D11AF00070F13D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +157,8 @@
 			children = (
 				DBB9A82D21CC110E00129C92 /* jbplanner */,
 				DBB9A82C21CC110E00129C92 /* Products */,
+				77F3A3B9B8A09A2D4246E966 /* Pods */,
+				4B0E583433025231B3B2331D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,9 +284,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBB9A84021CC111400129C92 /* Build configuration list for PBXNativeTarget "jbplanner" */;
 			buildPhases = (
+				7E715E2A4C738F8AAE0E0882 /* [CP] Check Pods Manifest.lock */,
 				DBB9A82721CC110E00129C92 /* Sources */,
 				DBB9A82821CC110E00129C92 /* Frameworks */,
 				DBB9A82921CC110E00129C92 /* Resources */,
+				2AA7EF5637D64FE1E203B4DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -314,6 +344,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AA7EF5637D64FE1E203B4DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-jbplanner/Pods-jbplanner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GCCalendar/GCCalendar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCCalendar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-jbplanner/Pods-jbplanner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E715E2A4C738F8AAE0E0882 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-jbplanner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DBB9A82721CC110E00129C92 /* Sources */ = {
@@ -492,6 +569,7 @@
 		};
 		DBB9A84121CC111400129C92 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 555C9A537EDC0BC861E9FB67 /* Pods-jbplanner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -512,6 +590,7 @@
 		};
 		DBB9A84221CC111400129C92 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 104E9003A198CB1B3E61937F /* Pods-jbplanner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
