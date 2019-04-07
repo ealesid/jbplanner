@@ -80,7 +80,7 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
     // MARK: dao
     
     func cancel() {
-        navigationController?.popViewController(animated: true)     // закрыть контроллер и удалить из navigation stack
+        closeController()
     }
     
     func save() {

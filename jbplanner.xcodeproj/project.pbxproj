@@ -11,6 +11,8 @@
 		DB0F7B9321EA2B7200DA398B /* TaskDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0F7B9221EA2B7200DA398B /* TaskDao.swift */; };
 		DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB116BD521D11BCB0070F13D /* TaskListController.swift */; };
 		DB21D913222D970B00C5958D /* GCCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB21D912222D970B00C5958D /* GCCalendar.framework */; };
+		DB21D915222DAFB800C5958D /* DatetimePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21D914222DAFB800C5958D /* DatetimePickerController.swift */; };
+		DB21D917222DB0C400C5958D /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21D916222DB0C400C5958D /* UIViewControllerExtension.swift */; };
 		DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */; };
 		DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2521E51F50002FA52C /* TaskInfoController.swift */; };
 		DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB9A82E21CC110E00129C92 /* AppDelegate.swift */; };
@@ -50,6 +52,8 @@
 		DB0F7B9221EA2B7200DA398B /* TaskDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDao.swift; sourceTree = "<group>"; };
 		DB116BD521D11BCB0070F13D /* TaskListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskListController.swift; path = jbplanner/Controllers/List/TaskListController.swift; sourceTree = SOURCE_ROOT; };
 		DB21D912222D970B00C5958D /* GCCalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GCCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB21D914222DAFB800C5958D /* DatetimePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatetimePickerController.swift; sourceTree = "<group>"; };
+		DB21D916222DB0C400C5958D /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTapButton.swift; sourceTree = "<group>"; };
 		DBB79E2521E51F50002FA52C /* TaskInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoController.swift; sourceTree = "<group>"; };
 		DBB9A82B21CC110E00129C92 /* jbplanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jbplanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +200,7 @@
 				DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */,
 				DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */,
 				DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */,
+				DB21D916222DB0C400C5958D /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 			children = (
 				DBB9A83021CC110E00129C92 /* TaskDetailsController.swift */,
 				DBB79E2521E51F50002FA52C /* TaskInfoController.swift */,
+				DB21D914222DAFB800C5958D /* DatetimePickerController.swift */,
 			);
 			path = TaskDetails;
 			sourceTree = "<group>";
@@ -411,9 +417,11 @@
 				DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */,
 				DBCCEB1F21E22BEB00ABFCF3 /* CategoryListController.swift in Sources */,
 				DBCCEB0D21DA23CA00ABFCF3 /* CrudExtension.swift in Sources */,
+				DB21D915222DAFB800C5958D /* DatetimePickerController.swift in Sources */,
 				DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */,
 				DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */,
 				DBCCEB2321E2358500ABFCF3 /* PriorityListController.swift in Sources */,
+				DB21D917222DB0C400C5958D /* UIViewControllerExtension.swift in Sources */,
 				DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */,
 				DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */,
 				DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */,

@@ -29,11 +29,11 @@ class TaskInfoController: UIViewController {
     
 
     @IBAction func tapCancel(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+        closeController()
     }
     
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
+        closeController()
         delegate?.done(source: self, data: textviewTaskInfo.text)
     }
     

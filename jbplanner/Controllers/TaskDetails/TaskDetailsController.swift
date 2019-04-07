@@ -28,21 +28,19 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     let taskDeadlineSection = 3
     let taskInfoSection = 4
     
-    let dateFormatter = DateFormatter()
-    
     var delegate: ActionResultDelegate! // нужен для уведомления и вызова функции из контроллера списка задач
     
     // сохраняем ссылки на компоненты
     var textTaskName: UITextField!
     var textViewTaskInfo: UITextView!
     
+    var dateFormatter: DateFormatter!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
+        dateFormatter = createDateFormatter()
         
         // сохраняем в соответствующие переменные все данные задачи
         if let task = task {    // если объект не пустой (значит, режим редактирования, а не создания новой задачи)
@@ -130,20 +128,25 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             cell.selectionStyle = .none
-            
+                        
             var value: String
             
             if let deadline = taskDeadline {
                 value = dateFormatter.string(from: deadline)
-                cell.labelTaskDeadline.textColor = UIColor.gray
+                cell.buttonDateTimePicker.setTitleColor(UIColor.gray, for: .normal)
                 cell.buttonClearDeadline.isHidden = false
             } else {
                 value = "No deadline."
-                cell.labelTaskDeadline.textColor = UIColor.lightGray
+                cell.buttonDateTimePicker.setTitleColor(UIColor.lightGray, for: .normal)
                 cell.buttonClearDeadline.isHidden = true
             }
             
-            cell.labelTaskDeadline.text = value
+            // заполняем компонент данными из задачи
+            cell.buttonDateTimePicker.setTitle(value, for: .normal)
+            
+            // текст и стиль для разницы в днях
+            handleDaysDiff(taskDeadline?.offsetFrom(date: Date().today), label: cell.labelDaysDiff)
+            
             return cell
 
         case taskInfoSection: // additional info
@@ -190,7 +193,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     // закрытие контроллера без сохранения
     @IBAction func tapCancel(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true) // контроллер удаляется из стека контроллеров
+        closeController()
     }
     
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
@@ -206,7 +209,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         
         delegate.done(source: self, data: task)      // можно не передавать обратно task, т.к. reference type
         
-        navigationController?.popViewController(animated: true)
+        closeController()
     }
     
     @IBAction func taskNameChanged(_ sender: UITextField) {
@@ -242,6 +245,8 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
 
     }
     
+    @IBAction func tapDatetimePicker(_ sender: UIButton) {
+    }
     
     // MARK: prepare
     
@@ -268,6 +273,12 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 controller.delegate = self
             }
             
+        case "selectDatetime":
+            if let controller = segue.destination as? DatetimePickerController {
+                controller.initDeadline = taskDeadline
+                controller.delegate = self
+            }
+            
         default:
             return
         }
@@ -290,6 +301,10 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
         case is TaskInfoController:
             taskInfo = data as? String
             textViewTaskInfo.text = taskInfo
+            
+        case is DatetimePickerController:
+            taskDeadline = data as? Date
+            tableView.reloadRows(at: [IndexPath(row: 0, section: taskDeadlineSection)], with: .fade)
             
         default:
             print()

@@ -13,8 +13,6 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     let db = Db()
     
-    let dateFormatter = DateFormatter()
-    
     let taskDAO = TaskDaoDbImpl.current
     let categoryDAO = CategoryDaoDbImpl.current
     let priorityDAO = PriorityDaoDbImpl.current
@@ -30,12 +28,13 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     var taskCount: Int { return taskDAO.items.count }
     
+    var dateFormatter: DateFormatter!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .none
+        dateFormatter = createDateFormatter()
         
         setupSearchController()
         
@@ -120,22 +119,9 @@ class TaskListController: UITableViewController, ActionResultDelegate {
                 cell.buttonTaskInfo.isHidden = false
             }
             
-            if let diff = task.daysLeft() {
-                switch diff {
-                case 0:
-                    cell.labelDeadLine.text = "Today" // TODO: localization
-                case 1:
-                    cell.labelDeadLine.text = "Tomorrow"
-                case 0...:
-                    cell.labelDeadLine.text = "\(diff) day(s)"
-                case ..<0:
-                    cell.labelDeadLine.textColor = .red
-                    cell.labelDeadLine.text = "\(diff) day(s)"
-                default:
-                    cell.labelDeadLine.text = ""
-                }
-            }
-            
+            // текст и стиль для отображения разниуы в днях
+            handleDaysDiff(task.daysLeft(), label: cell.labelDeadLine)
+                        
             // стиль для завершенных задач
             if task.completed {
                 cell.labelDeadLine.textColor = .lightGray
