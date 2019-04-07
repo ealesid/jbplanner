@@ -18,7 +18,7 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
         super.viewDidLoad()
         dictTableView = tableView
         dao = CategoryDaoDbImpl.current
-        dao.getAll()
+        dao.getAll(sortType: CategorySortType.name)
     }
     
     
@@ -59,6 +59,18 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
     
     @IBAction func tapCancel(_ sender: UIBarButtonItem) {
         cancel()
+    }
+    
+
+    // методы получения списков объектов - вызываются из родительского класса
+    
+    // MARK: override
+    override func getAll() -> [Category] {
+        return dao.getAll(sortType: CategorySortType.name)
+    }
+    
+    override func search(_ text: String) -> [Category] {
+        return dao.search(text: text, sortType: CategorySortType.name)
     }
     
 }

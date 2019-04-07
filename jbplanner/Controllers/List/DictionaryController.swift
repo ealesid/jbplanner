@@ -42,11 +42,6 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
         return dao.items.count
     }
     
-    // должен реализовываться в дочернем классе
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        fatalError("Not implemented!")
-    }
-    
     // выделяет элемент в списке
     func checkItem(_ sender: UIView) {
         
@@ -125,6 +120,17 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
         }
     }
     
+    
+    // MARK: - Have to be implemented
+    
+    // получение всех объектов с сортировкой
+    func getAll() -> [T.Item] { fatalError("Not implemented!") }
+    
+    // поиск объектов с сортировкой
+    func search(_ text: String) -> [T.Item] { fatalError("Not implemented!") }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { fatalError("Not implemented!") }
+    
     // при активации текстового окна - записываем последний поисковый текст
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.text = searchBarText
@@ -141,7 +147,7 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
     // нажимаем на кнопку Cancel
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBarText = ""
-        dao.getAll()
+        getAll()
         dictTableView.reloadData()
         searchBar.placeholder = "Type to start search"
     }
@@ -150,7 +156,7 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
     func updateSearchResults(for searchController: UISearchController) {
         if !(searchBar.text?.isEmpty)! {
             searchBarText = searchBar.text!
-            dao.search(text: searchBarText)
+            search(searchBarText)
             dictTableView.reloadData()
             currentCheckedIndexPath = nil       // чтобы не было двойного выделения значений
             searchBar.placeholder = searchBarText       // сохраняем текст поиска для отображения, если окно поиска будет не активным

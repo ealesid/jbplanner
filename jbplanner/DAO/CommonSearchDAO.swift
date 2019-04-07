@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CommonSearchDAO: Crud {
-    func search(text: String) -> [Item]
+    func search(text: String, sortType: SortType?) -> [Item]
 }

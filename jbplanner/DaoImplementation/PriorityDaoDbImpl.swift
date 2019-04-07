@@ -11,10 +11,11 @@ import CoreData
 
 class PriorityDaoDbImpl: CommonSearchDAO {
     
+    typealias Item = Priority
+    typealias SortType = PrioritySortType
+    
     static let current = PriorityDaoDbImpl()
-    private init() {
-//        items = getAll()
-    }
+    private init() {}
     
     var items: [Priority]!
     
@@ -26,12 +27,13 @@ class PriorityDaoDbImpl: CommonSearchDAO {
         save()
     }
     
-    func getAll() -> [Priority] {
+    func getAll(sortType: SortType?) -> [Priority] {
         let fetchRequest: NSFetchRequest<Priority> = Priority.fetchRequest()
         
         // добавляем поле для сортировки
-        let sort = NSSortDescriptor(key: #keyPath(Priority.index), ascending: true)
-        fetchRequest.sortDescriptors = [sort]
+        if let sortType = sortType {
+            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
+        }
 
         
         do {
@@ -48,7 +50,7 @@ class PriorityDaoDbImpl: CommonSearchDAO {
         save()
     }
     
-    func search(text: String) -> [Item] {
+    func search(text: String, sortType: SortType?) -> [Item] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         var params = [Any]()
         var sql = "name CONTAINS[c] %@"
@@ -57,9 +59,10 @@ class PriorityDaoDbImpl: CommonSearchDAO {
         fetchRequest.predicate = predicate
         
         // добавляем поле для сортировки
-        let sort = NSSortDescriptor(key: #keyPath(Priority.index), ascending: true)
-        fetchRequest.sortDescriptors = [sort]
-        
+        if let sortType = sortType {
+            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
+        }
+
         do {
             items = try context.fetch(fetchRequest)
         } catch {
@@ -69,4 +72,18 @@ class PriorityDaoDbImpl: CommonSearchDAO {
         return items
     }
 
+}
+
+
+// возможные поля для сортировки списка приоритетов
+enum PrioritySortType: Int {
+    case index = 0
+    
+    // получить объект сортировки для добавления в fetchRequest
+    func getDescriptor(_ sortType: PrioritySortType) -> NSSortDescriptor {
+        switch sortType {
+        case .index:
+            return NSSortDescriptor(key: #keyPath(Priority.index), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        }
+    }
 }

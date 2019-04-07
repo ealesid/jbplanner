@@ -10,6 +10,10 @@ import Foundation
 import CoreData
 
 class CategoryDaoDbImpl: CommonSearchDAO {
+
+    typealias Item = Category
+    typealias SortType = CategorySortType
+    
     var items: [Category]!
     
     static let current = CategoryDaoDbImpl()
@@ -25,13 +29,14 @@ class CategoryDaoDbImpl: CommonSearchDAO {
         save()
     }
     
-    func getAll() -> [Category] {
+    func getAll(sortType: SortType?) -> [Category] {
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         
         // добавляем поле для сортировки
-        let sort = NSSortDescriptor(key: #keyPath(Category.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
-        fetchRequest.sortDescriptors = [sort]
-        
+        if let sortType = sortType {
+            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
+        }
+
         do {
             items = try context.fetch(fetchRequest)
         } catch {
@@ -46,7 +51,7 @@ class CategoryDaoDbImpl: CommonSearchDAO {
         save()
     }
     
-    func search(text: String) -> [Item] {
+    func search(text: String, sortType: SortType?) -> [Item] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         var params = [Any]()
         var sql = "name CONTAINS[c] %@"
@@ -55,9 +60,10 @@ class CategoryDaoDbImpl: CommonSearchDAO {
         fetchRequest.predicate = predicate
         
         // добавляем поле для сортировки
-        let sort = NSSortDescriptor(key: #keyPath(Category.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
-        fetchRequest.sortDescriptors = [sort]
-        
+        if let sortType = sortType {
+            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
+        }
+
         do {
             items = try context.fetch(fetchRequest)
         } catch {
@@ -65,5 +71,19 @@ class CategoryDaoDbImpl: CommonSearchDAO {
         }
         
         return items
+    }
+}
+
+
+// возможные поля для сортировки списка категорий
+enum CategorySortType: Int {
+    case name = 0
+    
+    // получить объект сортировки для добавления в fetchRequest
+    func getDescriptor(_ sortType: CategorySortType) -> NSSortDescriptor {
+        switch sortType {
+        case .name:
+            return NSSortDescriptor(key: #keyPath(Category.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        }
     }
 }

@@ -33,6 +33,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     // сохраняем ссылки на компоненты
     var textTaskName: UITextField!
     var textViewTaskInfo: UITextView!
+    var buttonDatetimePicker: UIButton!
     
     var dateFormatter: DateFormatter!
     

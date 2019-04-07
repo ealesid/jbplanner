@@ -9,17 +9,18 @@
 import Foundation
 import CoreData
 
-class TaskDaoDbImpl: TaskDao {
+class TaskDaoDbImpl: CommonSearchDAO {
    
     static let current = TaskDaoDbImpl()
-    private init() {
-        getAll()
-    }
+    private init() {}
+    
+    typealias Item = Task
+    typealias SortType = TaskSortType
     
     let categoryDAO = CategoryDaoDbImpl.current
     let priorityDAO = PriorityDaoDbImpl.current
     
-    var items:[Task]!
+    var items: [Item]!
     
     func addOrUpdate(_ task: Task) {
         if !items.contains(task) {
@@ -28,12 +29,16 @@ class TaskDaoDbImpl: TaskDao {
         save()
     }
     
-    func getAll() -> [Task] {
-        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+    
+    // MARK: DAO
+    
+    func getAll(sortType: SortType?) -> [Task] {
+        let fetchRequest: NSFetchRequest<Item> = Task.fetchRequest()
         
         // добавляем поле для сортировки
-        let sort = NSSortDescriptor(key: #keyPath(Task.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
-        fetchRequest.sortDescriptors = [sort]
+        if let sortType = sortType {
+            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
+        }
         
         do {
             items = try context.fetch(fetchRequest)
@@ -49,7 +54,7 @@ class TaskDaoDbImpl: TaskDao {
         save()
     }
     
-    func search(text: String) -> [Task] {
+    func search(text: String, sortType: SortType?) -> [Task] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()       // объект-контейнер для выборки данных
         
         var params = [Any]()    // массив параметров лююого типа
@@ -67,9 +72,10 @@ class TaskDaoDbImpl: TaskDao {
         // можно создавать предикаты динамически и использовать нужный
         
         // добавляем поле для сортировки
-        let sort = NSSortDescriptor(key: #keyPath(Task.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
-        fetchRequest.sortDescriptors = [sort]
-        
+        if let sortType = sortType {
+            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
+        }
+
         do {
             items = try context.fetch(fetchRequest)
         } catch {
@@ -77,5 +83,26 @@ class TaskDaoDbImpl: TaskDao {
         }
         
         return items
+    }
+}
+
+
+// возможные поля для сортировки списка задач
+enum TaskSortType: Int {
+    // порядок case'ов должен совпадать с порядком кнопок сортировки (scope buttons)
+    case name = 0
+    case priority
+    case deadline
+    
+    // получить объект для сортировки для добавления в fetchRequest
+    func getDescriptor(_ sortType: TaskSortType) -> NSSortDescriptor {
+        switch sortType {
+        case .name:
+            return NSSortDescriptor(key: #keyPath(Task.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        case .deadline:
+            return NSSortDescriptor(key: #keyPath(Task.deadline), ascending: true)
+        case .priority:
+            return NSSortDescriptor(key: #keyPath(Task.priority.index), ascending: false)       // ascending: false - high priority вверху списка
+        }
     }
 }

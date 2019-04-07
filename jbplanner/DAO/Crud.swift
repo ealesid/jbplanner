@@ -10,9 +10,10 @@ import Foundation
 import CoreData
 
 protocol Crud {
-    associatedtype Item: NSManagedObject // NSManagedObject - чтобы объек можно было записывать в ДБ
+    associatedtype Item: NSManagedObject    // NSManagedObject - чтобы объек можно было записывать в ДБ
+    associatedtype SortType                 // Тип сортировки - для каждого объекта свои поля сортировки
     var items:[Item]! {get set}
     func addOrUpdate(_ item: Item)
-    func getAll() -> [Item]
+    func getAll(sortType: SortType?) -> [Item]
     func delete(_ item: Item)
 }

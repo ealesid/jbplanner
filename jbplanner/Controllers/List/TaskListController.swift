@@ -30,6 +30,10 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     var dateFormatter: DateFormatter!
     
+    var currentScopeIndex = 0           // текущая выбранная кнопка сортировки в search bar
+    
+    var searchBarActive = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +42,8 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         
         setupSearchController()
         
-       
-        // db.initData()
-
+        taskDAO.getAll(sortType: TaskSortType(rawValue: currentScopeIndex)!)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -312,7 +315,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     
     @IBAction func quickTaskAdd(_ sender: UITextField) {
-        var task = Task(context: taskDAO.context)
+        let task = Task(context: taskDAO.context)
         task.name = textQuickTask.text
         
         if let name = textQuickTask.text?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty {
@@ -349,6 +352,22 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         let indexPath = IndexPath(row: taskCount-1, section: taskListSection)
         tableView.insertRows(at: [indexPath], with: .top)
 
+    }
+    
+    
+    // MARK: - updateTable
+    
+    func updateTable() {
+        
+        let sortType = TaskSortType(rawValue: currentScopeIndex)!   // определяем тип сортировки  по текущему выбранному значению
+        
+        if searchBarActive && searchController.searchBar.text != nil && !(searchController.searchBar.text?.isEmpty)! {  // если активен режим поиска и текст не пустой
+            taskDAO.search(text: searchController.searchBar.text!, sortType: sortType)
+        } else {
+            taskDAO.getAll(sortType: sortType)
+        }
+        
+        tableView.reloadData()
     }
     
     
@@ -392,6 +411,8 @@ extension TaskListController: UISearchBarDelegate {
         searchController.searchBar.placeholder = "Search by name"
         searchController.searchBar.backgroundColor = .white
         
+        searchController.searchBar.scopeButtonTitles = ["A-Z", "Priority", "Date"]      // добавляем scope buttons
+        
         // обработка действий поиска и работа с search bar в этом же классе
         // searchController.searchResultsUpdater = self     // так как не используем
         searchController.searchBar.delegate = self
@@ -414,16 +435,33 @@ extension TaskListController: UISearchBarDelegate {
         return true
     }
     
+    // начали редактировать текст поиска
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBarActive = true      // есть также метод searchBar.isActive, но значение в него может быть записано позднее, чем это нужно
+    }
+    
     // поиск после окончания ввода данных (нажатия на Enter/Search)
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        taskDAO.search(text: searchController.searchBar.text!)
-        tableView.reloadData()
+        updateTable()
     }
     
     // нажимаем Cancel - возвращаем все данные
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        if !searchController.searchBar.showsScopeBar {
+            searchController.searchBar.showsScopeBar = true
+        }
+        
+        searchBarActive = false
         searchController.searchBar.text = ""
-        taskDAO.getAll()
-        tableView.reloadData()
+        
+        updateTable()
+    }
+    
+    // переключение между кнопками сортировки
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        if currentScopeIndex == selectedScope { return }        // если значение не изменилось (нажали уже активную кнопку) - ничего не делаем
+        currentScopeIndex = selectedScope                       // сохраняем выбранный scope button
+        updateTable()
     }
 }
