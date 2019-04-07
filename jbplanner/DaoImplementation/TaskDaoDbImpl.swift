@@ -29,10 +29,14 @@ class TaskDaoDbImpl: TaskDao {
     }
     
     func getAll() -> [Task] {
-        let fetchrequest: NSFetchRequest<Task> = Task.fetchRequest()
+        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+        
+        // добавляем поле для сортировки
+        let sort = NSSortDescriptor(key: #keyPath(Task.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        fetchRequest.sortDescriptors = [sort]
         
         do {
-            items = try context.fetch(fetchrequest)
+            items = try context.fetch(fetchRequest)
         } catch {
             fatalError("Tasks fetch failed.")
         }
@@ -61,6 +65,10 @@ class TaskDaoDbImpl: TaskDao {
         fetchRequest.predicate = predicate      //добавляем предикат в контейнер запроса
         
         // можно создавать предикаты динамически и использовать нужный
+        
+        // добавляем поле для сортировки
+        let sort = NSSortDescriptor(key: #keyPath(Task.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        fetchRequest.sortDescriptors = [sort]
         
         do {
             items = try context.fetch(fetchRequest)

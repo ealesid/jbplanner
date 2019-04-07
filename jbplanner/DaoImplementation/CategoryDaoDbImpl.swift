@@ -26,10 +26,14 @@ class CategoryDaoDbImpl: CommonSearchDAO {
     }
     
     func getAll() -> [Category] {
-        let fetchrequest: NSFetchRequest<Category> = Category.fetchRequest()
+        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        // добавляем поле для сортировки
+        let sort = NSSortDescriptor(key: #keyPath(Category.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        fetchRequest.sortDescriptors = [sort]
         
         do {
-            items = try context.fetch(fetchrequest)
+            items = try context.fetch(fetchRequest)
         } catch {
             fatalError("Categories fetch failed.")
         }
@@ -49,6 +53,10 @@ class CategoryDaoDbImpl: CommonSearchDAO {
         params.append(text)
         var predicate = NSPredicate(format: sql, argumentArray: params)
         fetchRequest.predicate = predicate
+        
+        // добавляем поле для сортировки
+        let sort = NSSortDescriptor(key: #keyPath(Category.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare))
+        fetchRequest.sortDescriptors = [sort]
         
         do {
             items = try context.fetch(fetchRequest)

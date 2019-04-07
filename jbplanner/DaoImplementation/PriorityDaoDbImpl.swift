@@ -27,10 +27,15 @@ class PriorityDaoDbImpl: CommonSearchDAO {
     }
     
     func getAll() -> [Priority] {
-        let fetchrequest: NSFetchRequest<Priority> = Priority.fetchRequest()
+        let fetchRequest: NSFetchRequest<Priority> = Priority.fetchRequest()
+        
+        // добавляем поле для сортировки
+        let sort = NSSortDescriptor(key: #keyPath(Priority.index), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+
         
         do {
-            items = try context.fetch(fetchrequest)
+            items = try context.fetch(fetchRequest)
         } catch {
             fatalError("Priorities fetch failed.")
         }
@@ -50,6 +55,10 @@ class PriorityDaoDbImpl: CommonSearchDAO {
         params.append(text)
         var predicate = NSPredicate(format: sql, argumentArray: params)
         fetchRequest.predicate = predicate
+        
+        // добавляем поле для сортировки
+        let sort = NSSortDescriptor(key: #keyPath(Priority.index), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
         
         do {
             items = try context.fetch(fetchRequest)
