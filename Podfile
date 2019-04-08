@@ -8,5 +8,6 @@ target 'jbplanner' do
   # Pods for jbplanner
 
 pod 'GCCalendar'
+pod 'SideMenu'
 
 end

@@ -13,6 +13,9 @@
 		DB21D913222D970B00C5958D /* GCCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB21D912222D970B00C5958D /* GCCalendar.framework */; };
 		DB21D915222DAFB800C5958D /* DatetimePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21D914222DAFB800C5958D /* DatetimePickerController.swift */; };
 		DB21D917222DB0C400C5958D /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21D916222DB0C400C5958D /* UIViewControllerExtension.swift */; };
+		DB383D2F225BAA94006F756F /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB383D2E225BAA94006F756F /* SideMenu.framework */; };
+		DB383D32225BAE60006F756F /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB383D31225BAE60006F756F /* SideMenuController.swift */; };
+		DB383D35225BAEDB006F756F /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB383D34225BAEDB006F756F /* SideMenuCell.swift */; };
 		DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */; };
 		DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79E2521E51F50002FA52C /* TaskInfoController.swift */; };
 		DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB9A82E21CC110E00129C92 /* AppDelegate.swift */; };
@@ -54,6 +57,9 @@
 		DB21D912222D970B00C5958D /* GCCalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GCCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB21D914222DAFB800C5958D /* DatetimePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatetimePickerController.swift; sourceTree = "<group>"; };
 		DB21D916222DB0C400C5958D /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		DB383D2E225BAA94006F756F /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB383D31225BAE60006F756F /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
+		DB383D34225BAEDB006F756F /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		DBB79E2321E4CD36002FA52C /* AreaTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTapButton.swift; sourceTree = "<group>"; };
 		DBB79E2521E51F50002FA52C /* TaskInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoController.swift; sourceTree = "<group>"; };
 		DBB9A82B21CC110E00129C92 /* jbplanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jbplanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB383D2F225BAA94006F756F /* SideMenu.framework in Frameworks */,
 				DB21D913222D970B00C5958D /* GCCalendar.framework in Frameworks */,
 				B4F6E767B609279ECF4941EA /* Pods_jbplanner.framework in Frameworks */,
 			);
@@ -104,6 +111,7 @@
 		4B0E583433025231B3B2331D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB383D2E225BAA94006F756F /* SideMenu.framework */,
 				DB21D912222D970B00C5958D /* GCCalendar.framework */,
 				9ED3F1B07A05739FED1E861C /* Pods_jbplanner.framework */,
 			);
@@ -122,6 +130,7 @@
 		DB116BD221D11AF00070F13D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DB383D30225BAE47006F756F /* Menu */,
 				DBCCEB1D21E22BA200ABFCF3 /* TaskDetails */,
 				DB116BD321D11B080070F13D /* List */,
 			);
@@ -146,6 +155,22 @@
 				DBB9A83A21CC111400129C92 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		DB383D30225BAE47006F756F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DB383D31225BAE60006F756F /* SideMenuController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		DB383D33225BAEA6006F756F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DB383D34225BAEDB006F756F /* SideMenuCell.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		DBB79E2221E4CD15002FA52C /* UIViews */ = {
@@ -277,6 +302,7 @@
 		DBE783A521D26FAC00512370 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DB383D33225BAEA6006F756F /* Menu */,
 				DBCCEB1921E205BC00ABFCF3 /* TaskDetails */,
 				DBCCEB1821E205AA00ABFCF3 /* List */,
 			);
@@ -362,12 +388,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-jbplanner/Pods-jbplanner-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GCCalendar/GCCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -420,6 +448,7 @@
 				DB21D915222DAFB800C5958D /* DatetimePickerController.swift in Sources */,
 				DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */,
 				DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */,
+				DB383D32225BAE60006F756F /* SideMenuController.swift in Sources */,
 				DBCCEB2321E2358500ABFCF3 /* PriorityListController.swift in Sources */,
 				DB21D917222DB0C400C5958D /* UIViewControllerExtension.swift in Sources */,
 				DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */,
@@ -428,6 +457,7 @@
 				DBCCEB1C21E20C0200ABFCF3 /* ActionResultDelegate.swift in Sources */,
 				DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */,
 				DBE406AE21F0A83300779C8D /* CommonSearchDAO.swift in Sources */,
+				DB383D35225BAEDB006F756F /* SideMenuCell.swift in Sources */,
 				DBCCEB2121E22C4C00ABFCF3 /* CategoryListCell.swift in Sources */,
 				DB0F7B9321EA2B7200DA398B /* TaskDao.swift in Sources */,
 				DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */,

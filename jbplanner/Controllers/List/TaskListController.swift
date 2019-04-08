@@ -8,6 +8,8 @@
 
 import CoreData
 import UIKit
+import SideMenu
+
 
 class TaskListController: UITableViewController, ActionResultDelegate {
     
@@ -44,13 +46,25 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         
         taskDAO.getAll(sortType: TaskSortType(rawValue: currentScopeIndex)!)
         
+        initSideMenu()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    
+    // MARK: - Side Menu
+    func initSideMenu() {
+        SideMenuManager.default.menuLeftNavigationController = storyboard!.instantiateViewController(withIdentifier: "SideMenu") as? UISideMenuNavigationController
+        
+        // не затемняем верхний статус бар
+        SideMenuManager.default.menuFadeStatusBar = false
+    }
 
+    
     // MARK: - Table view data source
     
     // методы вызываются автоматически компонентом tableView
