@@ -42,6 +42,9 @@
 		DBCCEB2121E22C4C00ABFCF3 /* CategoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2021E22C4C00ABFCF3 /* CategoryListCell.swift */; };
 		DBCCEB2321E2358500ABFCF3 /* PriorityListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2221E2358500ABFCF3 /* PriorityListController.swift */; };
 		DBCCEB2521E2364500ABFCF3 /* PriorityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */; };
+		DBD00C532278C13A0063E311 /* FiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C522278C13A0063E311 /* FiltersController.swift */; };
+		DBD00C552278C5AD0063E311 /* TaskSearchDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C542278C5AD0063E311 /* TaskSearchDao.swift */; };
+		DBD00C582278CB700063E311 /* PrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C572278CB700063E311 /* PrefsManager.swift */; };
 		DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF95E021E2720600655512 /* DictionaryController.swift */; };
 		DBE406AE21F0A83300779C8D /* CommonSearchDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
@@ -88,6 +91,9 @@
 		DBCCEB2021E22C4C00ABFCF3 /* CategoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCell.swift; sourceTree = "<group>"; };
 		DBCCEB2221E2358500ABFCF3 /* PriorityListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListController.swift; sourceTree = "<group>"; };
 		DBCCEB2421E2364500ABFCF3 /* PriorityListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListCell.swift; sourceTree = "<group>"; };
+		DBD00C522278C13A0063E311 /* FiltersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersController.swift; sourceTree = "<group>"; };
+		DBD00C542278C5AD0063E311 /* TaskSearchDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSearchDao.swift; sourceTree = "<group>"; };
+		DBD00C572278CB700063E311 /* PrefsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsManager.swift; sourceTree = "<group>"; };
 		DBDF95E021E2720600655512 /* DictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryController.swift; sourceTree = "<group>"; };
 		DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchDAO.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
@@ -133,6 +139,7 @@
 				DB383D30225BAE47006F756F /* Menu */,
 				DBCCEB1D21E22BA200ABFCF3 /* TaskDetails */,
 				DB116BD321D11B080070F13D /* List */,
+				DBD00C522278C13A0063E311 /* FiltersController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -202,6 +209,7 @@
 		DBB9A82D21CC110E00129C92 /* jbplanner */ = {
 			isa = PBXGroup;
 			children = (
+				DBD00C562278CB640063E311 /* Managers */,
 				DBB79E2221E4CD15002FA52C /* UIViews */,
 				DBCCEB1A21E20BDE00ABFCF3 /* Delegates */,
 				DBCCEAFD21DA10DF00ABFCF3 /* DaoImplementation */,
@@ -244,6 +252,7 @@
 				DBCCEB0A21DA208800ABFCF3 /* Crud.swift */,
 				DB0F7B9221EA2B7200DA398B /* TaskDao.swift */,
 				DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */,
+				DBD00C542278C5AD0063E311 /* TaskSearchDao.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -297,6 +306,14 @@
 				DB21D914222DAFB800C5958D /* DatetimePickerController.swift */,
 			);
 			path = TaskDetails;
+			sourceTree = "<group>";
+		};
+		DBD00C562278CB640063E311 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DBD00C572278CB700063E311 /* PrefsManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		DBE783A521D26FAC00512370 /* Cells */ = {
@@ -432,9 +449,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBCCEB1721DE2CE800ABFCF3 /* TaskInfoCell.swift in Sources */,
+				DBD00C532278C13A0063E311 /* FiltersController.swift in Sources */,
 				DBCCEAF721D77D6400ABFCF3 /* TaskExtension.swift in Sources */,
 				DBCCEAFA21D783D800ABFCF3 /* Db.swift in Sources */,
 				DBB9A83121CC110E00129C92 /* TaskDetailsController.swift in Sources */,
+				DBD00C552278C5AD0063E311 /* TaskSearchDao.swift in Sources */,
 				DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */,
 				DBCCEB1121DE25CD00ABFCF3 /* TaskCategoryCell.swift in Sources */,
 				DBB79E2621E51F50002FA52C /* TaskInfoController.swift in Sources */,
@@ -461,6 +480,7 @@
 				DBCCEB2121E22C4C00ABFCF3 /* CategoryListCell.swift in Sources */,
 				DB0F7B9321EA2B7200DA398B /* TaskDao.swift in Sources */,
 				DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */,
+				DBD00C582278CB700063E311 /* PrefsManager.swift in Sources */,
 				DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */,
 				DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */,
 				DBCCEB2521E2364500ABFCF3 /* PriorityListCell.swift in Sources */,

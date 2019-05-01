@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-class TaskDaoDbImpl: CommonSearchDAO {
-   
+class TaskDaoDbImpl: TaskSearchDAO {
+    
     static let current = TaskDaoDbImpl()
     private init() {}
     
@@ -54,20 +54,25 @@ class TaskDaoDbImpl: CommonSearchDAO {
         save()
     }
     
-    func search(text: String, sortType: SortType?) -> [Task] {
+    func search(text: String?, sortType: SortType?, showTasksEmptyPriorities: Bool, showTasksEmptyCategories: Bool, showCompletedTasks: Bool, showTasksWithoutDate: Bool) -> [Task] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()       // объект-контейнер для выборки данных
         
-        var params = [Any]()    // массив параметров лююого типа
+        var predicates = [NSPredicate]()
         
-        // прописываем само условие (без where)
-        var sql = "name CONTAINS[c] %@"     // начало запроса, [c] - case insensitive
+        if let text = text {
+            // упрощенная запись предиката (без массива параметров и отдельной переменной для sql)
+            predicates.append(NSPredicate(format: "name CONTAINS[c] %@", text))
+        }
         
-        params.append(text)
+        if !showTasksEmptyCategories { predicates.append(NSPredicate(format: "category != nil")) }
+        if !showTasksEmptyPriorities { predicates.append(NSPredicate(format: "priority != nil")) }
+        if !showCompletedTasks { predicates.append(NSPredicate(format: "completed != true")) }
+        if !showTasksWithoutDate { predicates.append(NSPredicate(format: "deadline != nil")) }
+
+        let allPredicates = NSCompoundPredicate(type: .and, subpredicates: predicates)
+
         
-        // объект контейнер для добавления условий
-        var predicate = NSPredicate(format: sql, argumentArray: params)
-        
-        fetchRequest.predicate = predicate      //добавляем предикат в контейнер запроса
+        fetchRequest.predicate = allPredicates      //добавляем предикат в контейнер запроса
         
         // можно создавать предикаты динамически и использовать нужный
         

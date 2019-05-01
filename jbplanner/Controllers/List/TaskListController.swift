@@ -42,9 +42,11 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         
         dateFormatter = createDateFormatter()
         
-        setupSearchController()
+        currentScopeIndex = PrefsManager.current.sortType   // сохраненный тип сортировки
         
         taskDAO.getAll(sortType: TaskSortType(rawValue: currentScopeIndex)!)
+
+        setupSearchController()
         
         initSideMenu()
         
@@ -53,6 +55,10 @@ class TaskListController: UITableViewController, ActionResultDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateTable()
     }
     
     
@@ -201,52 +207,6 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         }
     }
     
-    
-    
-    //название для каждой секции
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Section " + String(section + 1)
-//    }
-//
-//    // высота каждой секции
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 50
-//    }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
 
@@ -305,6 +265,12 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     
     // MARK: actions
+    
+    @IBAction func filterTasks(segue: UIStoryboardSegue) {
+        if let source = segue.source as? FiltersController, source.changed, segue.identifier == "filterTasks" { // если были изменения в фильтрах
+            updateTable()
+        }
+    }
 
     @IBAction func deleteFromTaskDetails(segue: UIStoryboardSegue) {
         guard segue.source is TaskDetailsController else {      // принимаем выховы только от TaskDetailsController - для более строго кода
@@ -354,9 +320,24 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         let task = taskDAO.items[indexPath.row]
         task.completed = !task.completed
         taskDAO.addOrUpdate(task)
-        
+
         tableView.reloadRows(at: [indexPath], with: .fade)
 
+        // анимация сокрытия строк
+        // TODO: Fix invalid number of sections during delete of section
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+            if !PrefsManager.current.showCompletedTasks {   // если отключен показ завершенных задач
+                
+                // удаляем задачу из коллекции и из таблицы
+                self.taskDAO.items.remove(at: indexPath.row)
+                
+                if self.taskDAO.items.isEmpty { // если это последняя запись - удаляем всю секцию
+                    self.tableView.deleteSections(IndexSet([self.taskListSection]), with: .top)
+                } else {
+                    self.tableView.deleteRows(at: [indexPath], with: .top)
+                }
+            }
+        }
     }
     
     func createTask(_ task: Task){
@@ -365,7 +346,6 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         // индекс чтобы задача добавилась в конец списка
         let indexPath = IndexPath(row: taskCount-1, section: taskListSection)
         tableView.insertRows(at: [indexPath], with: .top)
-
     }
     
     
@@ -376,9 +356,15 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         let sortType = TaskSortType(rawValue: currentScopeIndex)!   // определяем тип сортировки  по текущему выбранному значению
         
         if searchBarActive && searchController.searchBar.text != nil && !(searchController.searchBar.text?.isEmpty)! {  // если активен режим поиска и текст не пустой
-            taskDAO.search(text: searchController.searchBar.text!, sortType: sortType)
+            taskDAO.search(
+                text: searchController.searchBar.text!, sortType: sortType,
+                showTasksEmptyPriorities: PrefsManager.current.showEmptyPriorities, showTasksEmptyCategories: PrefsManager.current.showEmptyCategories, showCompletedTasks: PrefsManager.current.showCompletedTasks, showTasksWithoutDate: PrefsManager.current.showTasksWithoutDate
+            )
         } else {
-            taskDAO.getAll(sortType: sortType)
+            taskDAO.search(
+                text: nil, sortType: sortType,
+                showTasksEmptyPriorities: PrefsManager.current.showEmptyPriorities, showTasksEmptyCategories: PrefsManager.current.showEmptyCategories, showCompletedTasks: PrefsManager.current.showCompletedTasks, showTasksWithoutDate: PrefsManager.current.showTasksWithoutDate
+            )
         }
         
         tableView.reloadData()
@@ -426,6 +412,7 @@ extension TaskListController: UISearchBarDelegate {
         searchController.searchBar.backgroundColor = .white
         
         searchController.searchBar.scopeButtonTitles = ["A-Z", "Priority", "Date"]      // добавляем scope buttons
+        searchController.searchBar.selectedScopeButtonIndex = currentScopeIndex         // выделяем выбранную scope button
         
         // обработка действий поиска и работа с search bar в этом же классе
         // searchController.searchResultsUpdater = self     // так как не используем
@@ -476,6 +463,7 @@ extension TaskListController: UISearchBarDelegate {
         
         if currentScopeIndex == selectedScope { return }        // если значение не изменилось (нажали уже активную кнопку) - ничего не делаем
         currentScopeIndex = selectedScope                       // сохраняем выбранный scope button
+        PrefsManager.current.sortType = currentScopeIndex       // сохраняем в настройки приложения
         updateTable()
     }
 }

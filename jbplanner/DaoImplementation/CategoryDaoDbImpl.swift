@@ -53,10 +53,7 @@ class CategoryDaoDbImpl: CommonSearchDAO {
     
     func search(text: String, sortType: SortType?) -> [Item] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        var params = [Any]()
-        var sql = "name CONTAINS[c] %@"
-        params.append(text)
-        var predicate = NSPredicate(format: sql, argumentArray: params)
+        var predicate = NSPredicate(format: "name CONTAINS[c] %@", text)
         fetchRequest.predicate = predicate
         
         // добавляем поле для сортировки
