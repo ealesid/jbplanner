@@ -9,13 +9,13 @@
 import Foundation
 import CoreData
 
-class PriorityDaoDbImpl: CommonSearchDAO {
+class PriorityDaoDbImpl: DictionaryDao, CommonSearchDAO {
     
     typealias Item = Priority
     typealias SortType = PrioritySortType
     
     static let current = PriorityDaoDbImpl()
-    private init() {}
+    private init() { getAll(sortType: PrioritySortType.index) }
     
     var items: [Priority]!
     

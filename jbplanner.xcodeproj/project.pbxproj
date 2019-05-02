@@ -45,6 +45,8 @@
 		DBD00C532278C13A0063E311 /* FiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C522278C13A0063E311 /* FiltersController.swift */; };
 		DBD00C552278C5AD0063E311 /* TaskSearchDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C542278C5AD0063E311 /* TaskSearchDao.swift */; };
 		DBD00C582278CB700063E311 /* PrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C572278CB700063E311 /* PrefsManager.swift */; };
+		DBD00C5A227B2A710063E311 /* DictionaryDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C59227B2A710063E311 /* DictionaryDao.swift */; };
+		DBD00C5C227B2B3D0063E311 /* Checkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD00C5B227B2B3D0063E311 /* Checkable.swift */; };
 		DBDF95E121E2720600655512 /* DictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF95E021E2720600655512 /* DictionaryController.swift */; };
 		DBE406AE21F0A83300779C8D /* CommonSearchDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
@@ -94,6 +96,8 @@
 		DBD00C522278C13A0063E311 /* FiltersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersController.swift; sourceTree = "<group>"; };
 		DBD00C542278C5AD0063E311 /* TaskSearchDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSearchDao.swift; sourceTree = "<group>"; };
 		DBD00C572278CB700063E311 /* PrefsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsManager.swift; sourceTree = "<group>"; };
+		DBD00C59227B2A710063E311 /* DictionaryDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDao.swift; sourceTree = "<group>"; };
+		DBD00C5B227B2B3D0063E311 /* Checkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkable.swift; sourceTree = "<group>"; };
 		DBDF95E021E2720600655512 /* DictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryController.swift; sourceTree = "<group>"; };
 		DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchDAO.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
@@ -250,9 +254,11 @@
 			isa = PBXGroup;
 			children = (
 				DBCCEB0A21DA208800ABFCF3 /* Crud.swift */,
-				DB0F7B9221EA2B7200DA398B /* TaskDao.swift */,
 				DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */,
 				DBD00C542278C5AD0063E311 /* TaskSearchDao.swift */,
+				DB0F7B9221EA2B7200DA398B /* TaskDao.swift */,
+				DBD00C59227B2A710063E311 /* DictionaryDao.swift */,
+				DBD00C5B227B2B3D0063E311 /* Checkable.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -467,12 +473,14 @@
 				DB21D915222DAFB800C5958D /* DatetimePickerController.swift in Sources */,
 				DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */,
 				DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */,
+				DBD00C5A227B2A710063E311 /* DictionaryDao.swift in Sources */,
 				DB383D32225BAE60006F756F /* SideMenuController.swift in Sources */,
 				DBCCEB2321E2358500ABFCF3 /* PriorityListController.swift in Sources */,
 				DB21D917222DB0C400C5958D /* UIViewControllerExtension.swift in Sources */,
 				DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */,
 				DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */,
 				DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */,
+				DBD00C5C227B2B3D0063E311 /* Checkable.swift in Sources */,
 				DBCCEB1C21E20C0200ABFCF3 /* ActionResultDelegate.swift in Sources */,
 				DBB9A83721CC110E00129C92 /* jbplanner.xcdatamodeld in Sources */,
 				DBE406AE21F0A83300779C8D /* CommonSearchDAO.swift in Sources */,

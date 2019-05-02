@@ -54,7 +54,7 @@ class TaskDaoDbImpl: TaskSearchDAO {
         save()
     }
     
-    func search(text: String?, sortType: SortType?, showTasksEmptyPriorities: Bool, showTasksEmptyCategories: Bool, showCompletedTasks: Bool, showTasksWithoutDate: Bool) -> [Task] {
+    func search(text: String?, categories: [Category], sortType: SortType?, showTasksEmptyPriorities: Bool, showTasksEmptyCategories: Bool, showCompletedTasks: Bool, showTasksWithoutDate: Bool) -> [Task] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()       // объект-контейнер для выборки данных
         
         var predicates = [NSPredicate]()
@@ -64,7 +64,9 @@ class TaskDaoDbImpl: TaskSearchDAO {
             predicates.append(NSPredicate(format: "name CONTAINS[c] %@", text))
         }
         
-        if !showTasksEmptyCategories { predicates.append(NSPredicate(format: "category != nil")) }
+        if !showTasksEmptyCategories { predicates.append(NSPredicate(format: "category in %@", categories)) }
+        else { predicates.append(NSPredicate(format: "category in %@ or category = nil", categories)) }
+        
         if !showTasksEmptyPriorities { predicates.append(NSPredicate(format: "priority != nil")) }
         if !showCompletedTasks { predicates.append(NSPredicate(format: "completed != true")) }
         if !showTasksWithoutDate { predicates.append(NSPredicate(format: "deadline != nil")) }

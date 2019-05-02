@@ -274,6 +274,10 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         if let source = segue.source as? CategoryListController, source.changed, segue.identifier == "updateTaskCategories" {  // если были изменения при редактировании категорий
             updateTable()
         }
+        
+        if let source = segue.source as? PriorityListController, source.changed, segue.identifier == "updateTaskPriorities" {
+            updateTable()
+        }
     }
 
     @IBAction func deleteFromTaskDetails(segue: UIStoryboardSegue) {
@@ -361,12 +365,12 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         
         if searchBarActive && searchController.searchBar.text != nil && !(searchController.searchBar.text?.isEmpty)! {  // если активен режим поиска и текст не пустой
             taskDAO.search(
-                text: searchController.searchBar.text!, sortType: sortType,
+                text: searchController.searchBar.text!, categories: categoryDAO.checkedItems(), sortType: sortType,
                 showTasksEmptyPriorities: PrefsManager.current.showEmptyPriorities, showTasksEmptyCategories: PrefsManager.current.showEmptyCategories, showCompletedTasks: PrefsManager.current.showCompletedTasks, showTasksWithoutDate: PrefsManager.current.showTasksWithoutDate
             )
         } else {
             taskDAO.search(
-                text: nil, sortType: sortType,
+                text: nil, categories: categoryDAO.checkedItems(), sortType: sortType,
                 showTasksEmptyPriorities: PrefsManager.current.showEmptyPriorities, showTasksEmptyCategories: PrefsManager.current.showEmptyCategories, showCompletedTasks: PrefsManager.current.showCompletedTasks, showTasksWithoutDate: PrefsManager.current.showTasksWithoutDate
             )
         }

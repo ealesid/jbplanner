@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CategoryDaoDbImpl: CommonSearchDAO {
+class CategoryDaoDbImpl: DictionaryDao, CommonSearchDAO {
 
     typealias Item = Category
     typealias SortType = CategorySortType
@@ -17,9 +17,7 @@ class CategoryDaoDbImpl: CommonSearchDAO {
     var items: [Category]!
     
     static let current = CategoryDaoDbImpl()
-    private init() {
-//        items = getAll()
-    }
+    private init() { getAll(sortType: CategorySortType.name) }
     
     func addOrUpdate(_ category: Category) {
         if !items.contains(category) {

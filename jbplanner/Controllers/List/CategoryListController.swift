@@ -11,14 +11,18 @@ import UIKit
 class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
     
     @IBOutlet weak var tableView: UITableView!      // ссылка на компонент
+    @IBOutlet weak var labelHeaderTitle: UILabel!
+    @IBOutlet weak var buttonSelectDeselect: UIButton!
     
         // MARK: tableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dictTableView = tableView
+        
+        super.buttonSelectDeselectAll = buttonSelectDeselect
+        super.dictTableView = tableView
+        
         dao = CategoryDaoDbImpl.current
-        dao.getAll(sortType: CategorySortType.name)
         
         initNavBar()    // добавляем нужные кнопки на панель навигации
     }
@@ -30,19 +34,42 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
             fatalError("CategoryCell fatal error")
         }
         
-        cell.selectionStyle = .none     // чтобы строка не выделялась при нажатии
-        
         let category = dao.items[indexPath.row]     // получаем кождую категорию по индексу
+
+        cell.labelCategoryName.text = category.name
+        cell.selectionStyle = .none     // чтобы строка не выделялась при нажатии
+        cell.labelCategoryName.textColor = UIColor.darkGray
+        labelHeaderTitle.textColor = UIColor.lightGray
         
-        
-        if selectedItem != nil && selectedItem == category {
-            cell.buttonCheckCategory.setImage(UIImage(named: "check_green"), for: .normal)
-            currentCheckedIndexPath = indexPath         // сохраняем выбранный индекс
-        } else {
-            cell.buttonCheckCategory.setImage(UIImage(named: "check_gray"), for: .normal)
+        if showMode == .edit {
+            buttonSelectDeselect.isHidden = false
+            labelHeaderTitle.lineBreakMode = .byWordWrapping
+            labelHeaderTitle.numberOfLines = 0
+            labelHeaderTitle.text = "Check/uncheck categories to filter tasks."
+            
+            if category.checked {
+                cell.buttonCheckCategory.setImage(UIImage(named: "check_green"), for: .normal)
+            } else {
+                cell.buttonCheckCategory.setImage(UIImage(named: "check_gray"), for: .normal)
+            }
+            
+            tableView.allowsMultipleSelection = true
+            
+            if indexPath.row == dao.items.count - 1 { updateSelectDeselectButton() }
+        } else if showMode == .select {
+            tableView.allowsMultipleSelection = false
+            
+            buttonSelectDeselect.isHidden = true
+            labelHeaderTitle.text = "Select one category for task"
+
+            if selectedItem != nil && selectedItem == category {
+                cell.buttonCheckCategory.setImage(UIImage(named: "check_green"), for: .normal)
+                currentCheckedIndexPath = indexPath         // сохраняем выбранный индекс
+            } else {
+                cell.buttonCheckCategory.setImage(UIImage(named: "check_gray"), for: .normal)
+            }
         }
         
-        cell.labelCategoryName.text = category.name
         
         return cell
     }
@@ -101,15 +128,12 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
     }
 
 
-    @IBAction func tapSave(_ sender: UIBarButtonItem) {
-        save()
-    }
+    @IBAction func tapSave(_ sender: UIBarButtonItem) { save() }
 
-    @IBAction func tapCancel(_ sender: UIBarButtonItem) {
-        cancel()
-    }
+    @IBAction func tapCancel(_ sender: UIBarButtonItem) { cancel() }
     
-
+    @IBAction func tapSelectDeselect(_ sender: UIButton) { super.selectDeselectItems() }
+    
     // методы получения списков объектов - вызываются из родительского класса
     
     // MARK: override

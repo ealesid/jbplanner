@@ -11,9 +11,10 @@ import UIKit
 
 // Общий класс для контроллеров по работе со справочными значениями (категории, приоритеты)
 
-class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
     var dictTableView: UITableView!     // ссылка на компонент
+    var buttonSelectDeselectAll: UIButton!
     
     var dao: T!     // DAO для работы с БД
     
@@ -73,24 +74,64 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
                 
         let item = dao.items[indexPath.row]
         
-        if indexPath != currentCheckedIndexPath {       // если строка не была выделена до этого
-            selectedItem = item
-            
-            if let currentCheckedIndexPath = currentCheckedIndexPath {      // снимаем выделение для предыдущей выбранной строки
-                dictTableView.reloadRows(at: [currentCheckedIndexPath], with: .none)        // обновляем предыдущую выбранную строку
+        switch showMode {
+        case .select?:
+            if indexPath != currentCheckedIndexPath {       // если строка не была выделена до этого
+                selectedItem = item
+                
+                if let currentCheckedIndexPath = currentCheckedIndexPath {      // снимаем выделение для предыдущей выбранной строки
+                    dictTableView.reloadRows(at: [currentCheckedIndexPath], with: .none)        // обновляем предыдущую выбранную строку
+                }
+                
+                currentCheckedIndexPath = indexPath     // запоминаем новый выбранный индекс
+                
+            } else {    // если строка уже была выделена - снимаем выделение
+                selectedItem = nil
+                currentCheckedIndexPath = nil
             }
             
-            currentCheckedIndexPath = indexPath     // запоминаем новый выбранный индекс
+            // обновляем вид нажатой строки
+            dictTableView.reloadRows(at: [indexPath], with: .none)
             
-        } else {    // если строка уже была выделена - снимаем выделение
-            selectedItem = nil
-            currentCheckedIndexPath = nil
+            searchController.isActive = false       // автоматически закрывать поисковое окно, если пользователь выбрал значение
+
+        case .edit?:
+            item.checked = !item.checked
+            updateItem(item)
+            changed = true
+            
+        default: fatalError("Enum error")
         }
         
-        // обновляем вид нажатой строки
-        dictTableView.reloadRows(at: [indexPath], with: .none)
+        updateSelectDeselectButton()
+    }
+    
+    func selectDeselectItems() {
+        if dao.checkedItems().count > 0 { dao.items.map(){$0.checked = false} }
+        else { dao.items.map(){$0.checked = true} }
         
-        searchController.isActive = false       // автоматически закрывать поисковое окно, если пользователь выбрал значение
+        dictTableView.reloadSections([sectionList], with: .none)
+        updateSelectDeselectButton()
+        changed = true
+    }
+    
+    func updateSelectDeselectButton() {
+        
+        if showMode == .select { return }
+        
+        let newTitle: String
+        
+        if dao.checkedItems().count > 0 { newTitle = "Clear" } else { newTitle = "All" }
+        
+        if self.buttonSelectDeselectAll.title(for: .normal) != newTitle { buttonSelectDeselectAll.setTitle(newTitle, for: .normal) }
+        
+        var enabled: Bool
+        
+        if dao.items.count > 1 { enabled = true } else { enabled = false }
+        
+        buttonSelectDeselectAll.isEnabled = enabled
+        
+        if !enabled { return }
     }
     
     
@@ -119,6 +160,8 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
 //        else { dictTableView.deleteRows(at: [indexPath], with: .left) }
         
         changed = true
+        
+        updateSelectDeselectButton()
     }
     
     func addItem(_ item: T.Item) {
@@ -126,6 +169,8 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
         
         let indexPath = IndexPath(row: dao.items.count-1, section: sectionList)
         dictTableView.insertRows(at: [indexPath], with: .top)
+        
+        updateSelectDeselectButton()
 
 //        if dao.items.count == 1 { dictTableView.insertSections([sectionList], with: .top) }
 //        else {
