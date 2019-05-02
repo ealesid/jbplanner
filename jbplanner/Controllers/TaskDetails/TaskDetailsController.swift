@@ -223,11 +223,13 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func tapDeleteTask(_ sender: UIButton) {
-        confirmAction(title: "Delete confirmation", text: "Delete selected task?", segue: "DeleteTaskFromDetails")
+//        confirmAction(title: "Delete confirmation", text: "Delete selected task?", segue: "DeleteTaskFromDetails")
+        confirmAction(text: "Delete selected task?") { self.performSegue(withIdentifier: "DeleteTaskFromDetails", sender: self) }
     }
     
     @IBAction func tapCompleteTask(_ sender: UIButton) {
-        confirmAction(title: "Complete confirmation", text: "Complete selected task?", segue: "CompleteTaskFromDetails")
+//        confirmAction(title: "Complete confirmation", text: "Complete selected task?", segue: "CompleteTaskFromDetails")
+        confirmAction(text: "Complete selected task?") { self.performSegue(withIdentifier: "CompleteTaskFromDetails", sender: self) }
     }
     
     func confirmAction(title: String, text: String, segue: String) {
@@ -260,12 +262,15 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             if let controller = segue.destination as? CategoryListController {
                 controller.selectedItem = taskCategory     // передаем текущее значение категории
                 controller.delegate = self
+                controller.showMode = .select
+                controller.navigationTitle = "Select category"
             }
             
         case "selectPriority":
             if let controller = segue.destination as? PriorityListController {
                 controller.selectedItem = taskPriority     // передаем текущее значение категории
                 controller.delegate = self
+                controller.navigationTitle = "Select priority"
             }
             
         case "editTaskInfo":

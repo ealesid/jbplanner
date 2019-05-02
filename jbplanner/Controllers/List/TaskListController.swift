@@ -266,8 +266,12 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     // MARK: actions
     
-    @IBAction func filterTasks(segue: UIStoryboardSegue) {
+    @IBAction func updateTasks(segue: UIStoryboardSegue) {
         if let source = segue.source as? FiltersController, source.changed, segue.identifier == "filterTasks" { // если были изменения в фильтрах
+            updateTable()
+        }
+        
+        if let source = segue.source as? CategoryListController, source.changed, segue.identifier == "updateTaskCategories" {  // если были изменения при редактировании категорий
             updateTable()
         }
     }

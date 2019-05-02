@@ -19,6 +19,8 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
         dictTableView = tableView
         dao = CategoryDaoDbImpl.current
         dao.getAll(sortType: CategorySortType.name)
+        
+        initNavBar()    // добавляем нужные кнопки на панель навигации
     }
     
     
@@ -46,17 +48,63 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
     }
     
     
-    // MARK: IBActions
+    // нажатие на строку
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelectRow:\t", indexPath, showMode)
+        if showMode == .edit {
+            editCategory(indexPath: indexPath)
+            return
+        }
+        
+        if showMode == .select {
+            checkItem(indexPath)
+            return
+        }
+    }
     
-    @IBAction func tapCheckCategory(_ sender: UIButton) {
-        checkItem(sender)
+    func editCategory(indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            let currentItem = self.dao.items[indexPath.row]
+            let oldValue = currentItem.name
+            
+            self.showDialog(title: "Editing category", message: "Category name?:", initValue: currentItem.name!, actionClosure: { name in
+                if !self.isEmptyTrim(name) { currentItem.name = name }
+                else { currentItem.name = "New category" }
+                
+                if currentItem.name != oldValue {
+                    self.updateItem(currentItem)
+                    self.changed = true
+                } else { self.changed = false }
+            })
+        }
+    }
+    
+    override func addItemAction() {
+        showDialog(title: "New category", message: "Category name?", actionClosure: { name in
+            let category = Category(context: self.dao.context)
+            
+            if self.isEmptyTrim(name) { category.name = "New category" }
+            else { category.name = name }
+            self.addItem(category)
+        })
     }
     
     
+
+//     MARK: IBActions
+
+    @IBAction func tapCheckCategory(_ sender: UIButton) {
+        // определяем индекс строки по нажатому компоненту
+        let viewPosition = sender.convert(CGPoint.zero, to: dictTableView)
+        let indexPath = dictTableView.indexPathForRow(at: viewPosition)!
+        checkItem(indexPath)
+    }
+
+
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
         save()
     }
-    
+
     @IBAction func tapCancel(_ sender: UIBarButtonItem) {
         cancel()
     }

@@ -48,4 +48,60 @@ extension UIViewController {
         
         label.text = text 
     }
+    
+    // диалоговое окно для подтверждения действия
+    func confirmAction(text: String, actionClosure: @escaping () -> Void) {
+        let dialogMessage = UIAlertController(title: "Confirmation", message: text, preferredStyle: .actionSheet)   // объект диалогового окна
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in actionClosure() })
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in actionClosure() })
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        present(dialogMessage, animated: true, completion: nil)
+    }
+    
+    // add Save and Cancel buttons
+    func createSaveCancelButtons(save: Selector, cancel: Selector = #selector(cancel)) {
+        let buttonCancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: cancel)
+        navigationItem.leftBarButtonItem = buttonCancel
+        
+        let buttonSave = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: save)
+        navigationItem.rightBarButtonItem = buttonSave
+    }
+    
+    // add Add and Close buttons
+    func createAddCloseButtons(add: Selector, close: Selector = #selector(cancel)) {
+        let buttonClose = UIBarButtonItem()
+        buttonClose.target = self
+        buttonClose.action = close
+        buttonClose.title = "Close"
+        navigationItem.leftBarButtonItem = buttonClose
+        
+        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: add)
+        navigationItem.rightBarButtonItem = buttonAdd
+    }
+    
+    @objc func cancel() { closeController() }
+    
+    // проверяем, пустое ли значение, с учетом удаления пробелов и переноса строки
+    func isEmptyTrim(_ str: String?) -> Bool {
+        if let value = str?.trimmingCharacters(in: .whitespacesAndNewlines), !value.isEmpty {
+            return false    // значит - не пусто
+        } else {
+            return true
+        }
+    }
+    
+    func showDialog(title: String, message: String, initValue: String = "", actionClosure: @escaping (String) -> Void) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addTextField(configurationHandler: nil)
+            alert.textFields?[0].clearButtonMode = .whileEditing
+            alert.textFields?[0].text = initValue
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in actionClosure(alert.textFields?[0].text ?? "") }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }

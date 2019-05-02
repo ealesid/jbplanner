@@ -28,11 +28,31 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
     var searchBarText: String!
     
     var searchBar: UISearchBar{ return searchController.searchBar }
+    
+    var navigationTitle: String!
+    
+    var changed = false     // были или нет изменения при редактировании, чтобы лишний раз не обновлять  список задач
+    
+    let sectionList = 0
+    
+    var showMode: ShowMode!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
         searchBar.searchBarStyle = .prominent
+    }
+    
+    
+    // MARK: - init
+    
+    func initNavBar() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        if showMode == .select { createSaveCancelButtons(save: #selector(tapSave), cancel: #selector(tapCancel)) }
+        else if showMode == .edit { createAddCloseButtons(add: #selector(tapAdd), close: #selector(tapClose)) }
+        
+        self.title = navigationTitle
     }
     
     
@@ -42,13 +62,15 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
         return dao.items.count
     }
     
+    // удаление строки
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete { deleteItem(indexPath) }
+        else if editingStyle == .insert {}
+    }
+    
     // выделяет элемент в списке
-    func checkItem(_ sender: UIView) {
-        
-        // определение строки по координатам нажатия
-        let viewPosition = sender.convert(CGPoint.zero, to: dictTableView)
-        let indexPath = dictTableView.indexPathForRow(at: viewPosition)!
-        
+    func checkItem(_ indexPath: IndexPath) {
+                
         let item = dao.items[indexPath.row]
         
         if indexPath != currentCheckedIndexPath {       // если строка не была выделена до этого
@@ -74,14 +96,54 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
     
     // MARK: dao
     
-    func cancel() {
-        closeController()
-    }
+    override func cancel() { closeController() }
     
     func save() {
         cancel()
         delegate?.done(source: self, data: selectedItem)        // уведомить делегата и передать выбранное значение
     }
+    
+    func updateItem(_ item: T.Item) {
+        if let selectedIndexPath = dictTableView.indexPathForSelectedRow {
+            dao.addOrUpdate(item)
+            dictTableView.reloadRows(at: [selectedIndexPath], with: .none)
+        }
+    }
+    
+    func deleteItem(_ indexPath: IndexPath) {
+        dao.delete(dao.items[indexPath.row])
+        dao.items.remove(at: indexPath.row)
+        
+        dictTableView.deleteRows(at: [indexPath], with: .left)
+//        if dao.items.count == 0 { dictTableView.deleteSections([sectionList], with: .left) }
+//        else { dictTableView.deleteRows(at: [indexPath], with: .left) }
+        
+        changed = true
+    }
+    
+    func addItem(_ item: T.Item) {
+        dao.addOrUpdate(item)
+        
+        let indexPath = IndexPath(row: dao.items.count-1, section: sectionList)
+        dictTableView.insertRows(at: [indexPath], with: .top)
+
+//        if dao.items.count == 1 { dictTableView.insertSections([sectionList], with: .top) }
+//        else {
+//            let indexPath = IndexPath(row: dao.items.count-1, section: sectionList)
+//            dictTableView.insertRows(at: [indexPath], with: .top)
+//        }
+    }
+    
+    
+    // MARK: - selectors
+    
+    @objc func tapClose() { performSegue(withIdentifier: "updateTaskCategories", sender: self) }
+    
+    @objc func tapAdd() { addItemAction() }
+    
+    @objc func tapSave() { save() }
+    
+    @objc func tapCancel() { cancel() }
     
     
     // MARK: search
@@ -131,6 +193,10 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { fatalError("Not implemented!") }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { fatalError("Not implemented!") }
+    
+    func addItemAction() { fatalError("not implemented") }
+
     // при активации текстового окна - записываем последний поисковый текст
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.text = searchBarText
@@ -163,4 +229,10 @@ class DictionaryController<T:CommonSearchDAO>: UIViewController, UITableViewDele
         }
     }
 
+}
+
+
+enum ShowMode {
+    case edit
+    case select
 }

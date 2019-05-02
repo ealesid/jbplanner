@@ -47,16 +47,16 @@ class PriorityListController: DictionaryController<PriorityDaoDbImpl> {
     }
     
     
-    // MARK: IBActions
-    
-    @IBAction func tapCheckPriority(_ sender: UIButton) {
-        checkItem(sender)
-    }
-    
+//    MARK: IBActions
+//
+//    @IBAction func tapCheckPriority(_ sender: UIButton) {
+//        checkItem(sender)
+//    }
+
     @IBAction func tapCancel(_ sender: UIBarButtonItem) {
         cancel()
     }
-    
+
     @IBAction func tapSave(_ sender: UIBarButtonItem) {
         save()
     }
