@@ -11,5 +11,6 @@ pod 'GCCalendar'
 pod 'SideMenu'
 pod 'ChromaColorPicker'
 pod 'SwiftReorder'
+pod 'SwiftIconFont'
 
 end

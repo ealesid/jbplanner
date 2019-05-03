@@ -48,6 +48,8 @@ class TaskListController: UITableViewController, ActionResultDelegate {
 
         setupSearchController()
         
+        initIcons()
+        
         initSideMenu()
         
         // Uncomment the following line to preserve selection between presentations
@@ -59,6 +61,14 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         updateTable()
+    }
+    
+    
+    //    MARK: init
+    
+    func initIcons() {
+        navigationItem.rightBarButtonItem?.icon(from: .themify, code: "plus", ofSize: 20)
+        navigationItem.leftBarButtonItem?.icon(from: .themify, code: "menu", ofSize: 20)
     }
     
     

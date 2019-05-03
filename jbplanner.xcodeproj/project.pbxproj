@@ -53,6 +53,7 @@
 		DBF80CA4227C6A450090E3CC /* EditPriorityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */; };
 		DBF80CA6227C98130090E3CC /* SwiftReorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA5227C98130090E3CC /* SwiftReorder.framework */; };
 		DBF80CA8227CAF2A0090E3CC /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF80CA7227CAF2A0090E3CC /* ViewExtension.swift */; };
+		DBF80CAA227CB1E50090E3CC /* SwiftIconFont.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA9227CB1E50090E3CC /* SwiftIconFont.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPriorityController.swift; sourceTree = "<group>"; };
 		DBF80CA5227C98130090E3CC /* SwiftReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF80CA7227CAF2A0090E3CC /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		DBF80CA9227CB1E50090E3CC /* SwiftIconFont.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftIconFont.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF80CAA227CB1E50090E3CC /* SwiftIconFont.framework in Frameworks */,
 				DBF80CA6227C98130090E3CC /* SwiftReorder.framework in Frameworks */,
 				DBF80CA1227C5ACC0090E3CC /* ChromaColorPicker.framework in Frameworks */,
 				DB383D2F225BAA94006F756F /* SideMenu.framework in Frameworks */,
@@ -127,6 +130,7 @@
 		4B0E583433025231B3B2331D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBF80CA9227CB1E50090E3CC /* SwiftIconFont.framework */,
 				DBF80CA5227C98130090E3CC /* SwiftReorder.framework */,
 				DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */,
 				DB383D2E225BAA94006F756F /* SideMenu.framework */,
@@ -429,6 +433,7 @@
 				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/GCCalendar/GCCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftIconFont/SwiftIconFont.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftReorder/SwiftReorder.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -438,6 +443,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIconFont.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftReorder.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

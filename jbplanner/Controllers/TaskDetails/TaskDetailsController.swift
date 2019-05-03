@@ -1,15 +1,12 @@
-//
-//  ViewController.swift
-//  jbplanner
-//
-//  Created by Aleksey Sidorov on 20/12/2018.
-//  Copyright © 2018 Aleksey Sidorov. All rights reserved.
-//
-
 import UIKit
+import SwiftIconFont
+
+
 
 class TaskDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate, ActionResultDelegate {
     
+    @IBOutlet weak var buttonTaskComplete: UIButton!
+    @IBOutlet weak var buttonTaskDelete: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     // текущая задача для редактирования
@@ -52,6 +49,22 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             taskDeadline = task.deadline
         }
         
+        hideKeyboardWhenTypingAround()
+        
+        initTaskButtons()
+    }
+    
+    
+    //    MARK: init
+    
+    func initTaskButtons() {
+        buttonTaskComplete.titleLabel?.font = UIFont.icon(from: .fontAwesome, ofSize: 18.0)
+        buttonTaskComplete.titleLabel?.tintColor = UIColor.white
+        buttonTaskComplete.setTitle(String.fontAwesomeIcon("check"), for: .normal)
+
+        buttonTaskDelete.titleLabel?.font = UIFont.icon(from: .fontAwesome, ofSize: 18.0)
+        buttonTaskDelete.titleLabel?.tintColor = UIColor.white
+        buttonTaskDelete.setTitle(String.fontAwesomeIcon("trash"), for: .normal)
     }
     
     // MARK: tableView
