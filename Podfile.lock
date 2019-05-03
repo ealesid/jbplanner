@@ -2,23 +2,27 @@ PODS:
   - ChromaColorPicker (1.7.2)
   - GCCalendar (2.4.1)
   - SideMenu (5.0.3)
+  - SwiftReorder (6.0.2)
 
 DEPENDENCIES:
   - ChromaColorPicker
   - GCCalendar
   - SideMenu
+  - SwiftReorder
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - ChromaColorPicker
     - GCCalendar
     - SideMenu
+    - SwiftReorder
 
 SPEC CHECKSUMS:
   ChromaColorPicker: 78194fbae9f342d3781ac178c4d92c7652197d18
   GCCalendar: b9d584a3e437f9af5b0ab23030e7ed46affc3b23
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
+  SwiftReorder: 60ef1faf6446cf68f9a647cb975530db8efd6620
 
-PODFILE CHECKSUM: f71ef75d796a31e632d427fe4995747b3fc32b4b
+PODFILE CHECKSUM: ced18f233127a611df3531208275450d3538efec
 
 COCOAPODS: 1.6.1

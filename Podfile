@@ -10,5 +10,6 @@ target 'jbplanner' do
 pod 'GCCalendar'
 pod 'SideMenu'
 pod 'ChromaColorPicker'
+pod 'SwiftReorder'
 
 end

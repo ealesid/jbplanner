@@ -48,6 +48,15 @@ class PriorityDaoDbImpl: DictionaryDao, CommonSearchDAO {
         
         return items
     }
+    
+    
+    //    MARK: util
+    
+    func updateIndexes() {
+        for (index, item) in items.enumerated() { item.index = Int32(index) }
+        save()
+        items = getAll(sortType: .index)
+    }
 }
 
 

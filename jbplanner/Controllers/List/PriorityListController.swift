@@ -1,14 +1,9 @@
-//
-//  PriorityListController.swift
-//  jbplanner
-//
-//  Created by Aleksey Sidorov on 06/01/2019.
-//  Copyright © 2019 Aleksey Sidorov. All rights reserved.
-//
-
 import UIKit
+import SwiftReorder
 
-class PriorityListController: DictionaryController<PriorityDaoDbImpl>, ActionResultDelegate {
+
+class PriorityListController: DictionaryController<PriorityDaoDbImpl>, ActionResultDelegate, TableViewReorderDelegate {
+    
         
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var labelHeaderTitle: UILabel!
@@ -17,6 +12,8 @@ class PriorityListController: DictionaryController<PriorityDaoDbImpl>, ActionRes
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.reorder.delegate = self
         
         super.buttonSelectDeselectAll = buttonSelectDeselect
         super.dictTableView = tableView
@@ -133,6 +130,23 @@ class PriorityListController: DictionaryController<PriorityDaoDbImpl>, ActionRes
         }
     }
     
+    
+    //    MARK: drag
+    
+    func tableViewDidFinishReordering(_ tableView: UITableView, from initialSourceIndexPath: IndexPath, to finalDestinationIndexPath: IndexPath) {
+        let item = dao.items.remove(at: initialSourceIndexPath.row)
+        dao.items.insert(item, at: finalDestinationIndexPath.row)
+        dao.updateIndexes()
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, canReorderRowAt indexPath: IndexPath) -> Bool {
+        if showMode == .select || dao.items.count <= 1 { return false }
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, reorderRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {}
+
     
     // MARK: override
     

@@ -32,7 +32,6 @@ extension Crud {
     }
     
     func save() {
-        print("crud save")
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     

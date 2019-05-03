@@ -51,6 +51,7 @@
 		DBE94DF221E7B7D900748641 /* QuickTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */; };
 		DBF80CA1227C5ACC0090E3CC /* ChromaColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */; };
 		DBF80CA4227C6A450090E3CC /* EditPriorityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */; };
+		DBF80CA6227C98130090E3CC /* SwiftReorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA5227C98130090E3CC /* SwiftReorder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTaskCell.swift; sourceTree = "<group>"; };
 		DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ChromaColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPriorityController.swift; sourceTree = "<group>"; };
+		DBF80CA5227C98130090E3CC /* SwiftReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF80CA6227C98130090E3CC /* SwiftReorder.framework in Frameworks */,
 				DBF80CA1227C5ACC0090E3CC /* ChromaColorPicker.framework in Frameworks */,
 				DB383D2F225BAA94006F756F /* SideMenu.framework in Frameworks */,
 				DB21D913222D970B00C5958D /* GCCalendar.framework in Frameworks */,
@@ -122,6 +125,7 @@
 		4B0E583433025231B3B2331D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBF80CA5227C98130090E3CC /* SwiftReorder.framework */,
 				DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */,
 				DB383D2E225BAA94006F756F /* SideMenu.framework */,
 				DB21D912222D970B00C5958D /* GCCalendar.framework */,
@@ -422,6 +426,7 @@
 				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/GCCalendar/GCCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftReorder/SwiftReorder.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -430,6 +435,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftReorder.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
