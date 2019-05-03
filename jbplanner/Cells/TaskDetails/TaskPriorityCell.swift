@@ -11,6 +11,7 @@ import UIKit
 class TaskPriorityCell: UITableViewCell {
 
     @IBOutlet weak var labelTaskPriority: UILabel!
+    @IBOutlet weak var labelPriorityColor: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

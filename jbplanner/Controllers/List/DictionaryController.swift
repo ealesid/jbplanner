@@ -64,12 +64,29 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
         return dao.items.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
     // удаление строки
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete { deleteItem(indexPath) }
         else if editingStyle == .insert {}
     }
     
+    // нажатие на строку
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if showMode == .edit {
+            editItemAction(indexPath: indexPath)
+            return
+        }
+        
+        if showMode == .select {
+            checkItem(indexPath)
+            return
+        }
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         updateTableBackground(dictTableView, count: dao.items.count)
         
@@ -86,7 +103,7 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
     
     // выделяет элемент в списке
     func checkItem(_ indexPath: IndexPath) {
-                
+        
         let item = dao.items[indexPath.row]
         
         switch showMode {
@@ -112,7 +129,7 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
 
         case .edit?:
             item.checked = !item.checked
-            updateItem(item)
+            updateItem(item, indexPath: indexPath)
             changed = true
             
         default: fatalError("Enum error")
@@ -155,15 +172,13 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
     override func cancel() { closeController() }
     
     func save() {
-        cancel()
+        closeController()
         delegate?.done(source: self, data: selectedItem)        // уведомить делегата и передать выбранное значение
     }
     
-    func updateItem(_ item: T.Item) {
-        if let selectedIndexPath = dictTableView.indexPathForSelectedRow {
-            dao.addOrUpdate(item)
-            dictTableView.reloadRows(at: [selectedIndexPath], with: .none)
-        }
+    func updateItem(_ item: T.Item, indexPath: IndexPath) {
+        dao.update(item)
+        dictTableView.reloadRows(at: [indexPath], with: .none)
     }
     
     func deleteItem(_ indexPath: IndexPath) {
@@ -181,7 +196,7 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
     }
     
     func addItem(_ item: T.Item) {
-        dao.addOrUpdate(item)
+        dao.add(item)
         
         if dao.items.count == 1 { dictTableView.insertSections([sectionList], with: .top) }
         else {
@@ -197,8 +212,14 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
     
     // MARK: - selectors
     
-    @objc func tapClose() { performSegue(withIdentifier: "updateTaskCategories", sender: self) }
-    
+    @objc func tapClose(){
+        switch self {
+        case is CategoryListController: performSegue(withIdentifier: "updateTaskCategories", sender: self)
+        case is PriorityListController: performSegue(withIdentifier: "updateTaskPriorities", sender: self)
+        default: return
+        }
+    }
+
     @objc func tapAdd() { addItemAction() }
     
     @objc func tapSave() { save() }
@@ -253,9 +274,9 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { fatalError("Not implemented!") }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { fatalError("Not implemented!") }
-    
     func addItemAction() { fatalError("not implemented") }
+
+    func editItemAction(indexPath: IndexPath) { fatalError("not implemented") }
 
     // при активации текстового окна - записываем последний поисковый текст
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {

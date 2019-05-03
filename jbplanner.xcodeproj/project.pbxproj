@@ -49,6 +49,8 @@
 		DBE406AE21F0A83300779C8D /* CommonSearchDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */; };
 		DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE783A621D26FE800512370 /* TaskListCell.swift */; };
 		DBE94DF221E7B7D900748641 /* QuickTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */; };
+		DBF80CA1227C5ACC0090E3CC /* ChromaColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */; };
+		DBF80CA4227C6A450090E3CC /* EditPriorityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		DBE406AD21F0A83300779C8D /* CommonSearchDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSearchDAO.swift; sourceTree = "<group>"; };
 		DBE783A621D26FE800512370 /* TaskListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListCell.swift; sourceTree = "<group>"; };
 		DBE94DF121E7B7D900748641 /* QuickTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTaskCell.swift; sourceTree = "<group>"; };
+		DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ChromaColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPriorityController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF80CA1227C5ACC0090E3CC /* ChromaColorPicker.framework in Frameworks */,
 				DB383D2F225BAA94006F756F /* SideMenu.framework in Frameworks */,
 				DB21D913222D970B00C5958D /* GCCalendar.framework in Frameworks */,
 				B4F6E767B609279ECF4941EA /* Pods_jbplanner.framework in Frameworks */,
@@ -117,6 +122,7 @@
 		4B0E583433025231B3B2331D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */,
 				DB383D2E225BAA94006F756F /* SideMenu.framework */,
 				DB21D912222D970B00C5958D /* GCCalendar.framework */,
 				9ED3F1B07A05739FED1E861C /* Pods_jbplanner.framework */,
@@ -136,6 +142,7 @@
 		DB116BD221D11AF00070F13D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DBF80CA2227C6A300090E3CC /* PriorityDetails */,
 				DB383D30225BAE47006F756F /* Menu */,
 				DBCCEB1D21E22BA200ABFCF3 /* TaskDetails */,
 				DB116BD321D11B080070F13D /* List */,
@@ -326,6 +333,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		DBF80CA2227C6A300090E3CC /* PriorityDetails */ = {
+			isa = PBXGroup;
+			children = (
+				DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */,
+			);
+			path = PriorityDetails;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -404,6 +419,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-jbplanner/Pods-jbplanner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChromaColorPicker/ChromaColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/GCCalendar/GCCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
@@ -411,6 +427,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChromaColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
@@ -469,6 +486,7 @@
 				DB383D32225BAE60006F756F /* SideMenuController.swift in Sources */,
 				DBCCEB2321E2358500ABFCF3 /* PriorityListController.swift in Sources */,
 				DB21D917222DB0C400C5958D /* UIViewControllerExtension.swift in Sources */,
+				DBF80CA4227C6A450090E3CC /* EditPriorityController.swift in Sources */,
 				DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */,
 				DBE783A721D26FE800512370 /* TaskListCell.swift in Sources */,
 				DBCCEB1521DE2CD600ABFCF3 /* TaskDeadlineCell.swift in Sources */,

@@ -76,36 +76,36 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
     }
     
     
-    // нажатие на строку
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRow:\t", indexPath, showMode)
-        if showMode == .edit {
-            editCategory(indexPath: indexPath)
-            return
-        }
-        
-        if showMode == .select {
-            checkItem(indexPath)
-            return
-        }
-    }
+//    // нажатие на строку
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("didSelectRow:\t", indexPath, showMode)
+//        if showMode == .edit {
+//            editCategory(indexPath: indexPath)
+//            return
+//        }
+//        
+//        if showMode == .select {
+//            checkItem(indexPath)
+//            return
+//        }
+//    }
     
-    func editCategory(indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            let currentItem = self.dao.items[indexPath.row]
-            let oldValue = currentItem.name
-            
-            self.showDialog(title: "Editing category", message: "Category name?:", initValue: currentItem.name!, actionClosure: { name in
-                if !self.isEmptyTrim(name) { currentItem.name = name }
-                else { currentItem.name = "New category" }
-                
-                if currentItem.name != oldValue {
-                    self.updateItem(currentItem)
-                    self.changed = true
-                } else { self.changed = false }
-            })
-        }
-    }
+//    func editCategory(indexPath: IndexPath) {
+//        DispatchQueue.main.async {
+//            let currentItem = self.dao.items[indexPath.row]
+//            let oldValue = currentItem.name
+//            
+//            self.showDialog(title: "Editing category", message: "Category name?:", initValue: currentItem.name!, actionClosure: { name in
+//                if !self.isEmptyTrim(name) { currentItem.name = name }
+//                else { currentItem.name = "New category" }
+//                
+//                if currentItem.name != oldValue {
+//                    self.updateItem(currentItem)
+//                    self.changed = true
+//                } else { self.changed = false }
+//            })
+//        }
+//    }
     
     override func addItemAction() {
         showDialog(title: "New category", message: "Category name?", actionClosure: { name in
@@ -114,6 +114,21 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
             if self.isEmptyTrim(name) { category.name = "New category" }
             else { category.name = name }
             self.addItem(category)
+        })
+    }
+    
+    override func editItemAction(indexPath: IndexPath) {
+        let currentItem = self.dao.items[indexPath.row]
+        let oldValue = currentItem.name
+        
+        showDialog(title: "Editing categories", message: "Category name?", initValue: currentItem.name!, actionClosure: { name in
+            if !self.isEmptyTrim(name) { currentItem.name = name }
+            else { currentItem.name = "New category" }
+            
+            if currentItem.name != oldValue {
+                self.updateItem(currentItem, indexPath: indexPath)
+                self.changed = true
+            } else { self.changed = false }
         })
     }
     

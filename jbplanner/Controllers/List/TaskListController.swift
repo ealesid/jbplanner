@@ -117,21 +117,10 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             
             cell.labelTaskName.text = task.name
             cell.labelTaskCategory.text = (task.category?.name ?? "")
-            
-            if let priority = task.priority {
-                switch priority.index {
-                case 1:
-                    cell.labelPriority.backgroundColor = UIColor(named: "low")
-                case 2:
-                    cell.labelPriority.backgroundColor = UIColor(named: "medium")
-                case 3:
-                    cell.labelPriority.backgroundColor = UIColor(named: "high")
-                default:
-                    cell.labelPriority.backgroundColor = UIColor.white
-                }
-            } else {
-                cell.labelPriority.backgroundColor = UIColor.white
-            }
+            cell.labelTaskCategory.textColor = UIColor.lightGray
+
+            if let priority = task.priority { cell.labelPriority.backgroundColor = priority.color as? UIColor }
+            else { cell.labelPriority.backgroundColor = UIColor.white }
             
             cell.labelDeadLine.textColor = .lightGray
             
@@ -253,13 +242,16 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         // если пришел ответт от TaskDetailsController
         if source is TaskDetailsController {
             if let selectedIndexPaht = tableView.indexPathForSelectedRow { // определяем выбранную строку
-                taskDAO.save() // сохраняем измененную задачу (сохраняет все изменения)
-                tableView.reloadRows(at: [selectedIndexPaht], with: .fade) // обновляем только нужную строку
+                let task = data as! Task
+                taskDAO.update(task)
+//                taskDAO.save() // сохраняем измененную задачу (сохраняет все изменения)
+//                tableView.reloadRows(at: [selectedIndexPaht], with: .fade) // обновляем только нужную строку
             } else {    // создаем новую задачу
                 let task = data as! Task
-                
                 createTask(task)
             }
+            
+            updateTable()
         }
     }
     

@@ -270,6 +270,7 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
             if let controller = segue.destination as? PriorityListController {
                 controller.selectedItem = taskPriority     // передаем текущее значение категории
                 controller.delegate = self
+                controller.showMode = .select
                 controller.navigationTitle = "Select priority"
             }
             
