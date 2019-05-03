@@ -46,6 +46,8 @@ class PriorityListController: DictionaryController<PriorityDaoDbImpl>, ActionRes
         if let color = priority.color {
             cell.labelPriorityColor.backgroundColor = color as! UIColor
         }
+        
+        cell.labelTasksCount.text = "\(priority.tasks?.count ?? 0)"
 
         if showMode == .edit {
             buttonSelectDeselect.isHidden = false

@@ -42,6 +42,8 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
         cell.labelCategoryName.textColor = UIColor.darkGray
         labelHeaderTitle.textColor = UIColor.lightGray
         
+        cell.labelTasksCount.text = "\(category.tasks?.count ?? 0)"
+        
         if showMode == .edit {
             buttonSelectDeselect.isHidden = false
             labelHeaderTitle.lineBreakMode = .byWordWrapping

@@ -52,6 +52,7 @@
 		DBF80CA1227C5ACC0090E3CC /* ChromaColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */; };
 		DBF80CA4227C6A450090E3CC /* EditPriorityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */; };
 		DBF80CA6227C98130090E3CC /* SwiftReorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA5227C98130090E3CC /* SwiftReorder.framework */; };
+		DBF80CA8227CAF2A0090E3CC /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF80CA7227CAF2A0090E3CC /* ViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ChromaColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF80CA3227C6A450090E3CC /* EditPriorityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPriorityController.swift; sourceTree = "<group>"; };
 		DBF80CA5227C98130090E3CC /* SwiftReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBF80CA7227CAF2A0090E3CC /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +246,7 @@
 				DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */,
 				DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */,
 				DB21D916222DB0C400C5958D /* UIViewControllerExtension.swift */,
+				DBF80CA7227CAF2A0090E3CC /* ViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				DB0F7B9321EA2B7200DA398B /* TaskDao.swift in Sources */,
 				DBB79E2421E4CD36002FA52C /* AreaTapButton.swift in Sources */,
 				DBD00C582278CB700063E311 /* PrefsManager.swift in Sources */,
+				DBF80CA8227CAF2A0090E3CC /* ViewExtension.swift in Sources */,
 				DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */,
 				DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */,
 				DBCCEB2521E2364500ABFCF3 /* PriorityListCell.swift in Sources */,

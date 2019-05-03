@@ -12,11 +12,12 @@ class CategoryListCell: UITableViewCell {
     
     
     @IBOutlet weak var labelCategoryName: UILabel!
+    @IBOutlet weak var labelTasksCount: UILabel!
     @IBOutlet weak var buttonCheckCategory: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        labelTasksCount.roundLabel()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
