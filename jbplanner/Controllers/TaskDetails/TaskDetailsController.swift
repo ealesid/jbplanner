@@ -170,7 +170,12 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
                 fatalError("Cell Type Error")
             }
             
-            cell.textviewTaskInfo.text = taskInfo
+            if taskInfo != nil { cell.textviewTaskInfo.text = taskInfo }
+            else {
+                cell.textviewTaskInfo.text = "Tap to start editing"
+                cell.textviewTaskInfo.textColor = UIColor.gray
+            }
+            
             
             textViewTaskInfo = cell.textviewTaskInfo // для использования компонента вне метода tableView
             

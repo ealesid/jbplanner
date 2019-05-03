@@ -236,6 +236,21 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             controller.delegate = self
             controller.mode = TaskDetailsMode.add
             
+        case "showTaskInfo":
+            
+            let button = sender as! UIButton
+            let buttonPosition = button.convert(CGPoint.zero, to: self.tableView)
+            let indexPath = self.tableView.indexPathForRow(at: buttonPosition)!
+            
+            let selectedTask = taskDAO.items[indexPath.row]
+            
+            guard let controller = segue.destination as? TaskInfoController else {fatalError("TaskInfoController error") }
+            controller.taskInfo = selectedTask.info
+//            controller.delegate = self
+            controller.navigationTitle = selectedTask.name
+            controller.taskInfoShowMode = .readonly
+            
+            
         default:
             return
         }

@@ -2,6 +2,10 @@ import UIKit
 
 class SideMenuController: UITableViewController {
     
+    @IBOutlet weak var cellFeedback: UITableViewCell!
+    @IBOutlet weak var cellShare: UITableViewCell!
+    
+    
     let sectionCommon = 0
     let sectionDictionary = 1
     let sectionHelp = 2
@@ -23,6 +27,30 @@ class SideMenuController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.tintColor = UIColor.darkGray
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.isUserInteractionEnabled = false      // защита от двойных нажатий
+        
+        if tableView.cellForRow(at: indexPath) === cellFeedback {
+            let email = "app@support.org"       // TODO: вынести в plist
+            if let url = URL(string: "mailto:\(email)") { UIApplication.shared.open(url) }
+            
+            tableView.isUserInteractionEnabled = true
+            
+            return
+        }
+        
+        if tableView.cellForRow(at: indexPath) === cellShare {
+            let shareController = UIActivityViewController(activityItems: ["Create iOS application from beginning"], applicationActivities: nil)
+            shareController.popoverPresentationController?.sourceView = self.view
+            present(shareController, animated: true, completion: nil)
+            
+            tableView.isUserInteractionEnabled = true
+            
+            return
+        }
     }
     
     // заголовки секций

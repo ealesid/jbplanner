@@ -1,12 +1,5 @@
-//
-//  TaskInfoController.swift
-//  jbplanner
-//
-//  Created by Aleksey Sidorov on 08/01/2019.
-//  Copyright © 2019 Aleksey Sidorov. All rights reserved.
-//
-
 import UIKit
+
 
 class TaskInfoController: UIViewController {
 
@@ -14,17 +7,35 @@ class TaskInfoController: UIViewController {
     
     var taskInfo: String!       // текущий выбранный элемент
     
+    var taskInfoShowMode: TaskInfoShowMode!
+    
+    var navigationTitle: String!
+    
     var delegate: ActionResultDelegate!     // для передачи выбранного элемента обратно в контроллер
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Additional Info"
         
-        //фокусируем на компоненте для открытия клавиатуры
-        textviewTaskInfo.becomeFirstResponder()
+        title = navigationTitle
         
         textviewTaskInfo.text = taskInfo
+        
+        switch taskInfoShowMode {
+        case .readonly?:
+            textviewTaskInfo.isEditable = false
+            
+            let tap: UIGestureRecognizer = UIGestureRecognizer(target: textviewTaskInfo, action: #selector(tapTextView(_:)))
+            tap.cancelsTouchesInView = false
+            view.addGestureRecognizer(tap)
+            
+        case .edit?:
+            textviewTaskInfo.isEditable = true
+            createSaveCancelButtons(save: #selector(tapSave))
+            textviewTaskInfo.becomeFirstResponder()
+            
+        default: return
+        }
     }
     
 
@@ -38,14 +49,20 @@ class TaskInfoController: UIViewController {
     }
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+//    @objc func tapSave() {
+//        closeController()
+//        delegate?.done(source: self, data: textviewTaskInfo.text)
+//    }
+    
+    @objc func tapTextView(_ sender: UITapGestureRecognizer) {
+        textviewTaskInfo.findUrl(sender: sender)
     }
-    */
+    
+    
+}
 
+
+enum TaskInfoShowMode {
+    case readonly
+    case edit
 }
