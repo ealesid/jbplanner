@@ -13,7 +13,10 @@ class TaskDaoDbImpl: TaskSearchDAO {
     
     static let current = TaskDaoDbImpl()
     private init() {}
-    
+
+    typealias CategoryItem = Category
+    typealias PriorityItem = Priority
+        
     typealias Item = Task
     typealias SortType = TaskSortType
     
@@ -22,39 +25,23 @@ class TaskDaoDbImpl: TaskSearchDAO {
     
     var items: [Item]!
     
-    func addOrUpdate(_ task: Task) {
-        if !items.contains(task) {
-            items.append(task)
-        }
-        save()
-    }
-    
-    
-    // MARK: DAO
+
+    // MARK: - dao
     
     func getAll(sortType: SortType?) -> [Task] {
         let fetchRequest: NSFetchRequest<Item> = Task.fetchRequest()
         
         // добавляем поле для сортировки
-        if let sortType = sortType {
-            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
-        }
+        if let sortType = sortType { fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)] }
         
-        do {
-            items = try context.fetch(fetchRequest)
-        } catch {
-            fatalError("Tasks fetch failed.")
-        }
+        do { items = try context.fetch(fetchRequest) }
+        catch { fatalError("Tasks fetch failed.") }
         
         return items
     }
     
-    func delete(_ task: Task) {
-        context.delete(task)
-        save()
-    }
-    
-    func search(text: String?, categories: [Category], sortType: SortType?, showTasksEmptyPriorities: Bool, showTasksEmptyCategories: Bool, showCompletedTasks: Bool, showTasksWithoutDate: Bool) -> [Task] {
+
+    func search(text: String?, categories: [Category], priorities: [Priority], sortType: SortType?, showTasksEmptyPriorities: Bool, showTasksEmptyCategories: Bool, showCompletedTasks: Bool, showTasksWithoutDate: Bool) -> [Task] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()       // объект-контейнер для выборки данных
         
         var predicates = [NSPredicate]()
@@ -64,8 +51,28 @@ class TaskDaoDbImpl: TaskSearchDAO {
             predicates.append(NSPredicate(format: "name CONTAINS[c] %@", text))
         }
         
-        if !showTasksEmptyCategories { predicates.append(NSPredicate(format: "category in %@", categories)) }
-        else { predicates.append(NSPredicate(format: "category in %@ or category = nil", categories)) }
+        if !categoryDAO.items.isEmpty {
+            if categories.isEmpty {
+                if showTasksEmptyCategories { predicates.append(NSPredicate(format: "(NOT (category in %@) or category == nil)", categoryDAO.items)) }
+                else { predicates.append(NSPredicate(format: "(NOT (category in %@) and category == nil)", categoryDAO.items)) }
+            } else {
+                if showTasksEmptyCategories { predicates.append(NSPredicate(format: "(category in %@ or category == nil)", categories)) }
+                else { predicates.append(NSPredicate(format: "(category in %@ and category != nil)", categories)) }
+            }
+        }
+        
+        if !priorityDAO.items.isEmpty {
+            if priorities.isEmpty {
+                if showTasksEmptyPriorities { predicates.append(NSPredicate(format: "(NOT (priority in %@) or priority == nil)", priorityDAO.items)) }
+                else { predicates.append(NSPredicate(format: "(NOT (priority in %@) and priority == nil)", priorityDAO.items)) }
+            } else {
+                if showTasksEmptyPriorities { predicates.append(NSPredicate(format: "(priority in %@ or priority == nil)", priorities)) }
+                else { predicates.append(NSPredicate(format: "(priority in %@ and priority != nil)", priorities)) }
+            }
+        }
+        
+//        if !showTasksEmptyCategories { predicates.append(NSPredicate(format: "category in %@", categories)) }
+//        else { predicates.append(NSPredicate(format: "category in %@ or category = nil", categories)) }
         
         if !showTasksEmptyPriorities { predicates.append(NSPredicate(format: "priority != nil")) }
         if !showCompletedTasks { predicates.append(NSPredicate(format: "completed != true")) }

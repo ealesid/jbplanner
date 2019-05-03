@@ -5,10 +5,12 @@ import Foundation
 protocol TaskSearchDAO: Crud {
     
     associatedtype CategoryItem: Category   // любая реализация Category
-    
+    associatedtype PriorityItem: Priority   // любая реализация Category
+
     func search(
             text: String?,
             categories: [CategoryItem],
+            priorities: [Priority],
             sortType: SortType?,
             showTasksEmptyPriorities: Bool,
             showTasksEmptyCategories: Bool,

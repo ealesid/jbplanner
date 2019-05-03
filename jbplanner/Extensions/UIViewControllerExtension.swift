@@ -104,4 +104,37 @@ extension UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    // message - No data
+    func createNoDataView(_ text: String) -> UILabel {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
+        messageLabel.numberOfLines = 0
+        messageLabel.lineBreakMode = .byWordWrapping
+        messageLabel.textColor = UIColor.darkGray
+        messageLabel.textAlignment = .center
+        messageLabel.text = text
+        
+        return messageLabel
+    }
+    
+    // обновляет фон для таблицы, если нет данных
+    func updateTableBackground(_ tableView: UITableView, count: Int) {
+        if count > 0 {
+            tableView.separatorColor = UIColor.gray
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine
+        } else {
+            tableView.separatorStyle = .none
+            tableView.backgroundView = createNoDataView("No data")
+        }
+    }
+    
+    // скрыть клавиатуру
+    func hideKeyboardWhenTypingAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() { view.endEditing(true) }
 }

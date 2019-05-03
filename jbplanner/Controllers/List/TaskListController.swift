@@ -13,7 +13,7 @@ import SideMenu
 
 class TaskListController: UITableViewController, ActionResultDelegate {
     
-    let db = Db()
+//    let db = Db()
     
     let taskDAO = TaskDaoDbImpl.current
     let categoryDAO = CategoryDaoDbImpl.current
@@ -304,15 +304,12 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     @IBAction func quickTaskAdd(_ sender: UITextField) {
         let task = Task(context: taskDAO.context)
-        task.name = textQuickTask.text
         
-        if let name = textQuickTask.text?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty {
-            task.name = name
-        } else {
-            task.name = "New Task"
-        }
+        if !isEmptyTrim(textQuickTask.text) { task.name = textQuickTask.text }
+        else { task.name = "New task" }
         
         createTask(task)
+        updateTable()
         textQuickTask.text = ""
         
     }
@@ -338,12 +335,14 @@ class TaskListController: UITableViewController, ActionResultDelegate {
                 
                 // удаляем задачу из коллекции и из таблицы
                 self.taskDAO.items.remove(at: indexPath.row)
-                
-                if self.taskDAO.items.isEmpty { // если это последняя запись - удаляем всю секцию
-                    self.tableView.deleteSections(IndexSet([self.taskListSection]), with: .top)
-                } else {
-                    self.tableView.deleteRows(at: [indexPath], with: .top)
-                }
+
+                self.tableView.deleteRows(at: [indexPath], with: .top)
+
+//                if self.taskDAO.items.isEmpty { // если это последняя запись - удаляем всю секцию
+//                    self.tableView.deleteSections(IndexSet([self.taskListSection]), with: .top)
+//                } else {
+//                    self.tableView.deleteRows(at: [indexPath], with: .top)
+//                }
             }
         }
     }
@@ -365,17 +364,19 @@ class TaskListController: UITableViewController, ActionResultDelegate {
         
         if searchBarActive && searchController.searchBar.text != nil && !(searchController.searchBar.text?.isEmpty)! {  // если активен режим поиска и текст не пустой
             taskDAO.search(
-                text: searchController.searchBar.text!, categories: categoryDAO.checkedItems(), sortType: sortType,
+                text: searchController.searchBar.text!, categories: categoryDAO.checkedItems(), priorities: priorityDAO.checkedItems(), sortType: sortType,
                 showTasksEmptyPriorities: PrefsManager.current.showEmptyPriorities, showTasksEmptyCategories: PrefsManager.current.showEmptyCategories, showCompletedTasks: PrefsManager.current.showCompletedTasks, showTasksWithoutDate: PrefsManager.current.showTasksWithoutDate
             )
         } else {
             taskDAO.search(
-                text: nil, categories: categoryDAO.checkedItems(), sortType: sortType,
+                text: nil, categories: categoryDAO.checkedItems(), priorities: priorityDAO.checkedItems(), sortType: sortType,
                 showTasksEmptyPriorities: PrefsManager.current.showEmptyPriorities, showTasksEmptyCategories: PrefsManager.current.showEmptyCategories, showCompletedTasks: PrefsManager.current.showCompletedTasks, showTasksWithoutDate: PrefsManager.current.showTasksWithoutDate
             )
         }
         
         tableView.reloadData()
+        
+        updateTableBackground(tableView, count: taskCount)
     }
     
     

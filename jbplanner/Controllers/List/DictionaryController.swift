@@ -15,6 +15,7 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
     
     var dictTableView: UITableView!     // ссылка на компонент
     var buttonSelectDeselectAll: UIButton!
+    var labelHeaderTitleDict: UILabel!
     
     var dao: T!     // DAO для работы с БД
     
@@ -67,6 +68,20 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete { deleteItem(indexPath) }
         else if editingStyle == .insert {}
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        updateTableBackground(dictTableView, count: dao.items.count)
+        
+        if dao.items.count == 0 {
+            labelHeaderTitleDict.isHidden = true
+            buttonSelectDeselectAll.isHidden = true
+            return 0
+        }
+        
+        labelHeaderTitleDict.isHidden = false
+        buttonSelectDeselectAll.isHidden = false
+        return 1
     }
     
     // выделяет элемент в списке
@@ -155,28 +170,28 @@ class DictionaryController<T:DictionaryDao>: UIViewController, UITableViewDelega
         dao.delete(dao.items[indexPath.row])
         dao.items.remove(at: indexPath.row)
         
-        dictTableView.deleteRows(at: [indexPath], with: .left)
-//        if dao.items.count == 0 { dictTableView.deleteSections([sectionList], with: .left) }
-//        else { dictTableView.deleteRows(at: [indexPath], with: .left) }
+        if dao.items.count == 0 { dictTableView.deleteSections([sectionList], with: .left) }
+        else { dictTableView.deleteRows(at: [indexPath], with: .left) }
         
         changed = true
         
         updateSelectDeselectButton()
+        
+        updateTableBackground(dictTableView, count: dao.items.count)
     }
     
     func addItem(_ item: T.Item) {
         dao.addOrUpdate(item)
         
-        let indexPath = IndexPath(row: dao.items.count-1, section: sectionList)
-        dictTableView.insertRows(at: [indexPath], with: .top)
-        
-        updateSelectDeselectButton()
+        if dao.items.count == 1 { dictTableView.insertSections([sectionList], with: .top) }
+        else {
+            let indexPath = IndexPath(row: dao.items.count-1, section: sectionList)
+            dictTableView.insertRows(at: [indexPath], with: .top)
+        }
 
-//        if dao.items.count == 1 { dictTableView.insertSections([sectionList], with: .top) }
-//        else {
-//            let indexPath = IndexPath(row: dao.items.count-1, section: sectionList)
-//            dictTableView.insertRows(at: [indexPath], with: .top)
-//        }
+        updateSelectDeselectButton()
+        updateTableBackground(dictTableView, count: dao.items.count)
+
     }
     
     

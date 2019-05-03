@@ -44,6 +44,8 @@
                                         <constraint firstItem="M59-cp-XjZ" firstAttribute="leading" secondItem="99I-aU-8uJ" secondAttribute="leading" constant="20" id="vnd-fh-zfj"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="textQuickTask" destination="M59-cp-XjZ" id="SA4-eX-aAC"/>
                                 </connections>
@@ -127,6 +129,7 @@
                                         <constraint firstItem="ejy-E2-vJs" firstAttribute="top" secondItem="Fv7-6L-e1k" secondAttribute="top" id="zPM-zX-3dP"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="buttonCompleteTask" destination="zmY-gh-keJ" id="TDV-Rd-CLm"/>
                                     <outlet property="buttonTaskInfo" destination="pHa-eP-bgg" id="bLm-nk-ged"/>

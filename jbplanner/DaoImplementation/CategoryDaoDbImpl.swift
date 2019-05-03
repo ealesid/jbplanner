@@ -1,31 +1,19 @@
-//
-//  CategoryDaoDbImpl.swift
-//  jbplanner
-//
-//  Created by Aleksey Sidorov on 31/12/2018.
-//  Copyright © 2018 Aleksey Sidorov. All rights reserved.
-//
-
 import Foundation
 import CoreData
+
 
 class CategoryDaoDbImpl: DictionaryDao, CommonSearchDAO {
 
     typealias Item = Category
     typealias SortType = CategorySortType
     
-    var items: [Category]!
+    var items: [Item]!
     
     static let current = CategoryDaoDbImpl()
     private init() { getAll(sortType: CategorySortType.name) }
-    
-    func addOrUpdate(_ category: Category) {
-        if !items.contains(category) {
-            items.append(category)
-        }
-        
-        save()
-    }
+
+
+    // MARK: - dao
     
     func getAll(sortType: SortType?) -> [Category] {
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
@@ -44,26 +32,16 @@ class CategoryDaoDbImpl: DictionaryDao, CommonSearchDAO {
         return items
     }
     
-    func delete(_ category: Category) {
-        context.delete(category)
-        save()
-    }
     
     func search(text: String, sortType: SortType?) -> [Item] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        var predicate = NSPredicate(format: "name CONTAINS[c] %@", text)
-        fetchRequest.predicate = predicate
+        fetchRequest.predicate = NSPredicate(format: "name CONTAINS[c] %@", text)
         
         // добавляем поле для сортировки
-        if let sortType = sortType {
-            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
-        }
+        if let sortType = sortType { fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)] }
 
-        do {
-            items = try context.fetch(fetchRequest)
-        } catch {
-            fatalError("Categories fetching failed")
-        }
+        do { items = try context.fetch(fetchRequest) }
+        catch { fatalError("Categories fetch failed") }
         
         return items
     }

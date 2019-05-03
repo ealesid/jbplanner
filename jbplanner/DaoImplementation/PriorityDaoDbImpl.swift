@@ -19,56 +19,35 @@ class PriorityDaoDbImpl: DictionaryDao, CommonSearchDAO {
     
     var items: [Priority]!
     
-    func addOrUpdate(_ priority: Priority) {
-        if !items.contains(priority) {
-            items.append(priority)
-        }
-        
-        save()
-    }
+
+    // MARK: - dao
     
     func getAll(sortType: SortType?) -> [Priority] {
         let fetchRequest: NSFetchRequest<Priority> = Priority.fetchRequest()
         
         // добавляем поле для сортировки
-        if let sortType = sortType {
-            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
-        }
+        if let sortType = sortType { fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)] }
 
         
-        do {
-            items = try context.fetch(fetchRequest)
-        } catch {
-            fatalError("Priorities fetch failed.")
-        }
+        do { items = try context.fetch(fetchRequest) }
+        catch { fatalError("Priorities fetch failed.") }
         
         return items
     }
     
-    func delete(_ priority: Priority) {
-        context.delete(priority)
-        save()
-    }
-    
+
     func search(text: String, sortType: SortType?) -> [Item] {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        var predicate = NSPredicate(format: "name CONTAINS[c] %@", text)
-        fetchRequest.predicate = predicate
+        fetchRequest.predicate = NSPredicate(format: "name CONTAINS[c] %@", text)
         
         // добавляем поле для сортировки
-        if let sortType = sortType {
-            fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)]
-        }
+        if let sortType = sortType { fetchRequest.sortDescriptors = [sortType.getDescriptor(sortType)] }
 
-        do {
-            items = try context.fetch(fetchRequest)
-        } catch {
-            fatalError("Priorities fetching failed")
-        }
+        do { items = try context.fetch(fetchRequest) }
+        catch { fatalError("Priorities fetching failed") }
         
         return items
     }
-
 }
 
 

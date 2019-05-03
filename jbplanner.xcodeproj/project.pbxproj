@@ -26,12 +26,10 @@
 		DBB9A83C21CC111400129C92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB9A83A21CC111400129C92 /* LaunchScreen.storyboard */; };
 		DBCCEAF521D77B3C00ABFCF3 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */; };
 		DBCCEAF721D77D6400ABFCF3 /* TaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */; };
-		DBCCEAFA21D783D800ABFCF3 /* Db.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEAF921D783D800ABFCF3 /* Db.swift */; };
 		DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0421DA145C00ABFCF3 /* CategoryDaoDbImpl.swift */; };
 		DBCCEB0721DA16BA00ABFCF3 /* TaskDaoDbImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0621DA16BA00ABFCF3 /* TaskDaoDbImpl.swift */; };
 		DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0821DA175900ABFCF3 /* PriorityDaoDbImpl.swift */; };
 		DBCCEB0B21DA208800ABFCF3 /* Crud.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0A21DA208800ABFCF3 /* Crud.swift */; };
-		DBCCEB0D21DA23CA00ABFCF3 /* CrudExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */; };
 		DBCCEB0F21DE24F600ABFCF3 /* TaskNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB0E21DE24F600ABFCF3 /* TaskNameCell.swift */; };
 		DBCCEB1121DE25CD00ABFCF3 /* TaskCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1021DE25CD00ABFCF3 /* TaskCategoryCell.swift */; };
 		DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */; };
@@ -77,12 +75,10 @@
 		DBB9A83D21CC111400129C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtension.swift; sourceTree = "<group>"; };
-		DBCCEAF921D783D800ABFCF3 /* Db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Db.swift; sourceTree = "<group>"; };
 		DBCCEB0421DA145C00ABFCF3 /* CategoryDaoDbImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDaoDbImpl.swift; sourceTree = "<group>"; };
 		DBCCEB0621DA16BA00ABFCF3 /* TaskDaoDbImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDaoDbImpl.swift; sourceTree = "<group>"; };
 		DBCCEB0821DA175900ABFCF3 /* PriorityDaoDbImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityDaoDbImpl.swift; sourceTree = "<group>"; };
 		DBCCEB0A21DA208800ABFCF3 /* Crud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crud.swift; sourceTree = "<group>"; };
-		DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrudExtension.swift; sourceTree = "<group>"; };
 		DBCCEB0E21DE24F600ABFCF3 /* TaskNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNameCell.swift; sourceTree = "<group>"; };
 		DBCCEB1021DE25CD00ABFCF3 /* TaskCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategoryCell.swift; sourceTree = "<group>"; };
 		DBCCEB1221DE2CC300ABFCF3 /* TaskPriorityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPriorityCell.swift; sourceTree = "<group>"; };
@@ -236,7 +232,6 @@
 			children = (
 				DBCCEAF421D77B3C00ABFCF3 /* DateExtension.swift */,
 				DBCCEAF621D77D6400ABFCF3 /* TaskExtension.swift */,
-				DBCCEB0C21DA23CA00ABFCF3 /* CrudExtension.swift */,
 				DB21D916222DB0C400C5958D /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
@@ -245,7 +240,6 @@
 		DBCCEAF821D783C700ABFCF3 /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				DBCCEAF921D783D800ABFCF3 /* Db.swift */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -457,7 +451,6 @@
 				DBCCEB1721DE2CE800ABFCF3 /* TaskInfoCell.swift in Sources */,
 				DBD00C532278C13A0063E311 /* FiltersController.swift in Sources */,
 				DBCCEAF721D77D6400ABFCF3 /* TaskExtension.swift in Sources */,
-				DBCCEAFA21D783D800ABFCF3 /* Db.swift in Sources */,
 				DBB9A83121CC110E00129C92 /* TaskDetailsController.swift in Sources */,
 				DBD00C552278C5AD0063E311 /* TaskSearchDao.swift in Sources */,
 				DBCCEB0521DA145C00ABFCF3 /* CategoryDaoDbImpl.swift in Sources */,
@@ -469,7 +462,6 @@
 				DBCCEB1321DE2CC300ABFCF3 /* TaskPriorityCell.swift in Sources */,
 				DBB9A82F21CC110E00129C92 /* AppDelegate.swift in Sources */,
 				DBCCEB1F21E22BEB00ABFCF3 /* CategoryListController.swift in Sources */,
-				DBCCEB0D21DA23CA00ABFCF3 /* CrudExtension.swift in Sources */,
 				DB21D915222DAFB800C5958D /* DatetimePickerController.swift in Sources */,
 				DB116BD621D11BCB0070F13D /* TaskListController.swift in Sources */,
 				DBCCEB0921DA175900ABFCF3 /* PriorityDaoDbImpl.swift in Sources */,

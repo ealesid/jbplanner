@@ -21,6 +21,7 @@ class CategoryListController: DictionaryController<CategoryDaoDbImpl> {
         
         super.buttonSelectDeselectAll = buttonSelectDeselect
         super.dictTableView = tableView
+        super.labelHeaderTitleDict = labelHeaderTitle
         
         dao = CategoryDaoDbImpl.current
         

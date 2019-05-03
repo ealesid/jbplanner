@@ -22,6 +22,7 @@ class PriorityListController: DictionaryController<PriorityDaoDbImpl> {
         
         super.buttonSelectDeselectAll = buttonSelectDeselect
         super.dictTableView = tableView
+        super.labelHeaderTitleDict = labelHeaderTitle
 
         dao = PriorityDaoDbImpl.current
     }
