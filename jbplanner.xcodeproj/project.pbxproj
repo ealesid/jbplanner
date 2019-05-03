@@ -54,6 +54,7 @@
 		DBF80CA6227C98130090E3CC /* SwiftReorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA5227C98130090E3CC /* SwiftReorder.framework */; };
 		DBF80CA8227CAF2A0090E3CC /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF80CA7227CAF2A0090E3CC /* ViewExtension.swift */; };
 		DBF80CAA227CB1E50090E3CC /* SwiftIconFont.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CA9227CB1E50090E3CC /* SwiftIconFont.framework */; };
+		DBF80CAC227CBBE00090E3CC /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF80CAB227CBBE00090E3CC /* Toaster.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		DBF80CA5227C98130090E3CC /* SwiftReorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftReorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF80CA7227CAF2A0090E3CC /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		DBF80CA9227CB1E50090E3CC /* SwiftIconFont.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftIconFont.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBF80CAB227CBBE00090E3CC /* Toaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Toaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF80CAC227CBBE00090E3CC /* Toaster.framework in Frameworks */,
 				DBF80CAA227CB1E50090E3CC /* SwiftIconFont.framework in Frameworks */,
 				DBF80CA6227C98130090E3CC /* SwiftReorder.framework in Frameworks */,
 				DBF80CA1227C5ACC0090E3CC /* ChromaColorPicker.framework in Frameworks */,
@@ -130,6 +133,7 @@
 		4B0E583433025231B3B2331D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBF80CAB227CBBE00090E3CC /* Toaster.framework */,
 				DBF80CA9227CB1E50090E3CC /* SwiftIconFont.framework */,
 				DBF80CA5227C98130090E3CC /* SwiftReorder.framework */,
 				DBF80CA0227C5ACC0090E3CC /* ChromaColorPicker.framework */,
@@ -435,6 +439,7 @@
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftIconFont/SwiftIconFont.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftReorder/SwiftReorder.framework",
+				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -445,6 +450,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIconFont.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftReorder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -34,6 +34,8 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     
     var dateFormatter: DateFormatter!
     
+    var mode: TaskDetailsMode!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -332,3 +334,8 @@ class TaskDetailsController: UIViewController, UITableViewDataSource, UITableVie
     }
 }
 
+
+enum TaskDetailsMode {
+    case add
+    case update
+}

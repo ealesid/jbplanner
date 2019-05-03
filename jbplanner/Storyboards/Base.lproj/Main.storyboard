@@ -780,7 +780,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5LB-fP-N8L">
                                                     <rect key="frame" x="311" y="6.5" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="switchedWithoutProprerties:" destination="Zmu-XB-qC7" eventType="valueChanged" id="mU4-ok-Y4c"/>
+                                                        <action selector="switchedWithoutPriorities:" destination="Zmu-XB-qC7" eventType="valueChanged" id="U3u-KQ-6qA"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>

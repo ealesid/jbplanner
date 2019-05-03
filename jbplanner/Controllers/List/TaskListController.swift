@@ -1,14 +1,7 @@
-//
-//  TaskListController.swift
-//  jbplanner
-//
-//  Created by Aleksey Sidorov on 24/12/2018.
-//  Copyright © 2018 Aleksey Sidorov. All rights reserved.
-//
-
 import CoreData
 import UIKit
 import SideMenu
+import Toaster
 
 
 class TaskListController: UITableViewController, ActionResultDelegate {
@@ -35,6 +28,8 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     var currentScopeIndex = 0           // текущая выбранная кнопка сортировки в search bar
     
     var searchBarActive = false
+    
+    var searchBar: UISearchBar { return searchController.searchBar }
     
     
     override func viewDidLoad() {
@@ -231,6 +226,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             controller.title = "Editing"
             controller.task = selectedTask // передаем задачу в целевой контроллер
             controller.delegate = self
+            controller.mode = TaskDetailsMode.update
             
         case "CreateTask":
             // получаем доступ к целевому контроллеру
@@ -238,6 +234,7 @@ class TaskListController: UITableViewController, ActionResultDelegate {
             controller.title = "New Task"
             controller.task = Task(context: taskDAO.context)
             controller.delegate = self
+            controller.mode = TaskDetailsMode.add
             
         default:
             return
@@ -249,20 +246,29 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     // может обрабатывать ответы (слушать действия) от любых контроллеров
     func done(source: UIViewController, data: Any?) {
         
-        // если пришел ответт от TaskDetailsController
-        if source is TaskDetailsController {
-            if let selectedIndexPaht = tableView.indexPathForSelectedRow { // определяем выбранную строку
-                let task = data as! Task
-                taskDAO.update(task)
-//                taskDAO.save() // сохраняем измененную задачу (сохраняет все изменения)
-//                tableView.reloadRows(at: [selectedIndexPaht], with: .fade) // обновляем только нужную строку
-            } else {    // создаем новую задачу
-                let task = data as! Task
-                createTask(task)
-            }
-            
-            updateTable()
+        guard let controller = source as? TaskDetailsController else { fatalError("fatal error with cell") }
+        
+        let task = data as! Task
+        switch controller.mode {
+        case .add?: createTask(task)
+        case .update?: updateTask(task)
+        default: return
         }
+        
+//        // если пришел ответт от TaskDetailsController
+//        if source is TaskDetailsController {
+//            if let selectedIndexPaht = tableView.indexPathForSelectedRow { // определяем выбранную строку
+//                let task = data as! Task
+//                taskDAO.update(task)
+////                taskDAO.save() // сохраняем измененную задачу (сохраняет все изменения)
+////                tableView.reloadRows(at: [selectedIndexPaht], with: .fade) // обновляем только нужную строку
+//            } else {    // создаем новую задачу
+//                let task = data as! Task
+//                createTask(task)
+//            }
+//
+//            updateTable()
+//        }
     }
     
     
@@ -305,13 +311,13 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     
     @IBAction func quickTaskAdd(_ sender: UITextField) {
+        
+        if isEmptyTrim(textQuickTask.text) { return }
+        
         let task = Task(context: taskDAO.context)
         
-        if !isEmptyTrim(textQuickTask.text) { task.name = textQuickTask.text }
-        else { task.name = "New task" }
-        
         createTask(task)
-        updateTable()
+//        updateTable()
         textQuickTask.text = ""
         
     }
@@ -350,7 +356,8 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     }
     
     func createTask(_ task: Task){
-        taskDAO.addOrUpdate(task)
+        taskDAO.add(task)
+        tryUpdate(task, forceUpdate: false, text: "Task added,\nbut not visible because of filter:\n")
         
         // индекс чтобы задача добавилась в конец списка
         let indexPath = IndexPath(row: taskCount-1, section: taskListSection)
@@ -359,6 +366,58 @@ class TaskListController: UITableViewController, ActionResultDelegate {
     
     
     // MARK: - updateTable
+    
+    func updateTask(_ task: Task) {
+        taskDAO.update(task)
+        tryUpdate(task, forceUpdate: true, text: "Task updated,\nbut not visible because of filter:\n")
+    }
+
+    func tryUpdate(_ task: Task, forceUpdate: Bool, text: String) {
+        
+        var willShow = true
+        var text = text
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+            
+            if !PrefsManager.current.showCompletedTasks && task.completed == true { willShow = false }
+            else
+                if !PrefsManager.current.showEmptyCategories && task.category == nil {
+                    willShow = false
+                    text += "\"Hide tasks with empty category\""
+                }
+                else
+                    if !PrefsManager.current.showEmptyPriorities && task.priority == nil {
+                        willShow = false
+                        text += "\"Hide tasks with empty priority\""
+                    }
+                    else
+                        if !PrefsManager.current.showTasksWithoutDate && task.deadline == nil {
+                            willShow = false
+                            text += "\"Hide tasks withot date\""
+                        }
+                        else
+                            if let category = task.category, !self.categoryDAO.checkedItems().contains(category) {
+                                willShow = false
+                                text += "\"Hide category \(category)\""
+                            }
+                            else
+                                if let priority = task.priority, !self.priorityDAO.checkedItems().contains(priority) {
+                                    willShow = false
+                                    text += "\"Hide priorirty \(priority)\""
+                                }
+                                else
+                                    if (self.searchBarActive && task.name?.lowercased().range(of: self.searchBar.text!.lowercased()) == nil) {
+                                        willShow = false
+                                        text += "\"Name does not contains \(self.searchBar.text)\""
+            }
+            
+            if willShow { self.updateTable() }
+            else {
+                if forceUpdate {self.updateTable() }
+                Toast(text: text, delay: 0, duration: Delay.long).show()
+            }
+        }
+    }
     
     func updateTable() {
         

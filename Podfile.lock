@@ -1,9 +1,10 @@
 PODS:
   - ChromaColorPicker (1.7.2)
-  - GCCalendar (2.4.1)
+  - GCCalendar (2.5.0)
   - SideMenu (5.0.3)
   - SwiftIconFont (3.0.0)
   - SwiftReorder (6.0.2)
+  - Toaster (2.2.0)
 
 DEPENDENCIES:
   - ChromaColorPicker
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - SideMenu
   - SwiftIconFont
   - SwiftReorder
+  - Toaster
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -19,14 +21,16 @@ SPEC REPOS:
     - SideMenu
     - SwiftIconFont
     - SwiftReorder
+    - Toaster
 
 SPEC CHECKSUMS:
   ChromaColorPicker: 78194fbae9f342d3781ac178c4d92c7652197d18
-  GCCalendar: b9d584a3e437f9af5b0ab23030e7ed46affc3b23
+  GCCalendar: 88978ad35e25e26725dcb9372fc3b091362d78eb
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SwiftIconFont: 2ba18554a77c44948dc35b561b344e3c23834a84
   SwiftReorder: 60ef1faf6446cf68f9a647cb975530db8efd6620
+  Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: 147b92e926175e4ebbc2286bc0a4822f4ae483ba
+PODFILE CHECKSUM: fa8e56c724e04f48fa30c9455a52e4809f8a189f
 
 COCOAPODS: 1.6.1
